@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1713" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="EditCVTableViewCell" customModule="envision" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="compile_icon" translatesAutoresizingMaskIntoConstraints="NO" id="nfP-zJ-ZKk">
+                        <rect key="frame" x="222.5" y="16" width="11" height="13"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="11" id="Uso-IT-coi"/>
+                        </constraints>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R1G-X5-Jyh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <state key="normal" title="编辑简历">
+                            <color key="titleColor" red="1" green="1" blue="1" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
+                        </state>
+                    </button>
+                </subviews>
+                <color key="backgroundColor" red="0.0" green="0.65098039220000004" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
+                <constraints>
+                    <constraint firstItem="nfP-zJ-ZKk" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="0Kt-kd-TNq"/>
+                    <constraint firstItem="R1G-X5-Jyh" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="1LD-hX-nmg"/>
+                    <constraint firstItem="nfP-zJ-ZKk" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="centerXWithinMargins" constant="35" id="3s8-T3-dtN"/>
+                    <constraint firstAttribute="trailing" secondItem="nfP-zJ-ZKk" secondAttribute="trailing" constant="144" id="Ne3-Cx-qCT"/>
+                    <constraint firstItem="R1G-X5-Jyh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="UcA-Lz-fDL"/>
+                    <constraint firstItem="R1G-X5-Jyh" firstAttribute="centerY" secondItem="nfP-zJ-ZKk" secondAttribute="centerY" id="c5T-tT-gBR"/>
+                    <constraint firstAttribute="trailing" secondItem="R1G-X5-Jyh" secondAttribute="trailing" id="cUg-DX-8rK"/>
+                    <constraint firstItem="nfP-zJ-ZKk" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="8" id="hmc-4E-txY"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="Ne3-Cx-qCT"/>
+                    </mask>
+                </variation>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="editButton" destination="R1G-X5-Jyh" id="xUC-U9-1aa"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="compile_icon" width="21" height="26"/>
+    </resources>
+</document>

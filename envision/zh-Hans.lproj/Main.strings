@@ -1,0 +1,375 @@
+
+/* Class = "UILabel"; text = "出生年月"; ObjectID = "0QG-2o-YFH"; */
+"0QG-2o-YFH.text" = "出生年月";
+
+/* Class = "UILabel"; text = "会馆地址"; ObjectID = "0W5-13-wS4"; */
+"0W5-13-wS4.text" = "会馆地址";
+
+/* Class = "UITextField"; placeholder = "请输入密码"; ObjectID = "0qF-zc-byI"; */
+"0qF-zc-byI.placeholder" = "请输入密码";
+
+/* Class = "UILabel"; text = "元"; ObjectID = "0rR-Pr-dHI"; */
+"0rR-Pr-dHI.text" = "元";
+
+/* Class = "UILabel"; text = "总收入（元）"; ObjectID = "12s-Ts-CA2"; */
+"12s-Ts-CA2.text" = "总收入（元）";
+
+/* Class = "UITextField"; placeholder = "请输入手机号或邮箱"; ObjectID = "1ME-hF-Ys2"; */
+"1ME-hF-Ys2.placeholder" = "请输入手机号或邮箱";
+
+/* Class = "UITextField"; placeholder = "请选择"; ObjectID = "2XK-0d-Glg"; */
+"2XK-0d-Glg.placeholder" = "请选择";
+
+/* Class = "UILabel"; text = "请选择"; ObjectID = "2m9-Mj-tnK"; */
+"2m9-Mj-tnK.text" = "请选择";
+
+/* Class = "UILabel"; text = "联系电话"; ObjectID = "2oG-i6-00u"; */
+"2oG-i6-00u.text" = "联系电话";
+
+/* Class = "UINavigationItem"; title = "首页"; ObjectID = "2vF-u1-WfD"; */
+"2vF-u1-WfD.title" = "首页";
+
+/* Class = "UINavigationItem"; title = "我的"; ObjectID = "2w0-0g-NfE"; */
+"2w0-0g-NfE.title" = "我的";
+
+/* Class = "UITextField"; placeholder = "再次输入密码"; ObjectID = "3g1-dT-yAw"; */
+"3g1-dT-yAw.placeholder" = "再次输入密码";
+
+/* Class = "UILabel"; text = "4月促销，课程满半年送1个月，满1年送3个月！\n4月5日，免费陈式太极入门课程，欢迎参加！"; ObjectID = "4Ds-hI-yKF"; */
+"4Ds-hI-yKF.text" = "4月促销，课程满半年送1个月，满1年送3个月！\n4月5日，免费陈式太极入门课程，欢迎参加！";
+
+/* Class = "UILabel"; text = "我收到的评价"; ObjectID = "4ML-Jg-k2O"; */
+"4ML-Jg-k2O.text" = "我收到的评价";
+
+/* Class = "UILabel"; text = "所在地区"; ObjectID = "4iY-gZ-QHf"; */
+"4iY-gZ-QHf.text" = "所在地区";
+
+/* Class = "UILabel"; text = "1050.00"; ObjectID = "61R-r7-ng3"; */
+"61R-r7-ng3.text" = "1050.00";
+
+/* Class = "UINavigationItem"; title = "完善信息"; ObjectID = "6BS-Mo-d3j"; */
+"6BS-Mo-d3j.title" = "完善信息";
+
+/* Class = "UILabel"; text = "我的余额"; ObjectID = "6hd-tB-V5b"; */
+"6hd-tB-V5b.text" = "我的余额";
+
+/* Class = "UILabel"; text = "620"; ObjectID = "6iK-NW-Cs2"; */
+"6iK-NW-Cs2.text" = "620";
+
+/* Class = "UILabel"; text = "上传头像"; ObjectID = "7vS-QK-ndE"; */
+"7vS-QK-ndE.text" = "上传头像";
+
+/* Class = "UILabel"; text = "充值的密码会发送到注册时填写的邮箱中"; ObjectID = "831-LF-SUt"; */
+"831-LF-SUt.text" = "充值的密码会发送到注册时填写的邮箱中";
+
+/* Class = "UIButton"; normalTitle = "发布信息"; ObjectID = "8EO-u2-ikj"; */
+"8EO-u2-ikj.normalTitle" = "发布信息";
+
+/* Class = "UILabel"; text = "重复密码："; ObjectID = "8Sw-qW-41e"; */
+"8Sw-qW-41e.text" = "重复密码：";
+
+/* Class = "UITextField"; placeholder = "请输入"; ObjectID = "8Ve-ef-56R"; */
+"8Ve-ef-56R.placeholder" = "请输入";
+
+/* Class = "UITextField"; placeholder = "请输入密码"; ObjectID = "9Dr-fj-FlP"; */
+"9Dr-fj-FlP.placeholder" = "请输入密码";
+
+/* Class = "UILabel"; text = "23"; ObjectID = "9w5-5k-4im"; */
+"9w5-5k-4im.text" = "23";
+
+/* Class = "UIViewController"; title = "我的"; ObjectID = "A1r-zA-IHV"; */
+"A1r-zA-IHV.title" = "我的";
+
+/* Class = "UILabel"; text = "肖凌云"; ObjectID = "Ajv-dn-sgK"; */
+"Ajv-dn-sgK.text" = "肖凌云";
+
+/* Class = "UINavigationItem"; title = "我的"; ObjectID = "AmU-pk-crT"; */
+"AmU-pk-crT.title" = "我的";
+
+/* Class = "UITableViewController"; title = "偏执狂中心"; ObjectID = "B9u-sx-AvP"; */
+"B9u-sx-AvP.title" = "偏执狂中心";
+
+/* Class = "UILabel"; text = "4.9"; ObjectID = "BeF-dW-h2M"; */
+"BeF-dW-h2M.text" = "4.9";
+
+/* Class = "UILabel"; text = "排名"; ObjectID = "BgM-kQ-GpT"; */
+"BgM-kQ-GpT.text" = "排名";
+
+/* Class = "UIButton"; normalTitle = "购买"; ObjectID = "Dsk-L2-dRw"; */
+"Dsk-L2-dRw.normalTitle" = "购买";
+
+/* Class = "UINavigationItem"; title = "完善信息"; ObjectID = "EVj-ua-Tcy"; */
+"EVj-ua-Tcy.title" = "完善信息";
+
+/* Class = "UIButton"; normalTitle = "登录"; ObjectID = "FR7-wr-ENH"; */
+"FR7-wr-ENH.normalTitle" = "登录";
+
+/* Class = "UITextField"; placeholder = "请输入"; ObjectID = "FdB-Kh-1hs"; */
+"FdB-Kh-1hs.placeholder" = "请输入";
+
+/* Class = "UILabel"; text = "元/小时"; ObjectID = "G57-Hx-nEz"; */
+"G57-Hx-nEz.text" = "元/小时";
+
+/* Class = "UILabel"; text = "账户："; ObjectID = "Grp-9S-mCP"; */
+"Grp-9S-mCP.text" = "账户：";
+
+/* Class = "UILabel"; text = "会馆发布"; ObjectID = "H2g-4K-WWB"; */
+"H2g-4K-WWB.text" = "会馆发布";
+
+/* Class = "UILabel"; text = "星"; ObjectID = "HJV-oZ-tGs"; */
+"HJV-oZ-tGs.text" = "星";
+
+/* Class = "UILabel"; text = "1050.00"; ObjectID = "HKg-gz-Mnf"; */
+"HKg-gz-Mnf.text" = "1050.00";
+
+/* Class = "UILabel"; text = "易星体育发展有限公司成立于2006年，至今已成功运作近10年。作为中国《国家太极拳教练行业资格认证》标准的唯一制定者，拥有经国家认证的高素质专业人才，具有广阔发展前景和有力条件。企业自身..."; ObjectID = "Hkx-LW-vSJ"; */
+"Hkx-LW-vSJ.text" = "易星体育发展有限公司成立于2006年，至今已成功运作近10年。作为中国《国家太极拳教练行业资格认证》标准的唯一制定者，拥有经国家认证的高素质专业人才，具有广阔发展前景和有力条件。企业自身...";
+
+/* Class = "UILabel"; text = "排名"; ObjectID = "IRv-Ol-xTe"; */
+"IRv-Ol-xTe.text" = "排名";
+
+/* Class = "UILabel"; text = "姓名"; ObjectID = "IrS-U3-8W1"; */
+"IrS-U3-8W1.text" = "姓名";
+
+/* Class = "UINavigationItem"; title = "太极教练"; ObjectID = "J1p-pn-LH9"; */
+"J1p-pn-LH9.title" = "太极教练";
+
+/* Class = "UILabel"; text = "23"; ObjectID = "JmJ-Pb-Qv7"; */
+"JmJ-Pb-Qv7.text" = "23";
+
+/* Class = "UILabel"; text = "收费标准"; ObjectID = "JqZ-SJ-BAo"; */
+"JqZ-SJ-BAo.text" = "收费标准";
+
+/* Class = "UILabel"; text = "账户："; ObjectID = "L5N-jd-lI9"; */
+"L5N-jd-lI9.text" = "账户：";
+
+/* Class = "UILabel"; text = "620"; ObjectID = "LBH-aa-umv"; */
+"LBH-aa-umv.text" = "620";
+
+/* Class = "UITextField"; placeholder = "输入常用6-18位大小写字母+数字组成密码"; ObjectID = "LGa-pB-7zU"; */
+"LGa-pB-7zU.placeholder" = "输入常用6-18位大小写字母+数字组成密码";
+
+/* Class = "UINavigationItem"; title = "职位详情"; ObjectID = "LPi-3Y-W38"; */
+"LPi-3Y-W38.title" = "职位详情";
+
+/* Class = "UILabel"; text = "400 0606 200"; ObjectID = "Ly9-rx-aPt"; */
+"Ly9-rx-aPt.text" = "400 0606 200";
+
+/* Class = "UILabel"; text = "手机"; ObjectID = "N3P-w2-QWL"; */
+"N3P-w2-QWL.text" = "手机";
+
+/* Class = "UINavigationItem"; title = "走进远景"; ObjectID = "NUA-m2-KwK"; */
+"NUA-m2-KwK.title" = "走进远景";
+
+/* Class = "UIViewController"; title = "会馆详情"; ObjectID = "Nje-kh-sZb"; */
+"Nje-kh-sZb.title" = "会馆详情";
+
+/* Class = "UILabel"; text = "性别"; ObjectID = "Ph7-SM-CAQ"; */
+"Ph7-SM-CAQ.text" = "性别";
+
+/* Class = "UINavigationItem"; title = "购买联系方式"; ObjectID = "Q3M-2O-RW4"; */
+"Q3M-2O-RW4.title" = "购买联系方式";
+
+/* Class = "UITextField"; placeholder = "请输入真实姓名"; ObjectID = "R6B-I2-wZ1"; */
+"R6B-I2-wZ1.placeholder" = "请输入真实姓名";
+
+/* Class = "UILabel"; text = "总收入（元）"; ObjectID = "RPW-VH-aTN"; */
+"RPW-VH-aTN.text" = "总收入（元）";
+
+/* Class = "UITextField"; placeholder = "请输入"; ObjectID = "RcA-Gy-k0b"; */
+"RcA-Gy-k0b.placeholder" = "请输入";
+
+/* Class = "UILabel"; text = "上海易太极"; ObjectID = "RnJ-bc-07e"; */
+"RnJ-bc-07e.text" = "上海易太极";
+
+/* Class = "UILabel"; text = "已认证"; ObjectID = "SdS-GV-Njc"; */
+"SdS-GV-Njc.text" = "已认证";
+
+/* Class = "UILabel"; text = "元"; ObjectID = "StW-f5-py4"; */
+"StW-f5-py4.text" = "元";
+
+/* Class = "UILabel"; text = "用户名：shyitaiji"; ObjectID = "Sxv-wc-XEV"; */
+"Sxv-wc-XEV.text" = "用户名：shyitaiji";
+
+/* Class = "UINavigationItem"; title = "注册"; ObjectID = "T67-Kb-tuA"; */
+"T67-Kb-tuA.title" = "注册";
+
+/* Class = "UIButton"; normalTitle = "注册"; ObjectID = "U8h-A6-Ffb"; */
+"U8h-A6-Ffb.normalTitle" = "注册";
+
+/* Class = "UILabel"; text = "荣誉证书"; ObjectID = "UL4-o4-izb"; */
+"UL4-o4-izb.text" = "荣誉证书";
+
+/* Class = "UITabBarItem"; title = "成为偏执狂"; ObjectID = "UWt-oT-nz8"; */
+"UWt-oT-nz8.title" = "成为偏执狂";
+
+/* Class = "UIButton"; normalTitle = "发布信息"; ObjectID = "UiU-Kb-jHJ"; */
+"UiU-Kb-jHJ.normalTitle" = "发布信息";
+
+/* Class = "UILabel"; text = "上海市零陵路800号东亚富豪酒店1楼"; ObjectID = "Ujk-gg-NdF"; */
+"Ujk-gg-NdF.text" = "上海市零陵路800号东亚富豪酒店1楼";
+
+/* Class = "UILabel"; text = "出生日期"; ObjectID = "V6H-Of-tcP"; */
+"V6H-Of-tcP.text" = "出生日期";
+
+/* Class = "UILabel"; text = "用户名：xiaoly"; ObjectID = "VXf-6D-joP"; */
+"VXf-6D-joP.text" = "用户名：xiaoly";
+
+/* Class = "UIButton"; normalTitle = "注册"; ObjectID = "Vez-VC-PGk"; */
+"Vez-VC-PGk.normalTitle" = "注册";
+
+/* Class = "UILabel"; text = "浏览量"; ObjectID = "W9Z-sE-Rsl"; */
+"W9Z-sE-Rsl.text" = "浏览量";
+
+/* Class = "UILabel"; text = "所在地区"; ObjectID = "WtF-eb-dKp"; */
+"WtF-eb-dKp.text" = "所在地区";
+
+/* Class = "UILabel"; text = "性别"; ObjectID = "WtT-00-X3x"; */
+"WtT-00-X3x.text" = "性别";
+
+/* Class = "UILabel"; text = "姓名"; ObjectID = "XWo-qZ-tW1"; */
+"XWo-qZ-tW1.text" = "姓名";
+
+/* Class = "UIViewController"; title = "我的"; ObjectID = "XZp-5J-soH"; */
+"XZp-5J-soH.title" = "我的";
+
+/* Class = "UIButton"; normalTitle = "退出登录"; ObjectID = "Xn2-tE-t7L"; */
+"Xn2-tE-t7L.normalTitle" = "退出登录";
+
+/* Class = "UILabel"; text = "太极流派"; ObjectID = "YV6-ge-UV3"; */
+"YV6-ge-UV3.text" = "太极流派";
+
+/* Class = "UILabel"; text = "200.00"; ObjectID = "YaV-FB-zJs"; */
+"YaV-FB-zJs.text" = "200.00";
+
+/* Class = "UITextField"; placeholder = "请选择您的身份"; ObjectID = "aBb-oC-SI5"; */
+"aBb-oC-SI5.placeholder" = "请选择您的身份";
+
+/* Class = "UIButton"; normalTitle = "退出登录"; ObjectID = "b2u-wg-91i"; */
+"b2u-wg-91i.normalTitle" = "退出登录";
+
+/* Class = "UINavigationItem"; title = "登录"; ObjectID = "c5J-UV-NW4"; */
+"c5J-UV-NW4.title" = "登录";
+
+/* Class = "UIButton"; normalTitle = "找回密码"; ObjectID = "cAu-Vn-PJr"; */
+"cAu-Vn-PJr.normalTitle" = "找回密码";
+
+/* Class = "UILabel"; text = "我的余额"; ObjectID = "cBM-PT-gUd"; */
+"cBM-PT-gUd.text" = "我的余额";
+
+/* Class = "UILabel"; text = "外语特长"; ObjectID = "dFD-u4-HjM"; */
+"dFD-u4-HjM.text" = "外语特长";
+
+/* Class = "UIButton"; normalTitle = "完成"; ObjectID = "eks-FV-Fnw"; */
+"eks-FV-Fnw.normalTitle" = "完成";
+
+/* Class = "UINavigationItem"; title = "职位"; ObjectID = "etg-ik-qLI"; */
+"etg-ik-qLI.title" = "职位";
+
+/* Class = "UITextField"; placeholder = "请输入真实姓名"; ObjectID = "fEj-gE-XE2"; */
+"fEj-gE-XE2.placeholder" = "请输入真实姓名";
+
+/* Class = "UITabBarItem"; title = "首页"; ObjectID = "fun-cF-7nu"; */
+"fun-cF-7nu.title" = "首页";
+
+/* Class = "UITextField"; placeholder = "请输入"; ObjectID = "hDI-nf-zTa"; */
+"hDI-nf-zTa.placeholder" = "请输入";
+
+/* Class = "UIViewController"; title = "我的"; ObjectID = "hJ6-Up-853"; */
+"hJ6-Up-853.title" = "我的";
+
+/* Class = "UITextField"; placeholder = "请输入"; ObjectID = "hmh-Un-ZPa"; */
+"hmh-Un-ZPa.placeholder" = "请输入";
+
+/* Class = "UILabel"; text = "浏览量"; ObjectID = "jeW-a9-f78"; */
+"jeW-a9-f78.text" = "浏览量";
+
+/* Class = "UITextField"; placeholder = "请选择"; ObjectID = "kId-7h-D64"; */
+"kId-7h-D64.placeholder" = "请选择";
+
+/* Class = "UITextField"; placeholder = "请选择"; ObjectID = "l7t-Tj-tV3"; */
+"l7t-Tj-tV3.placeholder" = "请选择";
+
+/* Class = "UILabel"; text = "已认证"; ObjectID = "lbw-Pa-ZEN"; */
+"lbw-Pa-ZEN.text" = "已认证";
+
+/* Class = "UILabel"; text = "是否认证"; ObjectID = "m5o-iC-f2i"; */
+"m5o-iC-f2i.text" = "是否认证";
+
+/* Class = "UILabel"; text = "密码："; ObjectID = "mEd-Wo-Os6"; */
+"mEd-Wo-Os6.text" = "密码：";
+
+/* Class = "UILabel"; text = "视频展示"; ObjectID = "mOf-j7-gbf"; */
+"mOf-j7-gbf.text" = "视频展示";
+
+/* Class = "UITextField"; placeholder = "请选择"; ObjectID = "mYQ-Oc-Jax"; */
+"mYQ-Oc-Jax.placeholder" = "请选择";
+
+/* Class = "UILabel"; text = "已认证"; ObjectID = "noA-9f-LS3"; */
+"noA-9f-LS3.text" = "已认证";
+
+/* Class = "UINavigationItem"; title = "职位列表"; ObjectID = "oMX-c1-Toe"; */
+"oMX-c1-Toe.title" = "职位列表";
+
+/* Class = "UITextField"; placeholder = "请选择"; ObjectID = "otG-Ik-Xfw"; */
+"otG-Ik-Xfw.placeholder" = "请选择";
+
+/* Class = "UITextField"; placeholder = "使用手机或E-mail注册成为账户"; ObjectID = "qs9-Iv-CMr"; */
+"qs9-Iv-CMr.placeholder" = "使用手机或E-mail注册成为账户";
+
+/* Class = "UIViewController"; title = "教练详情"; ObjectID = "rMb-tI-Hij"; */
+"rMb-tI-Hij.title" = "教练详情";
+
+/* Class = "UINavigationItem"; title = "梦想偏执狂中心"; ObjectID = "rOj-wF-8bA"; */
+"rOj-wF-8bA.title" = "梦想偏执狂中心";
+
+/* Class = "UIViewController"; title = "成为偏执狂"; ObjectID = "rw5-66-NKI"; */
+"rw5-66-NKI.title" = "成为偏执狂";
+
+/* Class = "UITextField"; placeholder = "请选择"; ObjectID = "s9O-3Z-Mxq"; */
+"s9O-3Z-Mxq.placeholder" = "请选择";
+
+/* Class = "UILabel"; text = "您的身份"; ObjectID = "sGI-9h-EOW"; */
+"sGI-9h-EOW.text" = "您的身份";
+
+/* Class = "UIButton"; normalTitle = "完成"; ObjectID = "sJH-f4-kXY"; */
+"sJH-f4-kXY.normalTitle" = "完成";
+
+/* Class = "UILabel"; text = "会馆电话"; ObjectID = "sPh-eo-csb"; */
+"sPh-eo-csb.text" = "会馆电话";
+
+/* Class = "UILabel"; text = "用户名"; ObjectID = "sW7-gW-nJZ"; */
+"sW7-gW-nJZ.text" = "用户名";
+
+/* Class = "UILabel"; text = "会馆介绍"; ObjectID = "seb-cS-YXr"; */
+"seb-cS-YXr.text" = "会馆介绍";
+
+/* Class = "UILabel"; text = "密码："; ObjectID = "tfk-vG-jNi"; */
+"tfk-vG-jNi.text" = "密码：";
+
+/* Class = "UILabel"; text = "照片展示"; ObjectID = "ua2-WV-lsY"; */
+"ua2-WV-lsY.text" = "照片展示";
+
+/* Class = "UITabBarItem"; title = "偏执狂中心"; ObjectID = "umg-AC-VqU"; */
+"umg-AC-VqU.title" = "偏执狂中心";
+
+/* Class = "UILabel"; text = "陈式"; ObjectID = "vZh-ld-pEw"; */
+"vZh-ld-pEw.text" = "陈式";
+
+/* Class = "UINavigationItem"; title = "找回密码"; ObjectID = "vzU-Vx-P5J"; */
+"vzU-Vx-P5J.title" = "找回密码";
+
+/* Class = "UIButton"; normalTitle = "忘记密码！"; ObjectID = "w62-eS-nCa"; */
+"w62-eS-nCa.normalTitle" = "忘记密码！";
+
+/* Class = "UILabel"; text = "200.00"; ObjectID = "xDM-VH-Xvi"; */
+"xDM-VH-Xvi.text" = "200.00";
+
+/* Class = "UILabel"; text = "上传头像"; ObjectID = "ypC-TW-WRZ"; */
+"ypC-TW-WRZ.text" = "上传头像";
+
+/* Class = "UILabel"; text = "个人简介"; ObjectID = "zh1-7X-GLU"; */
+"zh1-7X-GLU.text" = "个人简介";
+
+/* Class = "UILabel"; text = "太极流派"; ObjectID = "zpB-nc-mNv"; */
+"zpB-nc-mNv.text" = "太极流派";
