@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-class RegisterViewController: UIViewController,UITextFieldDelegate,UIGestureRecognizerDelegate {
+class RegisterViewController: UIViewController,UITextFieldDelegate {
 
     @IBOutlet weak var nameView: UIView!
     @IBOutlet weak var pwdView: UIView!
@@ -55,14 +55,15 @@ class RegisterViewController: UIViewController,UITextFieldDelegate,UIGestureReco
         tap.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tap)
         
-        self.navigationItem.leftBarButtonItem = getBackButton(self)
-        
+        //self.navigationItem.leftBarButtonItem = getBackButton(self)
+        self.setBackButton()
+
         self.navigationController?.interactivePopGestureRecognizer!.delegate = self
     }
     
-    func backToPrevious(){
-        self.navigationController?.popViewControllerAnimated(true)
-    }
+//    func backToPrevious(){
+//        self.navigationController?.popViewControllerAnimated(true)
+//    }
     func handleTap(sender: UITapGestureRecognizer) {
         self.view.endEditing(true)
     }
@@ -138,59 +139,57 @@ class RegisterViewController: UIViewController,UITextFieldDelegate,UIGestureReco
     
     
     @IBAction func register(sender: AnyObject) {
-        let cvViewController = self.storyboard?.instantiateViewControllerWithIdentifier("MyCVViewController") as! MyCVViewController
+
+        if userNameField.text!.isEmpty {
+            let alertView = UIAlertController(title: "提醒", message: "请输入手机号码。", preferredStyle: .Alert)
+            let okAction = UIAlertAction(title: "确定", style: .Default, handler: nil)
+            alertView.addAction(okAction)
+            self.presentViewController(alertView, animated: true, completion: nil)
+            return
+        }
+        if passwordField.text!.isEmpty {
+            let alertView = UIAlertController(title: "提醒", message: "请输入密码。", preferredStyle: .Alert)
+            let okAction = UIAlertAction(title: "确定", style: .Default, handler: nil)
+            alertView.addAction(okAction)
+            self.presentViewController(alertView, animated: true, completion: nil)
+            return
+        }
+        if verificationCodeField.text!.isEmpty {
+            let alertView = UIAlertController(title: "提醒", message: "请输入验证码。", preferredStyle: .Alert)
+            let okAction = UIAlertAction(title: "确定", style: .Default, handler: nil)
+            alertView.addAction(okAction)
+            self.presentViewController(alertView, animated: true, completion: nil)
+            return
+        }
+        if identityField.text!.isEmpty {
+            let alertView = UIAlertController(title: "提醒", message: "请选择身份。", preferredStyle: .Alert)
+            let okAction = UIAlertAction(title: "确定", style: .Default, handler: nil)
+            alertView.addAction(okAction)
+            self.presentViewController(alertView, animated: true, completion: nil)
+            return
+        }
         
-        self.navigationController?.pushViewController(cvViewController, animated: true)
-//        if userNameField.text!.isEmpty {
-//            let alertView = UIAlertController(title: "提醒", message: "请输入手机号码。", preferredStyle: .Alert)
-//            let okAction = UIAlertAction(title: "确定", style: .Default, handler: nil)
-//            alertView.addAction(okAction)
-//            self.presentViewController(alertView, animated: true, completion: nil)
-//            return
-//        }
-//        if passwordField.text!.isEmpty {
-//            let alertView = UIAlertController(title: "提醒", message: "请输入密码。", preferredStyle: .Alert)
-//            let okAction = UIAlertAction(title: "确定", style: .Default, handler: nil)
-//            alertView.addAction(okAction)
-//            self.presentViewController(alertView, animated: true, completion: nil)
-//            return
-//        }
-//        if verificationCodeField.text!.isEmpty {
-//            let alertView = UIAlertController(title: "提醒", message: "请输入验证码。", preferredStyle: .Alert)
-//            let okAction = UIAlertAction(title: "确定", style: .Default, handler: nil)
-//            alertView.addAction(okAction)
-//            self.presentViewController(alertView, animated: true, completion: nil)
-//            return
-//        }
-//        if identityField.text!.isEmpty {
-//            let alertView = UIAlertController(title: "提醒", message: "请选择身份。", preferredStyle: .Alert)
-//            let okAction = UIAlertAction(title: "确定", style: .Default, handler: nil)
-//            alertView.addAction(okAction)
-//            self.presentViewController(alertView, animated: true, completion: nil)
-//            return
-//        }
-//        
-//        var userType = 1
-//        if identityField.text! == "老师"{
-//            userType  = 2
-//        }
-//        
-//        let url = REGISTER
-//        let param = ["mobile": userNameField.text! , "password":passwordField.text!, "code":verificationCodeField.text!, "type":String(userType)] as [String : AnyObject]
-//        doRequest(url, parameters: param, encoding:.URL, praseMethod: praseRegister)
-//        
+        var userType = 1
+        if identityField.text! == "老师"{
+            userType  = 2
+        }
+        
+        let url = REGISTER
+        let param = ["mobile": userNameField.text! , "password":passwordField.text!, "code":verificationCodeField.text!, "type":String(userType)] as [String : AnyObject]
+        doRequest(url, parameters: param, encoding:.URL, praseMethod: praseRegister)
+        
     }
     
     func praseRegister(json: SwiftyJSON.JSON){
         if json["success"].boolValue {
             //注册成功
-            let alertView = UIAlertController(title: "提醒", message:"注册成功，请继续填写简历。", preferredStyle: .Alert)
+            let alertView = UIAlertController(title: "提醒", message:"注册成功，请填写简历", preferredStyle: .Alert)
             let okAction = UIAlertAction(title: "确定", style: .Default) {(UIAlertAction) -> Void in
                 
-                let cvViewController = self.storyboard?.instantiateViewControllerWithIdentifier("MyCVViewController") as! MyCVViewController
+                let editCVViewController = self.storyboard?.instantiateViewControllerWithIdentifier("EditCVViewController") as! EditCVViewController
                 
-                self.navigationController?.pushViewController(cvViewController, animated: true)
-                alertView.dismissViewControllerAnimated(true, completion: nil)
+                self.navigationController?.pushViewController(editCVViewController, animated: true)
+                //alertView.dismissViewControllerAnimated(true, completion: nil)
 
             }
             alertView.addAction(okAction)

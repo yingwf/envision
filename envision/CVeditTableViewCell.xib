@@ -7,11 +7,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="KGk-i7-Jjw" customClass="CVeditTableViewCell" customModule="envision" customModuleProvider="target">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="KGk-i7-Jjw" customClass="CVeditTableViewCell" customModule="梦想偏执狂" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="342" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="最高学历" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qwz-CO-nGq">
@@ -23,26 +23,26 @@
                         <color key="textColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="选择" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="60Y-yP-TWG">
-                        <rect key="frame" x="87" y="11" width="255" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="选择" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Hb6-l6-4o4">
+                        <rect key="frame" x="79" y="7" width="263" height="30"/>
                         <color key="textColor" red="0.69803921568627447" green="0.69803921568627447" blue="0.69803921568627447" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
                 </subviews>
                 <constraints>
                     <constraint firstItem="Qwz-CO-nGq" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="5m9-d3-V71"/>
                     <constraint firstItem="Qwz-CO-nGq" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="An0-QD-jOH"/>
-                    <constraint firstItem="60Y-yP-TWG" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="3" id="bL5-GQ-a0q"/>
-                    <constraint firstItem="60Y-yP-TWG" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="ddH-2m-OWm"/>
+                    <constraint firstAttribute="trailing" secondItem="Hb6-l6-4o4" secondAttribute="trailing" id="CQs-Na-SZ2"/>
+                    <constraint firstItem="Hb6-l6-4o4" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Yl5-OU-6Cx"/>
                     <constraint firstAttribute="bottomMargin" secondItem="Qwz-CO-nGq" secondAttribute="bottom" constant="4.5" id="g8j-ra-7HK"/>
-                    <constraint firstItem="60Y-yP-TWG" firstAttribute="leading" secondItem="Qwz-CO-nGq" secondAttribute="trailing" constant="8" symbolic="YES" id="m0Y-xy-uxm"/>
-                    <constraint firstAttribute="trailing" secondItem="60Y-yP-TWG" secondAttribute="trailing" id="nxW-T2-Vx9"/>
+                    <constraint firstItem="Hb6-l6-4o4" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-1" id="hSw-QJ-sOL"/>
+                    <constraint firstItem="Hb6-l6-4o4" firstAttribute="leading" secondItem="Qwz-CO-nGq" secondAttribute="trailing" id="xEP-P4-VbA"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="title" destination="Qwz-CO-nGq" id="9Nt-JH-XLX"/>
-                <outlet property="value" destination="60Y-yP-TWG" id="r5D-SZ-5ZS"/>
+                <outlet property="value" destination="Hb6-l6-4o4" id="edC-QE-FQF"/>
             </connections>
             <point key="canvasLocation" x="143.5" y="315"/>
         </tableViewCell>

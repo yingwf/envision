@@ -68,9 +68,16 @@ class BeginInterviewTableViewController: UITableViewController,updateInfoDelegat
         }
         
         let cell = tableView.dequeueReusableCellWithIdentifier(beginTableCell, forIndexPath: indexPath) as! BeginInterviewButtonTableViewCell
-
+        cell.beginButton.addTarget(self, action: "beginInterview", forControlEvents: .TouchUpInside)
         
         return cell
+    }
+    
+    func beginInterview(){
+        
+        let interviewMgrViewController = self.storyboard?.instantiateViewControllerWithIdentifier("InterviewMgrViewController") as! InterviewMgrViewController
+        self.navigationController?.pushViewController(interviewMgrViewController, animated: true)
+        
     }
     
     
@@ -78,7 +85,7 @@ class BeginInterviewTableViewController: UITableViewController,updateInfoDelegat
         if indexPath.section <= 2{
             return 44
         }
-        return 64
+        return 74
     }
     
     override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat{

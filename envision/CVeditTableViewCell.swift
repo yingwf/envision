@@ -11,7 +11,7 @@ import UIKit
 class CVeditTableViewCell: UITableViewCell {
 
     @IBOutlet weak var title: UILabel!
-    @IBOutlet weak var value: UILabel!
+    @IBOutlet weak var value: UITextField!
     
     
     override func awakeFromNib() {

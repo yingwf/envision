@@ -10,5 +10,6 @@
 #define Header_h
 
 #import "WXApi.h"
+#import "SYQRCodeViewController.h"
 
 #endif /* Header_h */

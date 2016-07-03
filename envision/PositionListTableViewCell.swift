@@ -10,6 +10,12 @@ import UIKit
 
 class PositionListTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var jobTitle: UILabel!
+    @IBOutlet weak var major: UILabel!
+    @IBOutlet weak var address: UILabel!
+    @IBOutlet weak var favorImage: UIImageView!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

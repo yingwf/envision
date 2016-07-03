@@ -16,7 +16,7 @@ class BeginInterviewButtonTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        beginButton.layer.cornerRadius = 10
+        beginButton.layer.cornerRadius = 5
         beginButton.layer.masksToBounds = true
         
         

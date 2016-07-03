@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "14AD33D11CF6FBE1007AA411"
-               BuildableName = "envision.app"
+               BuildableName = "&#x68a6;&#x60f3;&#x504f;&#x6267;&#x72c2;.app"
                BlueprintName = "envision"
                ReferencedContainer = "container:envision.xcodeproj">
             </BuildableReference>
@@ -53,7 +53,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "14AD33D11CF6FBE1007AA411"
-            BuildableName = "envision.app"
+            BuildableName = "&#x68a6;&#x60f3;&#x504f;&#x6267;&#x72c2;.app"
             BlueprintName = "envision"
             ReferencedContainer = "container:envision.xcodeproj">
          </BuildableReference>
@@ -76,7 +76,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "14AD33D11CF6FBE1007AA411"
-            BuildableName = "envision.app"
+            BuildableName = "&#x68a6;&#x60f3;&#x504f;&#x6267;&#x72c2;.app"
             BlueprintName = "envision"
             ReferencedContainer = "container:envision.xcodeproj">
          </BuildableReference>
@@ -95,7 +95,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "14AD33D11CF6FBE1007AA411"
-            BuildableName = "envision.app"
+            BuildableName = "&#x68a6;&#x60f3;&#x504f;&#x6267;&#x72c2;.app"
             BlueprintName = "envision"
             ReferencedContainer = "container:envision.xcodeproj">
          </BuildableReference>

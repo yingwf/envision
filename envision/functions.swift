@@ -73,5 +73,28 @@ func getBackButton(vc: UIViewController) -> UIBarButtonItem{
     return backItem
 }
 
+//extension SYQRCodeViewController {
+//    override public func viewDidLoad() {
+//        super.viewDidLoad()
+//        self.setBackButton()
+//    }
+//}
 
+extension UIViewController:UIGestureRecognizerDelegate {
+    func backToPrevious(){
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+    func setBackButton(){
+        let backButton = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 30))
+        let backImage = UIImageView(frame: CGRect(x: -8, y: 5, width: 14, height: 22))
+        backImage.image = UIImage(named: "back")
+        backButton.addSubview(backImage)
+        backButton.addTarget(self, action: "backToPrevious", forControlEvents: .TouchUpInside)
+        let backItem = UIBarButtonItem(customView: backButton)
+        backItem.tintColor = UIColor.whiteColor()
+        self.navigationItem.leftBarButtonItem = backItem
+        self.navigationController?.interactivePopGestureRecognizer!.delegate = self
+
+    }
+}
 

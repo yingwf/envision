@@ -11,6 +11,7 @@
 		14053B0F1CFFDCC300BBF0A3 /* YYShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14053B0E1CFFDCC300BBF0A3 /* YYShareView.swift */; };
 		1430192A1CFC37C500437C67 /* PositionTypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143019281CFC37C500437C67 /* PositionTypeTableViewCell.swift */; };
 		1430192B1CFC37C500437C67 /* PositionTypeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 143019291CFC37C500437C67 /* PositionTypeTableViewCell.xib */; };
+		1458CD0C1D24C94900215C61 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1458CD0B1D24C94900215C61 /* LaunchViewController.swift */; };
 		145900221CFA98D8009F3DD6 /* IconTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145900201CFA98D8009F3DD6 /* IconTableViewCell.swift */; };
 		145900231CFA98D8009F3DD6 /* IconTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 145900211CFA98D8009F3DD6 /* IconTableViewCell.xib */; };
 		145900261CFA9CF7009F3DD6 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145900241CFA9CF7009F3DD6 /* HomeTableViewCell.swift */; };
@@ -85,6 +86,33 @@
 		14AD353F1CF74833007AA411 /* models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AD353E1CF74833007AA411 /* models.swift */; };
 		14AD35411CF74885007AA411 /* HttpConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AD35401CF74885007AA411 /* HttpConstants.swift */; };
 		14AD356E1CF74B02007AA411 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AD356D1CF74B02007AA411 /* SwiftyJSON.swift */; };
+		14B34C2F1D20C96800476B8B /* MyApplyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B34C2E1D20C96800476B8B /* MyApplyTableViewController.swift */; };
+		14B34C3A1D20CA1C00476B8B /* ApplyPosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B34C381D20CA1C00476B8B /* ApplyPosTableViewCell.swift */; };
+		14B34C3B1D20CA1C00476B8B /* ApplyPosTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14B34C391D20CA1C00476B8B /* ApplyPosTableViewCell.xib */; };
+		14B34C3E1D20CB3400476B8B /* ApplyProTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B34C3C1D20CB3400476B8B /* ApplyProTableViewCell.swift */; };
+		14B34C3F1D20CB3400476B8B /* ApplyProTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14B34C3D1D20CB3400476B8B /* ApplyProTableViewCell.xib */; };
+		14B34C421D20CDAF00476B8B /* ApplyStatusTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B34C401D20CDAF00476B8B /* ApplyStatusTableViewCell.swift */; };
+		14B34C431D20CDAF00476B8B /* ApplyStatusTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14B34C411D20CDAF00476B8B /* ApplyStatusTableViewCell.xib */; };
+		14B34C461D20FBC700476B8B /* ApplyCVTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B34C441D20FBC700476B8B /* ApplyCVTableViewCell.swift */; };
+		14B34C471D20FBC700476B8B /* ApplyCVTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14B34C451D20FBC700476B8B /* ApplyCVTableViewCell.xib */; };
+		14B34C4A1D211E5600476B8B /* ApplyInterviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B34C481D211E5600476B8B /* ApplyInterviewTableViewCell.swift */; };
+		14B34C4B1D211E5600476B8B /* ApplyInterviewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14B34C491D211E5600476B8B /* ApplyInterviewTableViewCell.xib */; };
+		14B34C4E1D21241300476B8B /* ApplyFinalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B34C4C1D21241300476B8B /* ApplyFinalTableViewCell.swift */; };
+		14B34C4F1D21241300476B8B /* ApplyFinalTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14B34C4D1D21241300476B8B /* ApplyFinalTableViewCell.xib */; };
+		14B34C521D21289E00476B8B /* ApplyOfferTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B34C501D21289E00476B8B /* ApplyOfferTableViewCell.swift */; };
+		14B34C531D21289E00476B8B /* ApplyOfferTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14B34C511D21289E00476B8B /* ApplyOfferTableViewCell.xib */; };
+		14B34C561D22254500476B8B /* TimeTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B34C541D22254500476B8B /* TimeTitleTableViewCell.swift */; };
+		14B34C571D22254500476B8B /* TimeTitleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14B34C551D22254500476B8B /* TimeTitleTableViewCell.xib */; };
+		14B34C5A1D22269300476B8B /* TimeSelectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B34C581D22269300476B8B /* TimeSelectTableViewCell.swift */; };
+		14B34C5B1D22269300476B8B /* TimeSelectTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14B34C591D22269300476B8B /* TimeSelectTableViewCell.xib */; };
+		14B34C5D1D222B2300476B8B /* TimeSelectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B34C5C1D222B2300476B8B /* TimeSelectTableViewController.swift */; };
+		14B34C601D224E6F00476B8B /* ResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B34C5E1D224E6F00476B8B /* ResultTableViewCell.swift */; };
+		14B34C611D224E6F00476B8B /* ResultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14B34C5F1D224E6F00476B8B /* ResultTableViewCell.xib */; };
+		14B34C651D22580C00476B8B /* StarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B34C641D22580C00476B8B /* StarView.swift */; };
+		14B34C681D225C6E00476B8B /* EvaluateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B34C661D225C6E00476B8B /* EvaluateTableViewCell.swift */; };
+		14B34C691D225C6E00476B8B /* EvaluateTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14B34C671D225C6E00476B8B /* EvaluateTableViewCell.xib */; };
+		14B34C6B1D2260D000476B8B /* EndInterviewTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B34C6A1D2260D000476B8B /* EndInterviewTableViewController.swift */; };
+		14B34C711D227C3A00476B8B /* InterviewMgrViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B34C701D227C3A00476B8B /* InterviewMgrViewController.swift */; };
 		14B95D8A1D12B4AA00F21FB3 /* CVTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14B95D881D12B4AA00F21FB3 /* CVTableViewCell.xib */; };
 		14B95D8B1D12B4AA00F21FB3 /* CVTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B95D891D12B4AA00F21FB3 /* CVTableViewCell.swift */; };
 		14BF845A1D06778200AD212E /* MyCVViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BF84591D06778200AD212E /* MyCVViewController.swift */; };
@@ -99,6 +127,19 @@
 		14BF84A81D0D3F0C00AD212E /* InputInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BF84A71D0D3F0C00AD212E /* InputInfoViewController.swift */; };
 		14BF84B61D0E61A900AD212E /* SearchVCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BF84B51D0E61A900AD212E /* SearchVCViewController.swift */; };
 		14BF84EA1D116ACC00AD212E /* FindPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BF84E91D116ACC00AD212E /* FindPasswordViewController.swift */; };
+		14CC8C571D24F913007CB259 /* JotTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CC8C551D24F913007CB259 /* JotTitleTableViewCell.swift */; };
+		14CC8C581D24F913007CB259 /* JotTitleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14CC8C561D24F913007CB259 /* JotTitleTableViewCell.xib */; };
+		14CC8C631D24FE6D007CB259 /* JobInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CC8C611D24FE6D007CB259 /* JobInfoTableViewCell.swift */; };
+		14CC8C641D24FE6D007CB259 /* JobInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14CC8C621D24FE6D007CB259 /* JobInfoTableViewCell.xib */; };
+		14CC8C671D26106D007CB259 /* SendTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CC8C651D26106D007CB259 /* SendTitleTableViewCell.swift */; };
+		14CC8C681D26106D007CB259 /* SendTitleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14CC8C661D26106D007CB259 /* SendTitleTableViewCell.xib */; };
+		14CC8C6B1D2615E2007CB259 /* SendContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CC8C691D2615E2007CB259 /* SendContentTableViewCell.swift */; };
+		14CC8C6C1D2615E2007CB259 /* SendContentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14CC8C6A1D2615E2007CB259 /* SendContentTableViewCell.xib */; };
+		14CC8C6F1D261934007CB259 /* SendVideoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CC8C6D1D261934007CB259 /* SendVideoTableViewCell.swift */; };
+		14CC8C701D261934007CB259 /* SendVideoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14CC8C6E1D261934007CB259 /* SendVideoTableViewCell.xib */; };
+		14CC8C721D261ACB007CB259 /* SendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CC8C711D261ACB007CB259 /* SendViewController.swift */; };
+		14EBC3B01D27913A0073DCDB /* SYQRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14EBC3AF1D27913A0073DCDB /* SYQRCodeViewController.m */; };
+		14EBC3BC1D279A190073DCDB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14EBC3BB1D279A190073DCDB /* Images.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -222,6 +263,7 @@
 		14053B0E1CFFDCC300BBF0A3 /* YYShareView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YYShareView.swift; sourceTree = "<group>"; };
 		143019281CFC37C500437C67 /* PositionTypeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PositionTypeTableViewCell.swift; sourceTree = "<group>"; };
 		143019291CFC37C500437C67 /* PositionTypeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionTypeTableViewCell.xib; sourceTree = "<group>"; };
+		1458CD0B1D24C94900215C61 /* LaunchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		145900201CFA98D8009F3DD6 /* IconTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IconTableViewCell.swift; sourceTree = "<group>"; };
 		145900211CFA98D8009F3DD6 /* IconTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IconTableViewCell.xib; sourceTree = "<group>"; };
 		145900241CFA9CF7009F3DD6 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
@@ -305,6 +347,33 @@
 		14AD353E1CF74833007AA411 /* models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = models.swift; sourceTree = "<group>"; };
 		14AD35401CF74885007AA411 /* HttpConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpConstants.swift; sourceTree = "<group>"; };
 		14AD356D1CF74B02007AA411 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
+		14B34C2E1D20C96800476B8B /* MyApplyTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyApplyTableViewController.swift; sourceTree = "<group>"; };
+		14B34C381D20CA1C00476B8B /* ApplyPosTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplyPosTableViewCell.swift; sourceTree = "<group>"; };
+		14B34C391D20CA1C00476B8B /* ApplyPosTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ApplyPosTableViewCell.xib; sourceTree = "<group>"; };
+		14B34C3C1D20CB3400476B8B /* ApplyProTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplyProTableViewCell.swift; sourceTree = "<group>"; };
+		14B34C3D1D20CB3400476B8B /* ApplyProTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ApplyProTableViewCell.xib; sourceTree = "<group>"; };
+		14B34C401D20CDAF00476B8B /* ApplyStatusTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplyStatusTableViewCell.swift; sourceTree = "<group>"; };
+		14B34C411D20CDAF00476B8B /* ApplyStatusTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ApplyStatusTableViewCell.xib; sourceTree = "<group>"; };
+		14B34C441D20FBC700476B8B /* ApplyCVTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplyCVTableViewCell.swift; sourceTree = "<group>"; };
+		14B34C451D20FBC700476B8B /* ApplyCVTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ApplyCVTableViewCell.xib; sourceTree = "<group>"; };
+		14B34C481D211E5600476B8B /* ApplyInterviewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplyInterviewTableViewCell.swift; sourceTree = "<group>"; };
+		14B34C491D211E5600476B8B /* ApplyInterviewTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ApplyInterviewTableViewCell.xib; sourceTree = "<group>"; };
+		14B34C4C1D21241300476B8B /* ApplyFinalTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplyFinalTableViewCell.swift; sourceTree = "<group>"; };
+		14B34C4D1D21241300476B8B /* ApplyFinalTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ApplyFinalTableViewCell.xib; sourceTree = "<group>"; };
+		14B34C501D21289E00476B8B /* ApplyOfferTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplyOfferTableViewCell.swift; sourceTree = "<group>"; };
+		14B34C511D21289E00476B8B /* ApplyOfferTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ApplyOfferTableViewCell.xib; sourceTree = "<group>"; };
+		14B34C541D22254500476B8B /* TimeTitleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeTitleTableViewCell.swift; sourceTree = "<group>"; };
+		14B34C551D22254500476B8B /* TimeTitleTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TimeTitleTableViewCell.xib; sourceTree = "<group>"; };
+		14B34C581D22269300476B8B /* TimeSelectTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeSelectTableViewCell.swift; sourceTree = "<group>"; };
+		14B34C591D22269300476B8B /* TimeSelectTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TimeSelectTableViewCell.xib; sourceTree = "<group>"; };
+		14B34C5C1D222B2300476B8B /* TimeSelectTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeSelectTableViewController.swift; sourceTree = "<group>"; };
+		14B34C5E1D224E6F00476B8B /* ResultTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultTableViewCell.swift; sourceTree = "<group>"; };
+		14B34C5F1D224E6F00476B8B /* ResultTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResultTableViewCell.xib; sourceTree = "<group>"; };
+		14B34C641D22580C00476B8B /* StarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarView.swift; sourceTree = "<group>"; };
+		14B34C661D225C6E00476B8B /* EvaluateTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EvaluateTableViewCell.swift; sourceTree = "<group>"; };
+		14B34C671D225C6E00476B8B /* EvaluateTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EvaluateTableViewCell.xib; sourceTree = "<group>"; };
+		14B34C6A1D2260D000476B8B /* EndInterviewTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndInterviewTableViewController.swift; sourceTree = "<group>"; };
+		14B34C701D227C3A00476B8B /* InterviewMgrViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InterviewMgrViewController.swift; path = ../InterviewMgrViewController.swift; sourceTree = "<group>"; };
 		14B95D881D12B4AA00F21FB3 /* CVTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CVTableViewCell.xib; sourceTree = "<group>"; };
 		14B95D891D12B4AA00F21FB3 /* CVTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVTableViewCell.swift; sourceTree = "<group>"; };
 		14BF84591D06778200AD212E /* MyCVViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCVViewController.swift; sourceTree = "<group>"; };
@@ -319,6 +388,20 @@
 		14BF84A71D0D3F0C00AD212E /* InputInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputInfoViewController.swift; sourceTree = "<group>"; };
 		14BF84B51D0E61A900AD212E /* SearchVCViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchVCViewController.swift; sourceTree = "<group>"; };
 		14BF84E91D116ACC00AD212E /* FindPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindPasswordViewController.swift; sourceTree = "<group>"; };
+		14CC8C551D24F913007CB259 /* JotTitleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JotTitleTableViewCell.swift; path = ../JotTitleTableViewCell.swift; sourceTree = "<group>"; };
+		14CC8C561D24F913007CB259 /* JotTitleTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = JotTitleTableViewCell.xib; path = ../JotTitleTableViewCell.xib; sourceTree = "<group>"; };
+		14CC8C611D24FE6D007CB259 /* JobInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JobInfoTableViewCell.swift; path = ../JobInfoTableViewCell.swift; sourceTree = "<group>"; };
+		14CC8C621D24FE6D007CB259 /* JobInfoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = JobInfoTableViewCell.xib; path = ../JobInfoTableViewCell.xib; sourceTree = "<group>"; };
+		14CC8C651D26106D007CB259 /* SendTitleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendTitleTableViewCell.swift; sourceTree = "<group>"; };
+		14CC8C661D26106D007CB259 /* SendTitleTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SendTitleTableViewCell.xib; sourceTree = "<group>"; };
+		14CC8C691D2615E2007CB259 /* SendContentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SendContentTableViewCell.swift; path = ../SendContentTableViewCell.swift; sourceTree = "<group>"; };
+		14CC8C6A1D2615E2007CB259 /* SendContentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SendContentTableViewCell.xib; path = ../SendContentTableViewCell.xib; sourceTree = "<group>"; };
+		14CC8C6D1D261934007CB259 /* SendVideoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SendVideoTableViewCell.swift; path = ../SendVideoTableViewCell.swift; sourceTree = "<group>"; };
+		14CC8C6E1D261934007CB259 /* SendVideoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SendVideoTableViewCell.xib; path = ../SendVideoTableViewCell.xib; sourceTree = "<group>"; };
+		14CC8C711D261ACB007CB259 /* SendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendViewController.swift; sourceTree = "<group>"; };
+		14EBC3AE1D27913A0073DCDB /* SYQRCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYQRCodeViewController.h; sourceTree = "<group>"; };
+		14EBC3AF1D27913A0073DCDB /* SYQRCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYQRCodeViewController.m; sourceTree = "<group>"; };
+		14EBC3BB1D279A190073DCDB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -359,6 +442,16 @@
 		145900281CFA9F65009F3DD6 /* cell */ = {
 			isa = PBXGroup;
 			children = (
+				14CC8C651D26106D007CB259 /* SendTitleTableViewCell.swift */,
+				14CC8C661D26106D007CB259 /* SendTitleTableViewCell.xib */,
+				14CC8C691D2615E2007CB259 /* SendContentTableViewCell.swift */,
+				14CC8C6A1D2615E2007CB259 /* SendContentTableViewCell.xib */,
+				14CC8C6D1D261934007CB259 /* SendVideoTableViewCell.swift */,
+				14CC8C6E1D261934007CB259 /* SendVideoTableViewCell.xib */,
+				14CC8C551D24F913007CB259 /* JotTitleTableViewCell.swift */,
+				14CC8C561D24F913007CB259 /* JotTitleTableViewCell.xib */,
+				14CC8C611D24FE6D007CB259 /* JobInfoTableViewCell.swift */,
+				14CC8C621D24FE6D007CB259 /* JobInfoTableViewCell.xib */,
 				14B95D881D12B4AA00F21FB3 /* CVTableViewCell.xib */,
 				14B95D891D12B4AA00F21FB3 /* CVTableViewCell.swift */,
 				143019281CFC37C500437C67 /* PositionTypeTableViewCell.swift */,
@@ -385,6 +478,30 @@
 				145CEBEE1CFDA55300BDA5DD /* HeaderTableViewCell.xib */,
 				145CEBF11CFDA70C00BDA5DD /* ContactTableViewCell.swift */,
 				145CEBF21CFDA70C00BDA5DD /* ContactTableViewCell.xib */,
+				14B34C5E1D224E6F00476B8B /* ResultTableViewCell.swift */,
+				14B34C5F1D224E6F00476B8B /* ResultTableViewCell.xib */,
+				14B34C661D225C6E00476B8B /* EvaluateTableViewCell.swift */,
+				14B34C671D225C6E00476B8B /* EvaluateTableViewCell.xib */,
+				14B34C501D21289E00476B8B /* ApplyOfferTableViewCell.swift */,
+				14B34C511D21289E00476B8B /* ApplyOfferTableViewCell.xib */,
+				14B34C541D22254500476B8B /* TimeTitleTableViewCell.swift */,
+				14B34C551D22254500476B8B /* TimeTitleTableViewCell.xib */,
+				14B34C381D20CA1C00476B8B /* ApplyPosTableViewCell.swift */,
+				14B34C391D20CA1C00476B8B /* ApplyPosTableViewCell.xib */,
+				14B34C3C1D20CB3400476B8B /* ApplyProTableViewCell.swift */,
+				14B34C3D1D20CB3400476B8B /* ApplyProTableViewCell.xib */,
+				14B34C401D20CDAF00476B8B /* ApplyStatusTableViewCell.swift */,
+				14B34C411D20CDAF00476B8B /* ApplyStatusTableViewCell.xib */,
+				14B34C441D20FBC700476B8B /* ApplyCVTableViewCell.swift */,
+				14B34C451D20FBC700476B8B /* ApplyCVTableViewCell.xib */,
+				14B34C481D211E5600476B8B /* ApplyInterviewTableViewCell.swift */,
+				14B34C491D211E5600476B8B /* ApplyInterviewTableViewCell.xib */,
+				14B34C4C1D21241300476B8B /* ApplyFinalTableViewCell.swift */,
+				14B34C4D1D21241300476B8B /* ApplyFinalTableViewCell.xib */,
+				1487DFA91D1942B600215546 /* InterviewTableViewCell.swift */,
+				1487DFAA1D1942B600215546 /* InterviewTableViewCell.xib */,
+				14B34C581D22269300476B8B /* TimeSelectTableViewCell.swift */,
+				14B34C591D22269300476B8B /* TimeSelectTableViewCell.xib */,
 			);
 			name = cell;
 			sourceTree = "<group>";
@@ -454,7 +571,6 @@
 		14AD33C91CF6FBE1007AA411 = {
 			isa = PBXGroup;
 			children = (
-				14A7E2531D18F49B00B54535 /* CoreTelephony.framework */,
 				14AD33D41CF6FBE1007AA411 /* envision */,
 				14AD33E91CF6FBE1007AA411 /* envisionTests */,
 				14AD33F41CF6FBE1007AA411 /* envisionUITests */,
@@ -484,23 +600,12 @@
 				14AD33D51CF6FBE1007AA411 /* AppDelegate.swift */,
 				14AD33D71CF6FBE1007AA411 /* ViewController.swift */,
 				14AD33D91CF6FBE1007AA411 /* Main.storyboard */,
-				1487DFCE1D1CFEB400215546 /* BeginInterviewTableViewController.swift */,
-				1487DFB81D1BE58700215546 /* InterViewTableViewController.swift */,
-				1487DFA91D1942B600215546 /* InterviewTableViewCell.swift */,
-				1487DFAA1D1942B600215546 /* InterviewTableViewCell.xib */,
-				14AB661D1D14DA7100A210A1 /* YJImagePickerController.swift */,
-				14BF84E91D116ACC00AD212E /* FindPasswordViewController.swift */,
-				14BF84B51D0E61A900AD212E /* SearchVCViewController.swift */,
-				14BF84A71D0D3F0C00AD212E /* InputInfoViewController.swift */,
-				14BF846D1D06AD4A00AD212E /* EditCVViewController.swift */,
-				14BF84591D06778200AD212E /* MyCVViewController.swift */,
-				1484AC7D1D0152BC0074346C /* RegisterViewController.swift */,
-				1484AC731D0138A00074346C /* LoginViewController.swift */,
-				14053B041CFF21FE00BBF0A3 /* PositionDetailViewController.swift */,
-				145CEBDF1CFD85CA00BDA5DD /* PositionListTableViewController.swift */,
+				14CC8C711D261ACB007CB259 /* SendViewController.swift */,
 				14AD33DC1CF6FBE1007AA411 /* Assets.xcassets */,
 				14AD33DE1CF6FBE1007AA411 /* LaunchScreen.storyboard */,
+				1458CD0B1D24C94900215C61 /* LaunchViewController.swift */,
 				14AD33E11CF6FBE1007AA411 /* Info.plist */,
+				14B34C641D22580C00476B8B /* StarView.swift */,
 				1491552D1CFEF642006C62A9 /* ShareView.swift */,
 				1491552F1CFEF668006C62A9 /* ShareView.xib */,
 				14A7E2521D18EB0300B54535 /* Header.h */,
@@ -529,11 +634,27 @@
 		14AD34111CF746B9007AA411 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
+				14B34C701D227C3A00476B8B /* InterviewMgrViewController.swift */,
 				145CEBCC1CFD75F500BDA5DD /* WebViewController.swift */,
 				14AD340D1CF73494007AA411 /* ApplyTableViewController.swift */,
 				14AD340F1CF734B8007AA411 /* MyTableViewController.swift */,
 				14AD340B1CF70428007AA411 /* DreamerViewController.swift */,
 				14AD34091CF6FEC2007AA411 /* HomeViewController.swift */,
+				14B34C6A1D2260D000476B8B /* EndInterviewTableViewController.swift */,
+				14B34C5C1D222B2300476B8B /* TimeSelectTableViewController.swift */,
+				14B34C2E1D20C96800476B8B /* MyApplyTableViewController.swift */,
+				1487DFCE1D1CFEB400215546 /* BeginInterviewTableViewController.swift */,
+				1487DFB81D1BE58700215546 /* InterViewTableViewController.swift */,
+				14AB661D1D14DA7100A210A1 /* YJImagePickerController.swift */,
+				14BF84E91D116ACC00AD212E /* FindPasswordViewController.swift */,
+				14BF84B51D0E61A900AD212E /* SearchVCViewController.swift */,
+				14BF84A71D0D3F0C00AD212E /* InputInfoViewController.swift */,
+				14BF846D1D06AD4A00AD212E /* EditCVViewController.swift */,
+				14BF84591D06778200AD212E /* MyCVViewController.swift */,
+				1484AC7D1D0152BC0074346C /* RegisterViewController.swift */,
+				1484AC731D0138A00074346C /* LoginViewController.swift */,
+				14053B041CFF21FE00BBF0A3 /* PositionDetailViewController.swift */,
+				145CEBDF1CFD85CA00BDA5DD /* PositionListTableViewController.swift */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -541,9 +662,11 @@
 		14AD34121CF746CB007AA411 /* framework */ = {
 			isa = PBXGroup;
 			children = (
+				14EBC3AD1D27913A0073DCDB /* SYQRCode */,
 				14A7E2501D18E92900B54535 /* libc++.tbd */,
 				14A7E24E1D18E90F00B54535 /* libsqlite3.0.tbd */,
 				14A7E24C1D18E90500B54535 /* libz.1.1.3.tbd */,
+				14A7E2531D18F49B00B54535 /* CoreTelephony.framework */,
 				14A7E24A1D18E8DE00B54535 /* SystemConfiguration.framework */,
 				14A7E23A1D18E88600B54535 /* OpenSDK1.7.1 */,
 				14AB65F71D14D19800A210A1 /* PKHUD */,
@@ -556,6 +679,16 @@
 			);
 			name = framework;
 			sourceTree = "<group>";
+		};
+		14EBC3AD1D27913A0073DCDB /* SYQRCode */ = {
+			isa = PBXGroup;
+			children = (
+				14EBC3BB1D279A190073DCDB /* Images.xcassets */,
+				14EBC3AE1D27913A0073DCDB /* SYQRCodeViewController.h */,
+				14EBC3AF1D27913A0073DCDB /* SYQRCodeViewController.m */,
+			);
+			path = SYQRCode;
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -749,22 +882,39 @@
 			buildActionMask = 2147483647;
 			files = (
 				14B95D8A1D12B4AA00F21FB3 /* CVTableViewCell.xib in Resources */,
+				14B34C3B1D20CA1C00476B8B /* ApplyPosTableViewCell.xib in Resources */,
+				14B34C431D20CDAF00476B8B /* ApplyStatusTableViewCell.xib in Resources */,
 				14AB660D1D14D19800A210A1 /* Images.xcassets in Resources */,
 				1487DFC91D1CE7E900215546 /* BeginInterviewTableViewCell.xib in Resources */,
 				1487DFAC1D1942B600215546 /* InterviewTableViewCell.xib in Resources */,
 				14AD33E01CF6FBE1007AA411 /* LaunchScreen.storyboard in Resources */,
 				14BF846C1D06A3C800AD212E /* EditCVTableViewCell.xib in Resources */,
+				14B34C4B1D211E5600476B8B /* ApplyInterviewTableViewCell.xib in Resources */,
 				145CEBF01CFDA55300BDA5DD /* HeaderTableViewCell.xib in Resources */,
+				14B34C3F1D20CB3400476B8B /* ApplyProTableViewCell.xib in Resources */,
+				14B34C531D21289E00476B8B /* ApplyOfferTableViewCell.xib in Resources */,
 				1487DFCD1D1CFC8E00215546 /* BeginInterviewButtonTableViewCell.xib in Resources */,
+				14B34C611D224E6F00476B8B /* ResultTableViewCell.xib in Resources */,
+				14B34C4F1D21241300476B8B /* ApplyFinalTableViewCell.xib in Resources */,
+				14EBC3BC1D279A190073DCDB /* Images.xcassets in Resources */,
+				14B34C571D22254500476B8B /* TimeTitleTableViewCell.xib in Resources */,
 				14BF84761D06AEED00AD212E /* CVeditTableViewCell.xib in Resources */,
 				145CEBDA1CFD7DF600BDA5DD /* PositionListTableViewCell.xib in Resources */,
 				145900231CFA98D8009F3DD6 /* IconTableViewCell.xib in Resources */,
+				14CC8C681D26106D007CB259 /* SendTitleTableViewCell.xib in Resources */,
+				14B34C691D225C6E00476B8B /* EvaluateTableViewCell.xib in Resources */,
+				14CC8C701D261934007CB259 /* SendVideoTableViewCell.xib in Resources */,
+				14B34C5B1D22269300476B8B /* TimeSelectTableViewCell.xib in Resources */,
 				149155301CFEF668006C62A9 /* ShareView.xib in Resources */,
 				14AD33DD1CF6FBE1007AA411 /* Assets.xcassets in Resources */,
 				14A7E2411D18E88600B54535 /* README.txt in Resources */,
+				14CC8C6C1D2615E2007CB259 /* SendContentTableViewCell.xib in Resources */,
 				14AB660E1D14D19800A210A1 /* Info.plist in Resources */,
+				14B34C471D20FBC700476B8B /* ApplyCVTableViewCell.xib in Resources */,
+				14CC8C581D24F913007CB259 /* JotTitleTableViewCell.xib in Resources */,
 				145CEBEC1CFDA23400BDA5DD /* CenterTableViewCell.xib in Resources */,
 				145900271CFA9CF7009F3DD6 /* HomeTableViewCell.xib in Resources */,
+				14CC8C641D24FE6D007CB259 /* JobInfoTableViewCell.xib in Resources */,
 				1430192B1CFC37C500437C67 /* PositionTypeTableViewCell.xib in Resources */,
 				14BF84721D06ADA300AD212E /* CVhintTableViewCell.xib in Resources */,
 				145CEBF41CFDA70C00BDA5DD /* ContactTableViewCell.xib in Resources */,
@@ -794,6 +944,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				145CEBE01CFD85CA00BDA5DD /* PositionListTableViewController.swift in Sources */,
+				14B34C601D224E6F00476B8B /* ResultTableViewCell.swift in Sources */,
+				14CC8C571D24F913007CB259 /* JotTitleTableViewCell.swift in Sources */,
 				14AB661B1D14D19800A210A1 /* Window.swift in Sources */,
 				1487DFCF1D1CFEB400215546 /* BeginInterviewTableViewController.swift in Sources */,
 				14AB66141D14D19800A210A1 /* PKHUDProgressView.swift in Sources */,
@@ -801,45 +953,65 @@
 				14AD353D1CF747DF007AA411 /* functions.swift in Sources */,
 				14AB661C1D14D19800A210A1 /* WindowRootViewController.swift in Sources */,
 				14BF845A1D06778200AD212E /* MyCVViewController.swift in Sources */,
+				14B34C3E1D20CB3400476B8B /* ApplyProTableViewCell.swift in Sources */,
 				14AB66151D14D19800A210A1 /* PKHUDRotatingImageView.swift in Sources */,
 				145CEBEF1CFDA55300BDA5DD /* HeaderTableViewCell.swift in Sources */,
 				1491552E1CFEF642006C62A9 /* ShareView.swift in Sources */,
 				14AB66131D14D19800A210A1 /* PKHUDErrorView.swift in Sources */,
 				14AB660C1D14D19800A210A1 /* HUD.swift in Sources */,
 				14AB66191D14D19800A210A1 /* PKHUDTextView.swift in Sources */,
+				14B34C461D20FBC700476B8B /* ApplyCVTableViewCell.swift in Sources */,
+				14B34C5D1D222B2300476B8B /* TimeSelectTableViewController.swift in Sources */,
+				14CC8C631D24FE6D007CB259 /* JobInfoTableViewCell.swift in Sources */,
 				14BF846B1D06A3C800AD212E /* EditCVTableViewCell.swift in Sources */,
+				14B34C6B1D2260D000476B8B /* EndInterviewTableViewController.swift in Sources */,
 				14AD33D81CF6FBE1007AA411 /* ViewController.swift in Sources */,
 				14BF846E1D06AD4A00AD212E /* EditCVViewController.swift in Sources */,
 				14BF84711D06ADA300AD212E /* CVhintTableViewCell.swift in Sources */,
 				14AB66111D14D19800A210A1 /* PKHUDAnimation.swift in Sources */,
 				1487DFC81D1CE7E900215546 /* BeginInterviewTableViewCell.swift in Sources */,
 				145900261CFA9CF7009F3DD6 /* HomeTableViewCell.swift in Sources */,
+				14CC8C721D261ACB007CB259 /* SendViewController.swift in Sources */,
+				14B34C681D225C6E00476B8B /* EvaluateTableViewCell.swift in Sources */,
 				145900221CFA98D8009F3DD6 /* IconTableViewCell.swift in Sources */,
 				14AB661E1D14DA7100A210A1 /* YJImagePickerController.swift in Sources */,
+				14B34C421D20CDAF00476B8B /* ApplyStatusTableViewCell.swift in Sources */,
 				14AB66161D14D19800A210A1 /* PKHUDSquareBaseView.swift in Sources */,
 				14AB660B1D14D19800A210A1 /* FrameView.swift in Sources */,
 				14AD35411CF74885007AA411 /* HttpConstants.swift in Sources */,
+				14B34C521D21289E00476B8B /* ApplyOfferTableViewCell.swift in Sources */,
 				14BF84751D06AEED00AD212E /* CVeditTableViewCell.swift in Sources */,
 				14AB66181D14D19800A210A1 /* PKHUDSystemActivityIndicatorView.swift in Sources */,
+				14B34C2F1D20C96800476B8B /* MyApplyTableViewController.swift in Sources */,
 				1487DFCC1D1CFC8E00215546 /* BeginInterviewButtonTableViewCell.swift in Sources */,
+				14EBC3B01D27913A0073DCDB /* SYQRCodeViewController.m in Sources */,
 				14AB66171D14D19800A210A1 /* PKHUDSuccessView.swift in Sources */,
 				14AD356E1CF74B02007AA411 /* SwiftyJSON.swift in Sources */,
 				14AD34101CF734B8007AA411 /* MyTableViewController.swift in Sources */,
+				14CC8C6B1D2615E2007CB259 /* SendContentTableViewCell.swift in Sources */,
+				14B34C5A1D22269300476B8B /* TimeSelectTableViewCell.swift in Sources */,
 				14BF84EA1D116ACC00AD212E /* FindPasswordViewController.swift in Sources */,
 				14AD340C1CF70428007AA411 /* DreamerViewController.swift in Sources */,
 				1484AC741D0138A00074346C /* LoginViewController.swift in Sources */,
 				14AD33D61CF6FBE1007AA411 /* AppDelegate.swift in Sources */,
+				14B34C561D22254500476B8B /* TimeTitleTableViewCell.swift in Sources */,
+				1458CD0C1D24C94900215C61 /* LaunchViewController.swift in Sources */,
 				14BF84A81D0D3F0C00AD212E /* InputInfoViewController.swift in Sources */,
 				14AD340A1CF6FEC2007AA411 /* HomeViewController.swift in Sources */,
 				14AD340E1CF73494007AA411 /* ApplyTableViewController.swift in Sources */,
+				14B34C4E1D21241300476B8B /* ApplyFinalTableViewCell.swift in Sources */,
 				1484AC7E1D0152BC0074346C /* RegisterViewController.swift in Sources */,
+				14CC8C6F1D261934007CB259 /* SendVideoTableViewCell.swift in Sources */,
 				14BF84B61D0E61A900AD212E /* SearchVCViewController.swift in Sources */,
 				1430192A1CFC37C500437C67 /* PositionTypeTableViewCell.swift in Sources */,
+				14B34C4A1D211E5600476B8B /* ApplyInterviewTableViewCell.swift in Sources */,
 				1487DFAB1D1942B600215546 /* InterviewTableViewCell.swift in Sources */,
 				14BF84781D0702D700AD212E /* YYPickerView.swift in Sources */,
 				14AB661A1D14D19800A210A1 /* PKHUDWideBaseView.swift in Sources */,
 				1487DFB91D1BE58700215546 /* InterViewTableViewController.swift in Sources */,
 				14B95D8B1D12B4AA00F21FB3 /* CVTableViewCell.swift in Sources */,
+				14B34C711D227C3A00476B8B /* InterviewMgrViewController.swift in Sources */,
+				14CC8C671D26106D007CB259 /* SendTitleTableViewCell.swift in Sources */,
 				14AD34141CF746E4007AA411 /* YYScrollView.swift in Sources */,
 				145CEBEB1CFDA23400BDA5DD /* CenterTableViewCell.swift in Sources */,
 				14AB660F1D14D19800A210A1 /* PKHUD.swift in Sources */,
@@ -849,6 +1021,8 @@
 				145CEBCD1CFD75F500BDA5DD /* WebViewController.swift in Sources */,
 				145CEBD91CFD7DF600BDA5DD /* PositionListTableViewCell.swift in Sources */,
 				14AD353F1CF74833007AA411 /* models.swift in Sources */,
+				14B34C3A1D20CA1C00476B8B /* ApplyPosTableViewCell.swift in Sources */,
+				14B34C651D22580C00476B8B /* StarView.swift in Sources */,
 				14AB66121D14D19800A210A1 /* PKHUDAssets.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1007,7 +1181,7 @@
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = envision/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1028,7 +1202,7 @@
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = envision/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

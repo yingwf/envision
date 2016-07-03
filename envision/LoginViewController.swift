@@ -100,10 +100,11 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
     
     
     func praseLogin(json: SwiftyJSON.JSON){
+        HUD.hide()
+
         if json["success"].boolValue {
             userinfo.getUserInfo(json)
             myTableViewController.updateUserInfo()
-            HUD.hide()
 
             NSUserDefaults.standardUserDefaults().setObject(true, forKey: "login")//标识自动登录
             NSUserDefaults.standardUserDefaults().setObject(nameTextField.text!, forKey: "username")

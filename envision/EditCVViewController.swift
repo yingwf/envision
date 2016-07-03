@@ -16,15 +16,19 @@ protocol updateInfoDelegate{
     func updateInfo(indexPath: NSIndexPath, info: String?)
 }
 
-class EditCVViewController: UIViewController,UITableViewDelegate,UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource, updateInfoDelegate,UIGestureRecognizerDelegate {
+class EditCVViewController: UIViewController,UITableViewDelegate,UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource, updateInfoDelegate {
 
     let cvHintCell = "CVhintTableViewCell"
     let cvEditCell = "CVeditTableViewCell"
     let sectionTitle = ["真实姓名","身份证号","电子邮箱","性别","最高学历","毕业学校","专业名称","毕业年份"]
     let genders = ["男","女"]
     let degrees = ["大专","本科","硕士","博士"]
+    var valueArray = ["","","","","","","",""]
+    //    let sectionTitle = ["真实姓名","身份证号","电子邮箱","性别","最高学历","毕业学校","专业名称","毕业年份"]
 
     @IBOutlet weak var tableView: UITableView!
+    
+    var delegate: RefreshUserInfoDelegate?
     
     var pickerView: UIPickerView?
     
@@ -47,20 +51,18 @@ class EditCVViewController: UIViewController,UITableViewDelegate,UITableViewData
             self.graduateYear.append(String(index + 2010))
         }
         
-        self.navigationItem.leftBarButtonItem = getBackButton(self)
+        //self.navigationItem.leftBarButtonItem = getBackButton(self)
+        self.setBackButton()
         
         self.navigationController?.interactivePopGestureRecognizer!.delegate = self
     
     }
     
-    func backToPrevious(){
-        self.navigationController?.popViewControllerAnimated(true)
-    }
+//    func backToPrevious(){
+//        self.navigationController?.popViewControllerAnimated(true)
+//    }
     
     func updateInfo(indexPath: NSIndexPath, info: String?){
-        if info == nil || info == ""{
-            return
-        }
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! CVeditTableViewCell
         cell.value.text = info
     }
@@ -88,11 +90,42 @@ class EditCVViewController: UIViewController,UITableViewDelegate,UITableViewData
         }else if (indexPath.section == 0) && (indexPath.row > 0) {
             let cell = tableView.dequeueReusableCellWithIdentifier(cvEditCell, forIndexPath: indexPath) as! CVeditTableViewCell
             cell.title.text = self.sectionTitle[indexPath.row - 1]
+            
+            //初始化
+            switch indexPath.row{
+            case 1:
+                cell.value.text = userinfo.name
+            case 2:
+                cell.value.text = userinfo.identity
+            case 3:
+                cell.value.text = userinfo.email
+            default:
+                print("default")
+            }
+            
             cell.selectionStyle = .None
             returnCell = cell
         }else if(indexPath.section == 1) {
             let cell = tableView.dequeueReusableCellWithIdentifier(cvEditCell, forIndexPath: indexPath) as! CVeditTableViewCell
             cell.title.text = self.sectionTitle[indexPath.row + 3]
+            
+            //初始化
+            switch indexPath.row{
+            case 0:
+                cell.value.text = userinfo.gender
+            case 1:
+                cell.value.text = userinfo.educationLevel
+            case 2:
+                cell.value.text = userinfo.lastschool
+            case 3:
+                cell.value.text = userinfo.lastDisciplineKind
+            case 4:
+                cell.value.text = userinfo.graduationDate
+            default:
+                print("default")
+            }
+            
+            
             returnCell = cell
         }
         
@@ -125,9 +158,7 @@ class EditCVViewController: UIViewController,UITableViewDelegate,UITableViewData
             inputInfoViewController.navigationItem.title = self.sectionTitle[indexPath.row - 1]
             inputInfoViewController.placeHolder = "请输入" + self.sectionTitle[indexPath.row - 1]
             let cell = tableView.cellForRowAtIndexPath(indexPath) as! CVeditTableViewCell
-            if cell.value.text != "选择"{
-                inputInfoViewController.originValue = cell.value.text
-            }
+            inputInfoViewController.originValue = cell.value.text
             inputInfoViewController.indexPath = indexPath
             inputInfoViewController.delegate = self
             self.navigationController?.pushViewController(inputInfoViewController, animated: true)
@@ -221,7 +252,7 @@ class EditCVViewController: UIViewController,UITableViewDelegate,UITableViewData
         return self.graduateYear[row]
     }
     
-    func selectValue(label:UILabel, value:[String]) {
+    func selectValue(label:UITextField, value:[String]) {
         let sheetView = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
         
         let cancelAction = UIAlertAction(title: "取消", style:UIAlertActionStyle.Cancel, handler: nil)
@@ -243,14 +274,12 @@ class EditCVViewController: UIViewController,UITableViewDelegate,UITableViewData
     
     //保存简历
     @IBAction func saveCV(sender: AnyObject) {
-        var valueArray = ["","","","","","","",""]
-        //    let sectionTitle = ["真实姓名","身份证号","电子邮箱","性别","最高学历","毕业学校","专业名称","毕业年份"]
 
         
         for index in 1...3{
             let indexPath = NSIndexPath(forRow: index, inSection: 0)
             let cell = self.tableView.cellForRowAtIndexPath(indexPath) as! CVeditTableViewCell
-            if cell.value.text == "选择" || cell.value.text == "" {
+            if cell.value.text == "" {
                 let alertView = UIAlertController(title: "提醒", message: "请输入\(self.sectionTitle[index - 1])", preferredStyle: .Alert)
                 let okAction = UIAlertAction(title: "确定", style: .Default, handler: nil)
                 alertView.addAction(okAction)
@@ -263,7 +292,7 @@ class EditCVViewController: UIViewController,UITableViewDelegate,UITableViewData
         for index in 0...4{
             let indexPath = NSIndexPath(forRow: index, inSection: 1)
             let cell = self.tableView.cellForRowAtIndexPath(indexPath) as! CVeditTableViewCell
-            if cell.value.text == "选择" || cell.value.text == "" {
+            if  cell.value.text == "" {
                 let alertView = UIAlertController(title: "提醒", message: "请选择\(self.sectionTitle[index + 3])", preferredStyle: .Alert)
                 let okAction = UIAlertAction(title: "确定", style: .Default, handler: nil)
                 alertView.addAction(okAction)
@@ -274,7 +303,7 @@ class EditCVViewController: UIViewController,UITableViewDelegate,UITableViewData
             }
         }
         
-        let mobile = "13817210197"//NSUserDefaults.standardUserDefaults().valueForKey("username") as! String
+        let mobile = NSUserDefaults.standardUserDefaults().valueForKey("username") as! String
         
         let url = applicantUpdate
         let param = ["mobile":mobile, "name":valueArray[0], "CertificateNumber":valueArray[1], "email":valueArray[2], "gendar":valueArray[3], "educationLevel":valueArray[4], "lastschool":valueArray[5], "lastdisciplinekind":valueArray[6], "graduationdate":valueArray[7]] as [String : AnyObject]
@@ -284,8 +313,24 @@ class EditCVViewController: UIViewController,UITableViewDelegate,UITableViewData
     func praseSaveResult(json: SwiftyJSON.JSON){
         if json["success"].boolValue {
             let alertView = UIAlertController(title: "提醒", message: "已保存简历", preferredStyle: .Alert)
-            let okAction = UIAlertAction(title: "确定", style: .Default, handler: nil)
+            let okAction = UIAlertAction(title: "确定", style: .Default){ (UIAlertAction) -> Void in
+                self.delegate?.refreshUserInfo()
+                self.navigationController?.popViewControllerAnimated(true)
+            }
+            
+            //成功后保存到全局变量userinfo
+            userinfo.name = valueArray[0]
+            userinfo.identity = valueArray[1]
+            userinfo.email = valueArray[2]
+            userinfo.gender = valueArray[3]
+            userinfo.educationLevel = valueArray[4]
+            userinfo.lastschool = valueArray[5]
+            userinfo.lastDisciplineKind = valueArray[6]
+            userinfo.graduationDate = valueArray[7]
             alertView.addAction(okAction)
+            
+            self.presentViewController(alertView, animated: false, completion: nil)
+            
         }else{
             let alertView = UIAlertController(title: "提醒", message: json["message"].string, preferredStyle: .Alert)
             let okAction = UIAlertAction(title: "确定", style: .Default, handler: nil)

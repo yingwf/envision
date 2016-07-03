@@ -8,7 +8,7 @@
 
 import UIKit
 
-class InputInfoViewController: UIViewController,UIGestureRecognizerDelegate {
+class InputInfoViewController: UIViewController {
 
     
     @IBOutlet weak var infoText: UITextField!
@@ -24,17 +24,18 @@ class InputInfoViewController: UIViewController,UIGestureRecognizerDelegate {
         infoText.placeholder = placeHolder
         infoText.text = self.originValue
 
-        self.navigationItem.leftBarButtonItem = getBackButton(self)
-        
+        //self.navigationItem.leftBarButtonItem = getBackButton(self)
+        self.setBackButton()
+
         self.navigationController?.interactivePopGestureRecognizer!.delegate = self
         
         
         // Do any additional setup after loading the view.
     }
     
-    func backToPrevious(){
-        self.navigationController?.popViewControllerAnimated(true)
-    }
+//    func backToPrevious(){
+//        self.navigationController?.popViewControllerAnimated(true)
+//    }
     
 
     @IBAction func update(sender: AnyObject) {

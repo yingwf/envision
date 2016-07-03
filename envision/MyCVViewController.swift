@@ -52,11 +52,39 @@ class MyCVViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             cell.viewImage.image = UIImage(named: self.sectionImage[indexPath.row])
             cell.title.text = self.sectionTitle[indexPath.row]
             
+            switch indexPath.row {
+            case 0:
+                cell.value.text = userinfo.name
+            case 1:
+                cell.value.text = userinfo.email
+            case 2:
+                cell.value.text = userinfo.mobile
+            default:
+                print("default")
+            }
+            
+            
             returnCell = cell
         }else if (indexPath.section == 1) && (indexPath.row <= 4) {
             let cell = tableView.dequeueReusableCellWithIdentifier(cvCell, forIndexPath: indexPath) as! CVTableViewCell
             cell.viewImage.image = UIImage(named: self.sectionImage[indexPath.row + 3])
             cell.title.text = self.sectionTitle[indexPath.row + 3]
+            
+            switch indexPath.row {
+            case 0:
+                cell.value.text = userinfo.gender
+            case 1:
+                cell.value.text = userinfo.educationLevel
+            case 2:
+                cell.value.text = userinfo.lastschool
+            case 3:
+                cell.value.text = userinfo.lastDisciplineKind
+            case 4:
+                cell.value.text = userinfo.graduationDate
+            default:
+                print("default")
+            }
+            
             returnCell = cell
         }else if(indexPath.section == 1) && (indexPath.row == 5) {
             let cell = tableView.dequeueReusableCellWithIdentifier(cvEditCell, forIndexPath: indexPath) as! EditCVTableViewCell

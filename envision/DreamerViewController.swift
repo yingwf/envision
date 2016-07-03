@@ -274,18 +274,16 @@ class DreamerViewController: UITableViewController,UIImagePickerControllerDelega
         }
         let introViewController  = self.storyboard?.instantiateViewControllerWithIdentifier("WebViewController") as! WebViewController
         introViewController.navigationItem.title = "种子成长故事"
-        introViewController.webSite = "http://118.242.16.162:5580/envision/api/getseed.htm?id=" + String(tag!)
+        introViewController.webSite = getSeed + "?id=\(tag!)"
         
         self.navigationController?.pushViewController(introViewController, animated: true)
-        
         
     }
     
     func moreAction(){
         let introViewController  = self.storyboard?.instantiateViewControllerWithIdentifier("WebViewController") as! WebViewController
-        introViewController.webSite = "http://www.envisioncn.com/"
+        introViewController.webSite = envisioninfo
         self.navigationController?.pushViewController(introViewController, animated: true)
-        
         
     }
     

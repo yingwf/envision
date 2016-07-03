@@ -2,12 +2,13 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1713" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="EHf-IW-A2E">
             <objects>
-                <viewController id="01J-lp-oVM" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="01J-lp-oVM" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Llm-lL-Icb"/>
                         <viewControllerLayoutGuide type="bottom" id="xb3-aO-Qok"/>
@@ -16,19 +17,42 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="g5o-gc-hZT">
-                                <rect key="frame" x="142" y="273" width="90" height="122"/>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="loading_logo" translatesAutoresizingMaskIntoConstraints="NO" id="ZYq-HH-5nP">
+                                <rect key="frame" x="137" y="184" width="100" height="300"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="122" id="ez5-55-JT4"/>
-                                    <constraint firstAttribute="width" constant="90" id="zzU-yg-pJi"/>
+                                    <constraint firstAttribute="width" constant="100" id="Wai-id-m4p"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="c35-2C-ari"/>
+                                    <constraint firstAttribute="height" constant="300" id="j7p-a7-dEf"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="c35-2C-ari"/>
+                                    </mask>
+                                </variation>
+                            </imageView>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="loading_buttom" translatesAutoresizingMaskIntoConstraints="NO" id="04C-5d-s5K">
+                                <rect key="frame" x="0.0" y="557" width="375" height="110"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="04C-5d-s5K" secondAttribute="height" multiplier="75:22" id="6QS-Jh-LIz"/>
                                 </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="g5o-gc-hZT" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="CPc-GO-zXQ"/>
-                            <constraint firstItem="g5o-gc-hZT" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="FKq-i8-BVo"/>
+                            <constraint firstItem="04C-5d-s5K" firstAttribute="centerX" secondItem="ZYq-HH-5nP" secondAttribute="centerX" id="4Vh-uf-HWF"/>
+                            <constraint firstItem="04C-5d-s5K" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Fs6-IZ-vwc"/>
+                            <constraint firstItem="04C-5d-s5K" firstAttribute="bottom" secondItem="xb3-aO-Qok" secondAttribute="top" id="GSS-vN-hb5"/>
+                            <constraint firstItem="04C-5d-s5K" firstAttribute="top" secondItem="ZYq-HH-5nP" secondAttribute="bottom" constant="73" id="hEj-Y0-f2h"/>
+                            <constraint firstItem="04C-5d-s5K" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="jFk-Ax-dbu"/>
+                            <constraint firstItem="ZYq-HH-5nP" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="syx-eq-Osj"/>
+                            <constraint firstItem="ZYq-HH-5nP" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="vbk-KL-4z8"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="4Vh-uf-HWF"/>
+                                <exclude reference="hEj-Y0-f2h"/>
+                            </mask>
+                        </variation>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </viewController>
@@ -38,6 +62,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="logo" width="90" height="122"/>
+        <image name="loading_buttom" width="749" height="219"/>
+        <image name="loading_logo" width="200" height="601"/>
     </resources>
 </document>
