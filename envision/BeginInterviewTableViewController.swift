@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class BeginInterviewTableViewController: UITableViewController,updateInfoDelegate {
 
@@ -15,6 +16,8 @@ class BeginInterviewTableViewController: UITableViewController,updateInfoDelegat
     
     let titleArray = ["面试官姓名","房间号","桌位号"]
     let placeholderArray = ["输入您的姓名","输入面试房间号码","输入面试桌位号"]
+    
+    var myInterview = MyInterView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +31,11 @@ class BeginInterviewTableViewController: UITableViewController,updateInfoDelegat
         self.tableView.separatorStyle = .None
         self.tableView.registerNib(UINib(nibName: "BeginInterviewTableViewCell", bundle: nil), forCellReuseIdentifier: editTableCell)
         self.tableView.registerNib(UINib(nibName: "BeginInterviewButtonTableViewCell", bundle: nil), forCellReuseIdentifier: beginTableCell)
+        self.setBackButton()
+        
+        let tap = UITapGestureRecognizer(target: self, action: "handleTap:")
+        tap.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tap)
 
         
     }
@@ -64,6 +72,18 @@ class BeginInterviewTableViewController: UITableViewController,updateInfoDelegat
 
             cell.title.text = self.titleArray[indexPath.section]
             cell.valueField.placeholder = self.placeholderArray[indexPath.section]
+            
+            switch indexPath.section {
+            case 0:
+                cell.valueField.text = roomInfo?.interviewName
+            case 1:
+                cell.valueField.text = roomInfo?.roomNo
+            case 2:
+                cell.valueField.text = roomInfo?.deskNo
+            default:
+                print("default")
+            }
+            
             return cell
         }
         
@@ -75,12 +95,63 @@ class BeginInterviewTableViewController: UITableViewController,updateInfoDelegat
     
     func beginInterview(){
         
-        let interviewMgrViewController = self.storyboard?.instantiateViewControllerWithIdentifier("InterviewMgrViewController") as! InterviewMgrViewController
-        self.navigationController?.pushViewController(interviewMgrViewController, animated: true)
+        var indexPath = NSIndexPath()
+        var cell = UITableViewCell()
         
+        for index in 0...2{
+            var indexPath = NSIndexPath(forRow: 0, inSection: index)
+            var cell = self.tableView.cellForRowAtIndexPath(indexPath) as! BeginInterviewTableViewCell
+            if cell.valueField.text!.isEmpty{
+                let alertView = UIAlertController(title: "提醒", message: "请输入\(titleArray[index])", preferredStyle: .Alert)
+                let okAction = UIAlertAction(title: "确定", style: .Default, handler: nil)
+                alertView.addAction(okAction)
+                self.presentViewController(alertView, animated: false, completion: nil)
+                return
+            }else{
+                if roomInfo == nil{
+                    roomInfo = RoomInfo()
+                }
+                switch(index){
+                case 0:
+                    roomInfo!.interviewName = cell.valueField.text!
+                case 1:
+                    roomInfo!.roomNo = cell.valueField.text!
+                case 2:
+                    roomInfo!.deskNo = cell.valueField.text!
+                default:
+                    print("default")
+                }
+            }
+        }
+        
+        HUD.show(.RotatingImage(loadingImage))
+        let seedUrl = startInterview
+        let parameters = ["name":roomInfo!.interviewName!, "roomNo":roomInfo!.roomNo!, "deskNo":roomInfo!.deskNo!, "interviewinfov2id":self.myInterview.interviewId!] as! [String : AnyObject]
+        doRequest(seedUrl, parameters: parameters , encoding: .URL, praseMethod: praseStartInterView)
     }
-    
-    
+
+    func praseStartInterView(json: SwiftyJSON.JSON){
+        HUD.hide()
+
+        if json["success"].boolValue {
+            
+            let employeeid = json["employeeid"].int
+            if employeeid != nil{
+                userinfo.employeeid = employeeid
+            }
+            
+            let interviewMgrViewController = self.storyboard?.instantiateViewControllerWithIdentifier("InterviewMgrViewController") as! InterviewMgrViewController
+            self.navigationController?.pushViewController(interviewMgrViewController, animated: true)
+        }else{
+            
+            let alertView = UIAlertController(title: "提醒", message: "连接后台服务器出错，请重新开始", preferredStyle: .Alert)
+            let okAction = UIAlertAction(title: "确定", style: .Default, handler: nil)
+            alertView.addAction(okAction)
+            self.presentViewController(alertView, animated: false, completion: nil)
+        }
+    }
+
+
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if indexPath.section <= 2{
             return 44

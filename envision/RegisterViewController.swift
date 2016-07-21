@@ -23,6 +23,7 @@ class RegisterViewController: UIViewController,UITextFieldDelegate {
     
     @IBOutlet weak var userNameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
+    @IBOutlet weak var userNameLabel: UILabel!
     
     var timer: NSTimer?
     var leftTime = 60 //60秒
@@ -32,6 +33,10 @@ class RegisterViewController: UIViewController,UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        userNameLabel.text = "手机："
+        userNameField.placeholder = "请输入11位手机号码"
+        verificationCodeField.placeholder = "输入验证码"
         
         receiveLabel.userInteractionEnabled = true
         receiveVerificaitonCodeTap = UITapGestureRecognizer(target: self, action: "receiveVerificationCode")
@@ -57,16 +62,10 @@ class RegisterViewController: UIViewController,UITextFieldDelegate {
         
         //self.navigationItem.leftBarButtonItem = getBackButton(self)
         self.setBackButton()
+        
 
-        self.navigationController?.interactivePopGestureRecognizer!.delegate = self
     }
-    
-//    func backToPrevious(){
-//        self.navigationController?.popViewControllerAnimated(true)
-//    }
-    func handleTap(sender: UITapGestureRecognizer) {
-        self.view.endEditing(true)
-    }
+
     
     func textFieldDidBeginEditing(textField: UITextField){
         print("beginediting")
@@ -74,7 +73,7 @@ class RegisterViewController: UIViewController,UITextFieldDelegate {
     
     func receiveVerificationCode() {
         if userNameField.text!.isEmpty {
-            let alertView = UIAlertController(title: "提醒", message: "请输入手机号码。", preferredStyle: .Alert)
+            let alertView = UIAlertController(title: "提醒", message: "请输入手机号码", preferredStyle: .Alert)
             let okAction = UIAlertAction(title: "确定", style: .Default, handler: nil)
             alertView.addAction(okAction)
             self.presentViewController(alertView, animated: true, completion: nil)
@@ -141,28 +140,28 @@ class RegisterViewController: UIViewController,UITextFieldDelegate {
     @IBAction func register(sender: AnyObject) {
 
         if userNameField.text!.isEmpty {
-            let alertView = UIAlertController(title: "提醒", message: "请输入手机号码。", preferredStyle: .Alert)
+            let alertView = UIAlertController(title: "提醒", message: "请输入手机号码", preferredStyle: .Alert)
             let okAction = UIAlertAction(title: "确定", style: .Default, handler: nil)
             alertView.addAction(okAction)
             self.presentViewController(alertView, animated: true, completion: nil)
             return
         }
         if passwordField.text!.isEmpty {
-            let alertView = UIAlertController(title: "提醒", message: "请输入密码。", preferredStyle: .Alert)
+            let alertView = UIAlertController(title: "提醒", message: "请输入密码", preferredStyle: .Alert)
             let okAction = UIAlertAction(title: "确定", style: .Default, handler: nil)
             alertView.addAction(okAction)
             self.presentViewController(alertView, animated: true, completion: nil)
             return
         }
         if verificationCodeField.text!.isEmpty {
-            let alertView = UIAlertController(title: "提醒", message: "请输入验证码。", preferredStyle: .Alert)
+            let alertView = UIAlertController(title: "提醒", message: "请输入验证码", preferredStyle: .Alert)
             let okAction = UIAlertAction(title: "确定", style: .Default, handler: nil)
             alertView.addAction(okAction)
             self.presentViewController(alertView, animated: true, completion: nil)
             return
         }
         if identityField.text!.isEmpty {
-            let alertView = UIAlertController(title: "提醒", message: "请选择身份。", preferredStyle: .Alert)
+            let alertView = UIAlertController(title: "提醒", message: "请选择身份", preferredStyle: .Alert)
             let okAction = UIAlertAction(title: "确定", style: .Default, handler: nil)
             alertView.addAction(okAction)
             self.presentViewController(alertView, animated: true, completion: nil)
@@ -185,12 +184,15 @@ class RegisterViewController: UIViewController,UITextFieldDelegate {
             //注册成功
             let alertView = UIAlertController(title: "提醒", message:"注册成功，请填写简历", preferredStyle: .Alert)
             let okAction = UIAlertAction(title: "确定", style: .Default) {(UIAlertAction) -> Void in
+                NSUserDefaults.standardUserDefaults().setObject(true, forKey: "login")//标识自动登录
+                NSUserDefaults.standardUserDefaults().setObject(self.userNameField.text!, forKey: "username")
+                NSUserDefaults.standardUserDefaults().setObject(self.passwordField.text!, forKey: "password")
                 
                 let editCVViewController = self.storyboard?.instantiateViewControllerWithIdentifier("EditCVViewController") as! EditCVViewController
+                editCVViewController.isRegister = true
                 
                 self.navigationController?.pushViewController(editCVViewController, animated: true)
-                //alertView.dismissViewControllerAnimated(true, completion: nil)
-
+                
             }
             alertView.addAction(okAction)
             

@@ -11,5 +11,6 @@
 
 #import "WXApi.h"
 #import "SYQRCodeViewController.h"
+#import "GeTuiSdk.h"
 
 #endif /* Header_h */

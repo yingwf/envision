@@ -11,8 +11,7 @@ import UIKit
 class YYShareView: UIView {
     
     var vc: UIViewController?
-    var title = "标题"
-    var jobDescription = "职位信息"
+    var job = Job()
     var webpageUrl = ""
     
     var backgroundView: UIView?
@@ -105,13 +104,13 @@ class YYShareView: UIView {
         
         
         let message = WXMediaMessage()
-        message.title = self.title
-        message.description = self.jobDescription
-        message.setThumbImage(UIImage(named: "logo"))
+        message.title = "寻找梦想的“偏执狂”——远景能源2017校园招聘"
+        message.description = self.job.jobTitle! + "，你来挑战吗？"
+        message.setThumbImage(UIImage(named: "ICON_T"))
 
         
         let webpageObject = WXWebpageObject()
-        webpageObject.webpageUrl = self.webpageUrl
+        webpageObject.webpageUrl = "www.envisioncn.com" //self.webpageUrl
         message.mediaObject = webpageObject
         
         let req = SendMessageToWXReq()
@@ -134,16 +133,15 @@ class YYShareView: UIView {
             self.vc?.presentViewController(alertView, animated: true, completion: nil)
         }
         
-        
         //创建分享内容对象
         let message = WXMediaMessage()
-        message.title = self.title
-        message.description = self.jobDescription
-        message.setThumbImage(UIImage(named: "logo"))
+        message.title = "寻找梦想的“偏执狂”——远景能源2017校园招聘"
+        message.description = self.job.jobTitle! + "，你来挑战吗？"
+        message.setThumbImage(UIImage(named: "ICON_T"))
         
         //创建多媒体对象
         let webpageObject = WXWebpageObject()
-        webpageObject.webpageUrl = self.webpageUrl
+        webpageObject.webpageUrl =  "www.envisioncn.com" //self.webpageUrl
         message.mediaObject = webpageObject
         
         //完成发送对象实例

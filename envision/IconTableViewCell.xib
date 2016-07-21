@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1713" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1808" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -90,13 +91,13 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X70-GD-oqx">
                                 <rect key="frame" x="250" y="0.0" width="125" height="86"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="远景种子院" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tJF-lI-MRh">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="走进远景" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tJF-lI-MRh">
                                         <rect key="frame" x="15" y="61" width="95" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AnnAuditorium" translatesAutoresizingMaskIntoConstraints="NO" id="u8b-9s-BGL">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="enter" translatesAutoresizingMaskIntoConstraints="NO" id="u8b-9s-BGL">
                                         <rect key="frame" x="32" y="8" width="60" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="60" id="B74-0Z-Ur3"/>
@@ -357,13 +358,13 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z9D-La-vy8">
                                 <rect key="frame" x="0.0" y="0.0" width="125" height="86"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="走进远景" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zf4-3Q-flB">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="走进高校" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zf4-3Q-flB">
                                         <rect key="frame" x="15" y="61" width="95" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="enter" translatesAutoresizingMaskIntoConstraints="NO" id="21s-wg-Kpc">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AnnAuditorium" translatesAutoresizingMaskIntoConstraints="NO" id="21s-wg-Kpc">
                                         <rect key="frame" x="32" y="8" width="60" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="60" id="4nz-ON-gcx"/>
@@ -503,11 +504,16 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="applyView" destination="4jQ-NY-Rta" id="dot-Ne-2w6"/>
+                <outlet property="coopView" destination="q1g-gB-7hG" id="CZL-pW-6UR"/>
+                <outlet property="gotoView" destination="X70-GD-oqx" id="s49-AX-vb4"/>
+                <outlet property="helpView" destination="aol-tG-glp" id="P9z-4i-q8g"/>
                 <outlet property="leftArrow" destination="0qK-wd-xl0" id="oQg-HC-xUC"/>
                 <outlet property="leftArrow2" destination="caP-aN-v7K" id="sH8-3V-o7d"/>
+                <outlet property="recommendView" destination="YVU-X0-YJq" id="bLw-Tk-IIx"/>
                 <outlet property="recordVideoView" destination="vCO-xm-Ji9" id="rgz-9o-5m6"/>
                 <outlet property="rightArrow" destination="hQt-Sp-rvK" id="aro-Vc-5Yv"/>
                 <outlet property="rightArrow2" destination="Eqg-sp-Mvx" id="OXi-yb-UJ4"/>
+                <outlet property="seedDpView" destination="z9D-La-vy8" id="6Kw-EZ-bBn"/>
                 <outlet property="testVideoView" destination="kky-MJ-AJM" id="kZg-Ru-wX4"/>
                 <outlet property="testView" destination="rE1-gg-dwa" id="Tps-FB-a79"/>
                 <outlet property="videoView" destination="gsu-xu-fvD" id="jTu-1T-zMv"/>

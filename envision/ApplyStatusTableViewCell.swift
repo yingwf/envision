@@ -24,8 +24,7 @@ class ApplyStatusTableViewCell: UITableViewCell {
         
         self.bgView.layer.cornerRadius = 5
         self.bgView.layer.masksToBounds = true
-        
-        
+
     }
     
     func setHide(){
@@ -40,6 +39,14 @@ class ApplyStatusTableViewCell: UITableViewCell {
         var contentFrame = self.contentView.frame
         contentFrame.size.height = 54
         self.contentView.frame = contentFrame
+    }
+    
+    func setApplied(){
+        self.hintLabel.hidden = false
+        self.emailLabel.hidden = false
+        self.hint2Label.hidden = false
+        
+        
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

@@ -10,6 +10,8 @@ import UIKit
 
 class ApplyPosTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var jobTitle: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

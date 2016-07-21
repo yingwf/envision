@@ -8,13 +8,14 @@
 
 import UIKit
 
-class MyCVViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+
+class MyCVViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,RefreshUserInfoDelegate {
     @IBOutlet weak var tableView: UITableView!
     
     let cvCell = "CVTableViewCell"
     let cvEditCell = "EditCVTableViewCell"
-    let sectionTitle = ["真实姓名","电子邮箱","手机号码","性别","最高学历","毕业学校","专业名称","毕业年份"]
-    let sectionImage = ["cv_name","cv_Email","cv_phone","cv_gender","cv_education","cv_school","cv_specialty","cv_graduate"]
+    let sectionTitle = ["真实姓名","身份证号","电子邮箱","手机号码","性别","最高学历","毕业学校","专业名称","毕业年份"]
+    let sectionImage = ["cv_name","Identity","cv_Email","cv_phone","cv_gender","cv_education","cv_school","cv_specialty","cv_graduate"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,9 +28,12 @@ class MyCVViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         
         self.tableView.registerNib(UINib(nibName: "EditCVTableViewCell", bundle: nil), forCellReuseIdentifier: cvEditCell)
 
-
+        self.setBackButton()
     }
 
+    func refreshUserInfo(){
+        self.tableView.reloadData()
+    }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
@@ -39,7 +43,7 @@ class MyCVViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         if section == 0{
-            return 3
+            return 4
         }
         return 6
     }
@@ -56,8 +60,10 @@ class MyCVViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             case 0:
                 cell.value.text = userinfo.name
             case 1:
-                cell.value.text = userinfo.email
+                cell.value.text = userinfo.identity
             case 2:
+                cell.value.text = userinfo.email
+            case 3:
                 cell.value.text = userinfo.mobile
             default:
                 print("default")
@@ -67,8 +73,8 @@ class MyCVViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             returnCell = cell
         }else if (indexPath.section == 1) && (indexPath.row <= 4) {
             let cell = tableView.dequeueReusableCellWithIdentifier(cvCell, forIndexPath: indexPath) as! CVTableViewCell
-            cell.viewImage.image = UIImage(named: self.sectionImage[indexPath.row + 3])
-            cell.title.text = self.sectionTitle[indexPath.row + 3]
+            cell.viewImage.image = UIImage(named: self.sectionImage[indexPath.row + 4])
+            cell.title.text = self.sectionTitle[indexPath.row + 4]
             
             switch indexPath.row {
             case 0:
@@ -112,7 +118,6 @@ class MyCVViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         sectionView.backgroundColor = UIColor.clearColor()
         
         return sectionView
-        
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -125,11 +130,19 @@ class MyCVViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     
     func editCV(sender: UIButton){
         let editCVViewController = self.storyboard?.instantiateViewControllerWithIdentifier("EditCVViewController") as! EditCVViewController
-        
+        editCVViewController.isModify = true  //修改简历
+        editCVViewController.delegate = self
         self.navigationController?.pushViewController(editCVViewController, animated: true)
         
     }
 
+    @IBAction func fullResume(sender: AnyObject) {
+        let introViewController  = self.storyboard?.instantiateViewControllerWithIdentifier("FullResumeViewController") as! FullResumeViewController
+        //introViewController.navigationItem.title = "详细简历"
+        introViewController.webSite = fullresume
+        
+        self.navigationController?.pushViewController(introViewController, animated: true)
+    }
 
 
     override func didReceiveMemoryWarning() {

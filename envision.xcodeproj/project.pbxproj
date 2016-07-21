@@ -9,6 +9,19 @@
 /* Begin PBXBuildFile section */
 		14053B051CFF21FE00BBF0A3 /* PositionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14053B041CFF21FE00BBF0A3 /* PositionDetailViewController.swift */; };
 		14053B0F1CFFDCC300BBF0A3 /* YYShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14053B0E1CFFDCC300BBF0A3 /* YYShareView.swift */; };
+		14245BC61D2F76AA00458D46 /* CVListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14245BC51D2F76AA00458D46 /* CVListTableViewController.swift */; };
+		14245BD11D2F772700458D46 /* CVListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14245BCF1D2F772700458D46 /* CVListTableViewCell.swift */; };
+		14245BD21D2F772700458D46 /* CVListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14245BD01D2F772700458D46 /* CVListTableViewCell.xib */; };
+		14245BEF1D338FA000458D46 /* libGeTuiSdk-1.4.3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14245BEE1D338FA000458D46 /* libGeTuiSdk-1.4.3.a */; };
+		14245BF11D33901800458D46 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14245BF01D33901800458D46 /* Security.framework */; };
+		14245BF31D33902D00458D46 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14245BF21D33902D00458D46 /* MobileCoreServices.framework */; };
+		14245BF51D33904B00458D46 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14245BF41D33904B00458D46 /* AVFoundation.framework */; };
+		14245BF71D33906100458D46 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14245BF61D33906100458D46 /* JavaScriptCore.framework */; };
+		14245BF91D33907300458D46 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14245BF81D33907300458D46 /* CoreLocation.framework */; };
+		14245BFB1D33907E00458D46 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14245BFA1D33907E00458D46 /* CoreBluetooth.framework */; };
+		14245C0D1D34A4A900458D46 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14245C0B1D34A4A900458D46 /* MessageTableViewCell.swift */; };
+		14245C0E1D34A4A900458D46 /* MessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14245C0C1D34A4A900458D46 /* MessageTableViewCell.xib */; };
+		14245C181D34A8E700458D46 /* MessageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14245C171D34A8E700458D46 /* MessageTableViewController.swift */; };
 		1430192A1CFC37C500437C67 /* PositionTypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143019281CFC37C500437C67 /* PositionTypeTableViewCell.swift */; };
 		1430192B1CFC37C500437C67 /* PositionTypeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 143019291CFC37C500437C67 /* PositionTypeTableViewCell.xib */; };
 		1458CD0C1D24C94900215C61 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1458CD0B1D24C94900215C61 /* LaunchViewController.swift */; };
@@ -32,6 +45,7 @@
 		145CEBF01CFDA55300BDA5DD /* HeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 145CEBEE1CFDA55300BDA5DD /* HeaderTableViewCell.xib */; };
 		145CEBF31CFDA70C00BDA5DD /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145CEBF11CFDA70C00BDA5DD /* ContactTableViewCell.swift */; };
 		145CEBF41CFDA70C00BDA5DD /* ContactTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 145CEBF21CFDA70C00BDA5DD /* ContactTableViewCell.xib */; };
+		14836C291D3DF41100653122 /* FullResumeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14836C281D3DF41100653122 /* FullResumeViewController.swift */; };
 		1484AC741D0138A00074346C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1484AC731D0138A00074346C /* LoginViewController.swift */; };
 		1484AC7E1D0152BC0074346C /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1484AC7D1D0152BC0074346C /* RegisterViewController.swift */; };
 		1487DFAB1D1942B600215546 /* InterviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1487DFA91D1942B600215546 /* InterviewTableViewCell.swift */; };
@@ -127,6 +141,8 @@
 		14BF84A81D0D3F0C00AD212E /* InputInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BF84A71D0D3F0C00AD212E /* InputInfoViewController.swift */; };
 		14BF84B61D0E61A900AD212E /* SearchVCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BF84B51D0E61A900AD212E /* SearchVCViewController.swift */; };
 		14BF84EA1D116ACC00AD212E /* FindPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BF84E91D116ACC00AD212E /* FindPasswordViewController.swift */; };
+		14CB17C11D2B6E2E00E8AE2D /* CollectedJobsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CB17C01D2B6E2E00E8AE2D /* CollectedJobsViewController.swift */; };
+		14CB17DA1D2CB5CF00E8AE2D /* regular.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CB17D91D2CB5CF00E8AE2D /* regular.swift */; };
 		14CC8C571D24F913007CB259 /* JotTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CC8C551D24F913007CB259 /* JotTitleTableViewCell.swift */; };
 		14CC8C581D24F913007CB259 /* JotTitleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14CC8C561D24F913007CB259 /* JotTitleTableViewCell.xib */; };
 		14CC8C631D24FE6D007CB259 /* JobInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CC8C611D24FE6D007CB259 /* JobInfoTableViewCell.swift */; };
@@ -261,6 +277,20 @@
 /* Begin PBXFileReference section */
 		14053B041CFF21FE00BBF0A3 /* PositionDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PositionDetailViewController.swift; sourceTree = "<group>"; };
 		14053B0E1CFFDCC300BBF0A3 /* YYShareView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YYShareView.swift; sourceTree = "<group>"; };
+		14245BC51D2F76AA00458D46 /* CVListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVListTableViewController.swift; sourceTree = "<group>"; };
+		14245BCF1D2F772700458D46 /* CVListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVListTableViewCell.swift; sourceTree = "<group>"; };
+		14245BD01D2F772700458D46 /* CVListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CVListTableViewCell.xib; sourceTree = "<group>"; };
+		14245BED1D338FA000458D46 /* GeTuiSdk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeTuiSdk.h; sourceTree = "<group>"; };
+		14245BEE1D338FA000458D46 /* libGeTuiSdk-1.4.3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libGeTuiSdk-1.4.3.a"; sourceTree = "<group>"; };
+		14245BF01D33901800458D46 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		14245BF21D33902D00458D46 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		14245BF41D33904B00458D46 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		14245BF61D33906100458D46 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		14245BF81D33907300458D46 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		14245BFA1D33907E00458D46 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		14245C0B1D34A4A900458D46 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
+		14245C0C1D34A4A900458D46 /* MessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageTableViewCell.xib; sourceTree = "<group>"; };
+		14245C171D34A8E700458D46 /* MessageTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableViewController.swift; sourceTree = "<group>"; };
 		143019281CFC37C500437C67 /* PositionTypeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PositionTypeTableViewCell.swift; sourceTree = "<group>"; };
 		143019291CFC37C500437C67 /* PositionTypeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionTypeTableViewCell.xib; sourceTree = "<group>"; };
 		1458CD0B1D24C94900215C61 /* LaunchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
@@ -280,6 +310,7 @@
 		145CEBEE1CFDA55300BDA5DD /* HeaderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderTableViewCell.xib; sourceTree = "<group>"; };
 		145CEBF11CFDA70C00BDA5DD /* ContactTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactTableViewCell.swift; sourceTree = "<group>"; };
 		145CEBF21CFDA70C00BDA5DD /* ContactTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactTableViewCell.xib; sourceTree = "<group>"; };
+		14836C281D3DF41100653122 /* FullResumeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullResumeViewController.swift; sourceTree = "<group>"; };
 		1484AC731D0138A00074346C /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1484AC7D1D0152BC0074346C /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		1484AC9D1D0511EF0074346C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
@@ -388,6 +419,8 @@
 		14BF84A71D0D3F0C00AD212E /* InputInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputInfoViewController.swift; sourceTree = "<group>"; };
 		14BF84B51D0E61A900AD212E /* SearchVCViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchVCViewController.swift; sourceTree = "<group>"; };
 		14BF84E91D116ACC00AD212E /* FindPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindPasswordViewController.swift; sourceTree = "<group>"; };
+		14CB17C01D2B6E2E00E8AE2D /* CollectedJobsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectedJobsViewController.swift; sourceTree = "<group>"; };
+		14CB17D91D2CB5CF00E8AE2D /* regular.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = regular.swift; sourceTree = SOURCE_ROOT; };
 		14CC8C551D24F913007CB259 /* JotTitleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JotTitleTableViewCell.swift; path = ../JotTitleTableViewCell.swift; sourceTree = "<group>"; };
 		14CC8C561D24F913007CB259 /* JotTitleTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = JotTitleTableViewCell.xib; path = ../JotTitleTableViewCell.xib; sourceTree = "<group>"; };
 		14CC8C611D24FE6D007CB259 /* JobInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JobInfoTableViewCell.swift; path = ../JobInfoTableViewCell.swift; sourceTree = "<group>"; };
@@ -409,7 +442,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14245BEF1D338FA000458D46 /* libGeTuiSdk-1.4.3.a in Frameworks */,
 				14A7E2541D18F49B00B54535 /* CoreTelephony.framework in Frameworks */,
+				14245BFB1D33907E00458D46 /* CoreBluetooth.framework in Frameworks */,
+				14245BF91D33907300458D46 /* CoreLocation.framework in Frameworks */,
+				14245BF71D33906100458D46 /* JavaScriptCore.framework in Frameworks */,
+				14245BF51D33904B00458D46 /* AVFoundation.framework in Frameworks */,
+				14245BF31D33902D00458D46 /* MobileCoreServices.framework in Frameworks */,
+				14245BF11D33901800458D46 /* Security.framework in Frameworks */,
 				14A7E2511D18E92900B54535 /* libc++.tbd in Frameworks */,
 				14A7E24F1D18E90F00B54535 /* libsqlite3.0.tbd in Frameworks */,
 				14A7E24D1D18E90500B54535 /* libz.1.1.3.tbd in Frameworks */,
@@ -439,6 +479,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		14245BEC1D338FA000458D46 /* GtSdkLib */ = {
+			isa = PBXGroup;
+			children = (
+				14245BED1D338FA000458D46 /* GeTuiSdk.h */,
+				14245BEE1D338FA000458D46 /* libGeTuiSdk-1.4.3.a */,
+			);
+			path = GtSdkLib;
+			sourceTree = "<group>";
+		};
 		145900281CFA9F65009F3DD6 /* cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -453,6 +502,8 @@
 				14CC8C611D24FE6D007CB259 /* JobInfoTableViewCell.swift */,
 				14CC8C621D24FE6D007CB259 /* JobInfoTableViewCell.xib */,
 				14B95D881D12B4AA00F21FB3 /* CVTableViewCell.xib */,
+				14245BCF1D2F772700458D46 /* CVListTableViewCell.swift */,
+				14245BD01D2F772700458D46 /* CVListTableViewCell.xib */,
 				14B95D891D12B4AA00F21FB3 /* CVTableViewCell.swift */,
 				143019281CFC37C500437C67 /* PositionTypeTableViewCell.swift */,
 				143019291CFC37C500437C67 /* PositionTypeTableViewCell.xib */,
@@ -502,6 +553,8 @@
 				1487DFAA1D1942B600215546 /* InterviewTableViewCell.xib */,
 				14B34C581D22269300476B8B /* TimeSelectTableViewCell.swift */,
 				14B34C591D22269300476B8B /* TimeSelectTableViewCell.xib */,
+				14245C0B1D34A4A900458D46 /* MessageTableViewCell.swift */,
+				14245C0C1D34A4A900458D46 /* MessageTableViewCell.xib */,
 			);
 			name = cell;
 			sourceTree = "<group>";
@@ -600,6 +653,10 @@
 				14AD33D51CF6FBE1007AA411 /* AppDelegate.swift */,
 				14AD33D71CF6FBE1007AA411 /* ViewController.swift */,
 				14AD33D91CF6FBE1007AA411 /* Main.storyboard */,
+				14836C281D3DF41100653122 /* FullResumeViewController.swift */,
+				14245C171D34A8E700458D46 /* MessageTableViewController.swift */,
+				14245BC51D2F76AA00458D46 /* CVListTableViewController.swift */,
+				14CB17C01D2B6E2E00E8AE2D /* CollectedJobsViewController.swift */,
 				14CC8C711D261ACB007CB259 /* SendViewController.swift */,
 				14AD33DC1CF6FBE1007AA411 /* Assets.xcassets */,
 				14AD33DE1CF6FBE1007AA411 /* LaunchScreen.storyboard */,
@@ -662,11 +719,19 @@
 		14AD34121CF746CB007AA411 /* framework */ = {
 			isa = PBXGroup;
 			children = (
+				14245BEC1D338FA000458D46 /* GtSdkLib */,
+				14CB17D91D2CB5CF00E8AE2D /* regular.swift */,
 				14EBC3AD1D27913A0073DCDB /* SYQRCode */,
 				14A7E2501D18E92900B54535 /* libc++.tbd */,
 				14A7E24E1D18E90F00B54535 /* libsqlite3.0.tbd */,
 				14A7E24C1D18E90500B54535 /* libz.1.1.3.tbd */,
 				14A7E2531D18F49B00B54535 /* CoreTelephony.framework */,
+				14245BFA1D33907E00458D46 /* CoreBluetooth.framework */,
+				14245BF81D33907300458D46 /* CoreLocation.framework */,
+				14245BF61D33906100458D46 /* JavaScriptCore.framework */,
+				14245BF41D33904B00458D46 /* AVFoundation.framework */,
+				14245BF21D33902D00458D46 /* MobileCoreServices.framework */,
+				14245BF01D33901800458D46 /* Security.framework */,
 				14A7E24A1D18E8DE00B54535 /* SystemConfiguration.framework */,
 				14A7E23A1D18E88600B54535 /* OpenSDK1.7.1 */,
 				14AB65F71D14D19800A210A1 /* PKHUD */,
@@ -762,6 +827,11 @@
 					14AD33D11CF6FBE1007AA411 = {
 						CreatedOnToolsVersion = 7.2.1;
 						DevelopmentTeam = BGGPKU4J95;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					14AD33E51CF6FBE1007AA411 = {
 						CreatedOnToolsVersion = 7.2.1;
@@ -898,6 +968,7 @@
 				14B34C4F1D21241300476B8B /* ApplyFinalTableViewCell.xib in Resources */,
 				14EBC3BC1D279A190073DCDB /* Images.xcassets in Resources */,
 				14B34C571D22254500476B8B /* TimeTitleTableViewCell.xib in Resources */,
+				14245C0E1D34A4A900458D46 /* MessageTableViewCell.xib in Resources */,
 				14BF84761D06AEED00AD212E /* CVeditTableViewCell.xib in Resources */,
 				145CEBDA1CFD7DF600BDA5DD /* PositionListTableViewCell.xib in Resources */,
 				145900231CFA98D8009F3DD6 /* IconTableViewCell.xib in Resources */,
@@ -919,6 +990,7 @@
 				14BF84721D06ADA300AD212E /* CVhintTableViewCell.xib in Resources */,
 				145CEBF41CFDA70C00BDA5DD /* ContactTableViewCell.xib in Resources */,
 				14AD33DB1CF6FBE1007AA411 /* Main.storyboard in Resources */,
+				14245BD21D2F772700458D46 /* CVListTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -957,9 +1029,12 @@
 				14AB66151D14D19800A210A1 /* PKHUDRotatingImageView.swift in Sources */,
 				145CEBEF1CFDA55300BDA5DD /* HeaderTableViewCell.swift in Sources */,
 				1491552E1CFEF642006C62A9 /* ShareView.swift in Sources */,
+				14CB17DA1D2CB5CF00E8AE2D /* regular.swift in Sources */,
+				14245C0D1D34A4A900458D46 /* MessageTableViewCell.swift in Sources */,
 				14AB66131D14D19800A210A1 /* PKHUDErrorView.swift in Sources */,
 				14AB660C1D14D19800A210A1 /* HUD.swift in Sources */,
 				14AB66191D14D19800A210A1 /* PKHUDTextView.swift in Sources */,
+				14245BC61D2F76AA00458D46 /* CVListTableViewController.swift in Sources */,
 				14B34C461D20FBC700476B8B /* ApplyCVTableViewCell.swift in Sources */,
 				14B34C5D1D222B2300476B8B /* TimeSelectTableViewController.swift in Sources */,
 				14CC8C631D24FE6D007CB259 /* JobInfoTableViewCell.swift in Sources */,
@@ -967,6 +1042,7 @@
 				14B34C6B1D2260D000476B8B /* EndInterviewTableViewController.swift in Sources */,
 				14AD33D81CF6FBE1007AA411 /* ViewController.swift in Sources */,
 				14BF846E1D06AD4A00AD212E /* EditCVViewController.swift in Sources */,
+				14245BD11D2F772700458D46 /* CVListTableViewCell.swift in Sources */,
 				14BF84711D06ADA300AD212E /* CVhintTableViewCell.swift in Sources */,
 				14AB66111D14D19800A210A1 /* PKHUDAnimation.swift in Sources */,
 				1487DFC81D1CE7E900215546 /* BeginInterviewTableViewCell.swift in Sources */,
@@ -975,6 +1051,7 @@
 				14B34C681D225C6E00476B8B /* EvaluateTableViewCell.swift in Sources */,
 				145900221CFA98D8009F3DD6 /* IconTableViewCell.swift in Sources */,
 				14AB661E1D14DA7100A210A1 /* YJImagePickerController.swift in Sources */,
+				14836C291D3DF41100653122 /* FullResumeViewController.swift in Sources */,
 				14B34C421D20CDAF00476B8B /* ApplyStatusTableViewCell.swift in Sources */,
 				14AB66161D14D19800A210A1 /* PKHUDSquareBaseView.swift in Sources */,
 				14AB660B1D14D19800A210A1 /* FrameView.swift in Sources */,
@@ -985,8 +1062,10 @@
 				14B34C2F1D20C96800476B8B /* MyApplyTableViewController.swift in Sources */,
 				1487DFCC1D1CFC8E00215546 /* BeginInterviewButtonTableViewCell.swift in Sources */,
 				14EBC3B01D27913A0073DCDB /* SYQRCodeViewController.m in Sources */,
+				14CB17C11D2B6E2E00E8AE2D /* CollectedJobsViewController.swift in Sources */,
 				14AB66171D14D19800A210A1 /* PKHUDSuccessView.swift in Sources */,
 				14AD356E1CF74B02007AA411 /* SwiftyJSON.swift in Sources */,
+				14245C181D34A8E700458D46 /* MessageTableViewController.swift in Sources */,
 				14AD34101CF734B8007AA411 /* MyTableViewController.swift in Sources */,
 				14CC8C6B1D2615E2007CB259 /* SendContentTableViewCell.swift in Sources */,
 				14B34C5A1D22269300476B8B /* TimeSelectTableViewCell.swift in Sources */,
@@ -1178,6 +1257,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = envision/Info.plist;
@@ -1186,10 +1266,11 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/envision/OpenSDK1.7.1",
+					"$(PROJECT_DIR)/envision/GtSdkLib",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.envisioncn.daydream;
 				PRODUCT_NAME = "梦想偏执狂";
-				PROVISIONING_PROFILE = "fc6a58d0-210d-472c-8b5f-87ce1547ae7f";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = envision/Header.h;
 			};
 			name = Debug;
@@ -1199,6 +1280,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = envision/Info.plist;
@@ -1207,10 +1289,11 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/envision/OpenSDK1.7.1",
+					"$(PROJECT_DIR)/envision/GtSdkLib",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.envisioncn.daydream;
 				PRODUCT_NAME = "梦想偏执狂";
-				PROVISIONING_PROFILE = "fc6a58d0-210d-472c-8b5f-87ce1547ae7f";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = envision/Header.h;
 			};
 			name = Release;

@@ -16,10 +16,10 @@ class PositionDetailViewController: UIViewController,UITableViewDelegate,UITable
     var job = Job()
     var jobid = 0
     
-    let seeds = [["id": 12, "image": "http:/118.242.16.162:5580/envision/img/seed/head.png"],
-        ["id" : 7,"image" : "http://118.242.16.162:5580/envision/img/seed/head1.jpg"],
-        ["id" : 3,"image" : "http://118.242.16.162:5580/envision/img/seed/head2.jpg"]
-        ]
+//    let seeds = [["id": 12, "image": "http:/118.242.16.162:5580/envision/img/seed/head.png"],
+//        ["id" : 7,"image" : "http://118.242.16.162:5580/envision/img/seed/head1.jpg"],
+//        ["id" : 3,"image" : "http://118.242.16.162:5580/envision/img/seed/head2.jpg"]
+//        ]
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var buttomView: UIView!
@@ -30,6 +30,7 @@ class PositionDetailViewController: UIViewController,UITableViewDelegate,UITable
     let jobInfoTableViewCell = "JobInfoTableViewCell"
 
     var shareView = YYShareView()
+    var delegate: updateRowInfoDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,7 +53,10 @@ class PositionDetailViewController: UIViewController,UITableViewDelegate,UITable
         self.tableView.registerNib(UINib(nibName: "JobInfoTableViewCell", bundle: nil), forCellReuseIdentifier: jobInfoTableViewCell)
 
         let seedUrl = getjobInfoJson
-        let parameters = ["jobid":jobid] as! [String: AnyObject]
+        var parameters = ["jobId":jobid] as! [String: AnyObject]
+        if userinfo.beisen_id != nil{
+            parameters["applicantId"] = userinfo.beisen_id!
+        }
         doRequest(seedUrl, parameters: parameters, encoding: .URL, praseMethod: praseJob)
         
         self.tableView.separatorStyle = .None
@@ -63,16 +67,12 @@ class PositionDetailViewController: UIViewController,UITableViewDelegate,UITable
         shareBtn.userInteractionEnabled = true
         shareBtn.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "shareAction"))
         
-        //self.navigationItem.leftBarButtonItem = getBackButton(self)
         self.setBackButton()
 
         self.navigationController?.interactivePopGestureRecognizer!.delegate = self
     }
     
-//    func backToPrevious(){
-//        self.navigationController?.popViewControllerAnimated(true)
-//    }
-    
+
     func praseJob(json: SwiftyJSON.JSON){
         if json["success"].boolValue {
             self.job.getJobInfo(json)
@@ -83,7 +83,7 @@ class PositionDetailViewController: UIViewController,UITableViewDelegate,UITable
     
     func shareAction(){
         shareView.vc = self
-        shareView.title = self.job.jobTitle!
+        shareView.job = self.job
         shareView.webpageUrl = self.webSite
         shareView.show()
         
@@ -98,8 +98,24 @@ class PositionDetailViewController: UIViewController,UITableViewDelegate,UITable
             self.navigationController?.pushViewController(loginViewController, animated: true)
             return
         }
+        if !userinfo.haveCV(){
+            //未填写微简历
+            let editCVViewController  = self.storyboard?.instantiateViewControllerWithIdentifier("EditCVViewController") as! EditCVViewController
+            editCVViewController.isModify = true
+            self.navigationController?.pushViewController(editCVViewController, animated: true)
+            return
+        }
+        
+        if userinfo.type != 1 && userinfo.type != 2{
+            let alertView = UIAlertController(title: "提醒", message: "只有学生可以申请职位", preferredStyle: .Alert)
+            let okAction = UIAlertAction(title: "确定", style: .Default, handler: nil)
+            alertView.addAction(okAction)
+            self.presentViewController(alertView, animated: false, completion: nil)
+            return
+        }
         
         let sendViewController  = self.storyboard?.instantiateViewControllerWithIdentifier("SendViewController") as! SendViewController
+        sendViewController.job = self.job
         self.navigationController?.pushViewController(sendViewController, animated: true)
         
     }
@@ -115,14 +131,65 @@ class PositionDetailViewController: UIViewController,UITableViewDelegate,UITable
     }
     
     func collectTap(sender: UITapGestureRecognizer){
-        self.job.collected = !self.job.collected
+
+        //未登录时提示登录
+        if userinfo.id == nil{
+            //未登录时，提醒登录
+            let loginViewController  = self.storyboard?.instantiateViewControllerWithIdentifier("LoginViewController") as! LoginViewController
+            self.navigationController?.pushViewController(loginViewController, animated: true)
+            return
+        }
+        
         let indexPath = NSIndexPath(forRow: 0, inSection: 0)
         let cell = self.tableView.cellForRowAtIndexPath(indexPath) as! JotTitleTableViewCell
-        if self.job.collected {
+        
+        if self.job.isCollect != nil && !self.job.isCollect! {
             cell.collectImage.image = UIImage(named: "collected")
+
+            let seedUrl = favorJob
+            let parameters = ["applicantId":userinfo.beisen_id!, "jobId":self.jobid ] as! [String: AnyObject]
+            doRequest(seedUrl, parameters: parameters, encoding: .URL, praseMethod: praseFavor)
+            
         }else{
             cell.collectImage.image = UIImage(named: "uncollected")
+            let seedUrl = unFavorJob
+            let parameters = ["applicantId":userinfo.beisen_id!, "jobId":self.jobid ] as! [String: AnyObject]
+            doRequest(seedUrl, parameters: parameters, encoding: .URL, praseMethod: praseUnFavor)
         }
+    }
+    
+    func praseFavor(json: SwiftyJSON.JSON){
+        if json["success"].boolValue {
+            self.job.isCollect = true
+            self.delegate?.updateRowInfo(self.job)
+        }else{
+            let indexPath = NSIndexPath(forRow: 0, inSection: 0)
+            let cell = self.tableView.cellForRowAtIndexPath(indexPath) as! JotTitleTableViewCell
+            cell.collectImage.image = UIImage(named: "uncollected")
+            let alertView = UIAlertController(title: "提醒", message: "网络异常，请重新操作", preferredStyle: .Alert)
+            let okAction = UIAlertAction(title: "确定", style: .Default, handler: nil)
+            alertView.addAction(okAction)
+            self.presentViewController(alertView, animated: false, completion: nil)
+            
+        }
+        
+    }
+    
+    func praseUnFavor(json: SwiftyJSON.JSON){
+        if json["success"].boolValue {
+            self.job.isCollect = false
+            self.delegate?.updateRowInfo(self.job)
+        }else{
+            let indexPath = NSIndexPath(forRow: 0, inSection: 0)
+            let cell = self.tableView.cellForRowAtIndexPath(indexPath) as! JotTitleTableViewCell
+            cell.collectImage.image = UIImage(named: "collected")
+            let alertView = UIAlertController(title: "提醒", message: "网络异常，请重新操作", preferredStyle: .Alert)
+            let okAction = UIAlertAction(title: "确定", style: .Default, handler: nil)
+            alertView.addAction(okAction)
+            self.presentViewController(alertView, animated: false, completion: nil)
+            
+        }
+        
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -131,11 +198,11 @@ class PositionDetailViewController: UIViewController,UITableViewDelegate,UITable
         if indexPath.section == 0{
             let cell = tableView.dequeueReusableCellWithIdentifier(jotTitleTableViewCell, forIndexPath: indexPath) as! JotTitleTableViewCell
             cell.jobTitle.text = self.job.jobTitle
-            cell.address.text = self.job.location
+            cell.address.text = self.job.address
             cell.address.sizeToFit()
             cell.kind.text = self.job.kind
             
-            if self.job.collected {
+            if self.job.isCollect != nil && self.job.isCollect! {
                 cell.collectImage.image = UIImage(named: "collected")
             }else{
                 cell.collectImage.image = UIImage(named: "uncollected")
@@ -148,23 +215,23 @@ class PositionDetailViewController: UIViewController,UITableViewDelegate,UITable
             //添加种子图片
             let width = cell.contentView.frame.width - 32
             var count = Int(width/70)
-            if count > self.seeds.count{
-                count = self.seeds.count
+            if count > self.job.seedList.count{
+                count = self.job.seedList.count
             }
             
-            for index in 0...count - 1{
-                let imageView = UIImageView(frame: CGRect(x: 16 + index * 70, y: 103, width: 60, height: 60))
-                imageView.imageFromUrl(self.seeds[index]["image"] as! String)
-                imageView.layer.cornerRadius = 3
-                imageView.layer.masksToBounds = true
-                imageView.userInteractionEnabled = true
-                let tap = UITapGestureRecognizer(target: self, action: "tapSeedImage:")
-                imageView.addGestureRecognizer(tap)
-                tap.view?.tag = index
-                cell.contentView.addSubview(imageView)
+            if count > 0{
+                for index in 0...count - 1{
+                    let imageView = UIImageView(frame: CGRect(x: 16 + index * 70, y: 103, width: 60, height: 60))
+                    imageView.imageFromUrl(self.job.seedList[index].image)
+                    imageView.layer.cornerRadius = 3
+                    imageView.layer.masksToBounds = true
+                    imageView.userInteractionEnabled = true
+                    let tap = UITapGestureRecognizer(target: self, action: "tapSeedImage:")
+                    imageView.addGestureRecognizer(tap)
+                    tap.view?.tag = index
+                    cell.contentView.addSubview(imageView)
+                }
             }
-            
-            
             
             returnCell = cell
         }else if indexPath.section == 1{
@@ -184,21 +251,14 @@ class PositionDetailViewController: UIViewController,UITableViewDelegate,UITable
     
     func tapSeedImage(sender: UITapGestureRecognizer){
         let tag = sender.view?.tag
-        if tag != nil && tag <= self.seeds.count - 1{
+        if tag != nil && tag <= self.job.seedList.count - 1{
             let introViewController  = self.storyboard?.instantiateViewControllerWithIdentifier("WebViewController") as! WebViewController
             introViewController.navigationItem.title = "种子成长故事"
-            introViewController.webSite = getSeed + "?id=\(self.seeds[tag!]["id"] as! Int)"
+            introViewController.webSite = getSeed + "?id=\(self.job.seedList[tag!].id!)"
             
             self.navigationController?.pushViewController(introViewController, animated: true)
-            
         }
-        
-        
     }
-    
-//    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-//        return 206
-//    }
     
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat{
         return 10
@@ -211,7 +271,7 @@ class PositionDetailViewController: UIViewController,UITableViewDelegate,UITable
         if section == 2{
             sectionView.backgroundColor = UIColor.clearColor()
         }
-
+        
         return sectionView
     }
 
@@ -220,16 +280,5 @@ class PositionDetailViewController: UIViewController,UITableViewDelegate,UITable
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

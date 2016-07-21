@@ -25,6 +25,15 @@ class IconTableViewCell: UITableViewCell {
     
     @IBOutlet weak var applyView: UIView!
     
+    @IBOutlet weak var helpView: UIView!
+    
+    @IBOutlet weak var recommendView: UIView!
+    
+    @IBOutlet weak var gotoView: UIView!
+    
+    @IBOutlet weak var seedDpView: UIView!
+    
+    @IBOutlet weak var coopView: UIView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -44,46 +53,7 @@ class IconTableViewCell: UITableViewCell {
         
         self.videoView.layer.borderWidth = 0.5
         self.videoView.layer.borderColor = SYSTEMCOLOR.CGColor
-        
-//        UIView.animateWithDuration(0.8,
-//            delay:0.5,
-//            usingSpringWithDamping: 0.8,
-//            initialSpringVelocity: 0.3,
-//            options: [.Repeat,.CurveEaseInOut],
-//            animations: {
-//                self.leftArrow.frame = self.leftArrow.frame.offsetBy(dx: 15, dy: 0)
-//            },
-//            completion: nil)
-//        
-//        UIView.animateWithDuration(0.8,
-//            delay:0.5,
-//            usingSpringWithDamping: 0.8,
-//            initialSpringVelocity: 0.3,
-//            options: [.Repeat,.CurveEaseInOut],
-//            animations: {
-//                self.rightArrow.frame = self.rightArrow.frame.offsetBy(dx: -15, dy: 0)
-//            },
-//            completion: nil)
-//        UIView.animateWithDuration(0.8,
-//            delay:0.5,
-//            usingSpringWithDamping: 0.8,
-//            initialSpringVelocity: 0.3,
-//            options: [.Repeat,.CurveEaseInOut],
-//            animations: {
-//                self.leftArrow2.frame = self.leftArrow2.frame.offsetBy(dx: 15, dy: 0)
-//            },
-//            completion: nil)
-//        
-//        UIView.animateWithDuration(0.8,
-//            delay:0.5,
-//            usingSpringWithDamping: 0.8,
-//            initialSpringVelocity: 0.3,
-//            options: [.Repeat,.CurveEaseInOut],
-//            animations: {
-//                self.rightArrow2.frame = self.rightArrow2.frame.offsetBy(dx: -15, dy: 0)
-//            },
-//            completion: nil)
-        
+                
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

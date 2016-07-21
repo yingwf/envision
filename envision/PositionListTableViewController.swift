@@ -9,7 +9,11 @@
 import UIKit
 import SwiftyJSON
 
-class PositionListTableViewController: UITableViewController {
+protocol updateRowInfoDelegate{
+    func updateRowInfo(job: Job)
+}
+
+class PositionListTableViewController: UITableViewController,updateRowInfoDelegate {
     
     let positionTitle = ["能源互联网软件类","智能风机与智慧风场研发类","智慧供应链类","智慧光伏类"]
     
@@ -17,33 +21,25 @@ class PositionListTableViewController: UITableViewController {
     
     var jobLists = [JobList]()
     
+    var currentIndexPath: NSIndexPath?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        let leftBarBtn = UIBarButtonItem(title: "", style: .Plain, target: self,
-//            action: "backToPrevious")
-//        leftBarBtn.image = UIImage(named: "back")
-//        leftBarBtn.tintColor = UIColor.whiteColor()
-//        self.navigationItem.leftBarButtonItem = leftBarBtn
-        
-//        let backButton = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 30))
-//        let backImage = UIImageView(frame: CGRect(x: -8, y: 5, width: 14, height: 22))
-//        backImage.image = UIImage(named: "back")
-//        backButton.addSubview(backImage)
-//        backButton.addTarget(self, action: "backToPrevious", forControlEvents: .TouchUpInside)
-//        let backItem = UIBarButtonItem(customView: backButton)
-//        backItem.tintColor = UIColor.whiteColor()
-        //self.navigationItem.leftBarButtonItem = getBackButton(self)
+    
         self.setBackButton()
 
         
-        self.tableView.tableFooterView = UIView() //取消多余的分割线
+        //self.tableView.tableFooterView = UIView() //取消多余的分割线
         //self.tableView.backgroundColor = BACKGROUNDCOLOR
+        self.tableView.separatorStyle = .None
         self.tableView.registerNib(UINib(nibName: "PositionListTableViewCell", bundle: nil), forCellReuseIdentifier: positionListCell)
         
         HUD.show(.RotatingImage(loadingImage))
         let seedUrl = getJobList
-        let parameters = ["Category":1] as! [String: AnyObject]
+        var parameters = ["Category":1] as! [String: AnyObject]
+        if userinfo.beisen_id != nil{
+            parameters["applicantId"] = userinfo.beisen_id!
+        }
         doRequest(seedUrl, parameters: parameters, encoding: .URL, praseMethod: praseJobList)
     }
     
@@ -65,6 +61,7 @@ class PositionListTableViewController: UITableViewController {
 //    func backToPrevious(){
 //        self.navigationController?.popViewControllerAnimated(true)
 //    }
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -90,6 +87,18 @@ class PositionListTableViewController: UITableViewController {
         cell.jobTitle.text = self.jobLists[indexPath.section].jobs[indexPath.row].jobTitle
         cell.major.text = self.jobLists[indexPath.section].jobs[indexPath.row].MBYZ
         cell.address.text = self.jobLists[indexPath.section].jobs[indexPath.row].address
+        
+        if userinfo.beisen_id != nil{
+            cell.favorImage.hidden = false
+            let isCollect = self.jobLists[indexPath.section].jobs[indexPath.row].isCollect
+            if isCollect != nil && isCollect! {
+                cell.favorImage.image = UIImage(named: "collected")
+            }else{
+                cell.favorImage.image = UIImage(named: "uncollected")
+            }
+        }else{
+            cell.favorImage.hidden = true
+        }
 
         return cell
     }
@@ -106,9 +115,9 @@ class PositionListTableViewController: UITableViewController {
         let width = UIScreen.mainScreen().bounds.width
         let sectionView = UIView(frame: CGRect(x: 0, y: 0, width: width, height: 44))
         sectionView.backgroundColor = UIColor.whiteColor()
-        let sepView1 = UIView(frame: CGRect(x: 0, y: 0, width: width, height: 0.5))
-        sepView1.backgroundColor = SEPERATORCOLOR
-        sectionView.addSubview(sepView1)
+//        let sepView1 = UIView(frame: CGRect(x: 0, y: 0, width: width, height: 0.5))
+//        sepView1.backgroundColor = SEPERATORCOLOR
+//        sectionView.addSubview(sepView1)
 
         let sepView2 = UIView(frame: CGRect(x: 0, y: 43.5, width: width, height: 0.5))
         sepView2.backgroundColor = SEPERATORCOLOR
@@ -129,15 +138,28 @@ class PositionListTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
+        self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+
+        
         let positionDetailViewController = self.storyboard?.instantiateViewControllerWithIdentifier("PositionDetailViewController") as! PositionDetailViewController
         
-        positionDetailViewController.jobid = self.jobLists[indexPath.section].jobs[indexPath.row].jobid!//  getjobInfoUrl + "?jobid=\(self.jobLists[indexPath.section].jobs[indexPath.row].jobid!)"
-        //positionDetailViewController.job = self.jobLists[indexPath.section].jobs[indexPath.row]
+        positionDetailViewController.jobid = self.jobLists[indexPath.section].jobs[indexPath.row].jobid!
+        positionDetailViewController.delegate = self
+        
+        self.currentIndexPath = indexPath
         
         self.navigationController?.pushViewController(positionDetailViewController, animated: true)
+        
     }
 
-    
+    func updateRowInfo(job: Job){
+        if self.currentIndexPath == nil{
+            return
+        }
+        self.jobLists[currentIndexPath!.section].jobs[currentIndexPath!.row].isCollect = job.isCollect
+        self.tableView.reloadRowsAtIndexPaths([self.currentIndexPath!], withRowAnimation: .None)
+        
+    }
     
     /*
     // Override to support conditional editing of the table view.

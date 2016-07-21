@@ -14,11 +14,21 @@ class InterviewTableViewCell: UITableViewCell {
     
     @IBOutlet weak var bgView: UIView!
     
+    @IBOutlet weak var jobName: UILabel!
+    
+    @IBOutlet weak var personAmount: UILabel!
+    
+    @IBOutlet weak var duration: UILabel!
     
     @IBOutlet weak var readcv: UIView!
     
     @IBOutlet weak var interview: UIView!
     
+    @IBOutlet weak var date: UILabel!
+    
+    @IBOutlet weak var time: UILabel!
+    
+    @IBOutlet weak var address: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -38,7 +48,7 @@ class InterviewTableViewCell: UITableViewCell {
         interview.layer.cornerRadius = 5
         interview.layer.masksToBounds = true
         
-        let bgWidth = bgView.frame.width
+        let bgWidth = UIScreen.mainScreen().bounds.width
         let sepView = UIView(frame: CGRect(x: 10, y: 101, width: bgWidth - 20, height: 0.5))
         sepView.backgroundColor = UIColor(red: 0, green: 0xa6/255, blue: 0xdb/255, alpha: 0.24)
         bgView.addSubview(sepView)

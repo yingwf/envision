@@ -10,13 +10,15 @@ import UIKit
 
 class ResultTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var interviewedApplicant: UILabel!
+    @IBOutlet weak var passedApplicant: UILabel!
+    @IBOutlet weak var passedRate: UILabel!
     
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        let width = self.contentView.frame.width
-        let height = self.contentView.frame.height
+        let width = UIScreen.mainScreen().bounds.width
         
         let sepView1 = UIView(frame: CGRect(x: 0, y: 0, width: width, height: 0.5))
         sepView1.backgroundColor = UIColor(red: 0xe7/255, green: 0xe7/255, blue: 0xe7/255, alpha: 1)

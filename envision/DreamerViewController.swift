@@ -12,7 +12,6 @@ import SwiftyJSON
 import MediaPlayer
 
 class DreamerViewController: UITableViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
-
     
     let homeCell = "HomeTableViewCell"
     let iconCell = "IconTableViewCell"
@@ -28,7 +27,7 @@ class DreamerViewController: UITableViewController,UIImagePickerControllerDelega
         for _ in 0...11 {
             let imageView = UIImageView(frame: CGRectZero)
             imageView.contentMode = .ScaleToFill
-            seedImageArray.append(imageView) //UIImageView(frame: CGRectZero)
+            seedImageArray.append(imageView)
         }
         
         //获取滚动图片
@@ -114,6 +113,20 @@ class DreamerViewController: UITableViewController,UIImagePickerControllerDelega
     }
     
     func recordVideo(){
+        if userinfo.id == nil{
+            //未登录时，提醒登录
+            let loginViewController  = self.storyboard?.instantiateViewControllerWithIdentifier("LoginViewController") as! LoginViewController
+            self.navigationController?.pushViewController(loginViewController, animated: true)
+            return
+        }
+        if !userinfo.haveCV(){
+            //未填写微简历
+            let editCVViewController  = self.storyboard?.instantiateViewControllerWithIdentifier("EditCVViewController") as! EditCVViewController
+            editCVViewController.isModify = true
+            self.navigationController?.pushViewController(editCVViewController, animated: true)
+            return
+        }
+        
         //录制视频
         imagePickerController = YJImagePickerController()
         imagePickerController!.delegate = self
@@ -135,6 +148,42 @@ class DreamerViewController: UITableViewController,UIImagePickerControllerDelega
         
     }
     
+    func helpCenter(){
+        let introViewController  = self.storyboard?.instantiateViewControllerWithIdentifier("WebViewController") as! WebViewController
+        introViewController.webSite = helpUrl
+        introViewController.navigationItem.title = "帮助中心"
+        self.navigationController?.pushViewController(introViewController, animated: true)
+    }
+    
+    func recommendAction(){
+        let introViewController  = self.storyboard?.instantiateViewControllerWithIdentifier("WebViewController") as! WebViewController
+        introViewController.webSite = recomparanoia
+        introViewController.navigationItem.title = "推荐梦想偏执狂"
+        self.navigationController?.pushViewController(introViewController, animated: true)
+    }
+    
+    func gotoEnvision(){
+        let introViewController  = self.storyboard?.instantiateViewControllerWithIdentifier("WebViewController") as! WebViewController
+        introViewController.webSite = walktofuture
+        introViewController.navigationItem.title = "走进远景"
+        self.navigationController?.pushViewController(introViewController, animated: true)
+    }
+    
+    func seedDepartment(){
+        let introViewController  = self.storyboard?.instantiateViewControllerWithIdentifier("WebViewController") as! WebViewController
+        introViewController.webSite = futureseed
+        introViewController.navigationItem.title = "走进高校"
+        self.navigationController?.pushViewController(introViewController, animated: true)
+    }
+    
+    func jobCooperation(){
+        let introViewController  = self.storyboard?.instantiateViewControllerWithIdentifier("WebViewController") as! WebViewController
+        introViewController.webSite = employment
+        introViewController.navigationItem.title = "就业合作"
+        self.navigationController?.pushViewController(introViewController, animated: true)
+    }
+    
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var returnCell = UITableViewCell()
         
@@ -146,54 +195,36 @@ class DreamerViewController: UITableViewController,UIImagePickerControllerDelega
             let applyTap = UITapGestureRecognizer(target: self, action: "applyPosition")
             cell.applyView.addGestureRecognizer(applyTap)
             
+            //推荐梦想偏执狂
+            cell.recommendView.userInteractionEnabled = true
+            let recommendTap = UITapGestureRecognizer(target: self, action: "recommendAction")
+            cell.recommendView.addGestureRecognizer(recommendTap)
+            
+            //走进远景
+            cell.gotoView.userInteractionEnabled = true
+            let gotoTap = UITapGestureRecognizer(target: self, action: "gotoEnvision")
+            cell.gotoView.addGestureRecognizer(gotoTap)
+            
+            //远景种子院
+            cell.seedDpView.userInteractionEnabled = true
+            let seedDpTap = UITapGestureRecognizer(target: self, action: "seedDepartment")
+            cell.seedDpView.addGestureRecognizer(seedDpTap)
+            
+            //就业合作
+            cell.coopView.userInteractionEnabled = true
+            let coopTap = UITapGestureRecognizer(target: self, action: "jobCooperation")
+            cell.coopView.addGestureRecognizer(coopTap)
             
             //视频录制
             cell.recordVideoView.userInteractionEnabled = true
             let videoTap = UITapGestureRecognizer(target: self, action: "recordVideo")
             cell.recordVideoView.addGestureRecognizer(videoTap)
             
-//            let arrowWidth = 11.0
-//            let arrowHeight = 7.0
-//            let arrowY = 8.5
-//            UIView.animateWithDuration(0.8,
-//                delay:0.5,
-//                usingSpringWithDamping: 0.8,
-//                initialSpringVelocity: 0.3,
-//                options: [.Repeat,.CurveEaseInOut],
-//                animations: {
-//                    cell.leftArrow.frame = CGRect(x: 40 + 5, y: arrowY, width: arrowWidth, height: arrowHeight)
-//                },
-//                completion: nil)
-//            
-//            UIView.animateWithDuration(0.8,
-//                delay:0.5,
-//                usingSpringWithDamping: 0.8,
-//                initialSpringVelocity: 0.3,
-//                options: [.Repeat,.CurveEaseInOut],
-//                animations: {
-//                    cell.rightArrow.frame = CGRect(x: 115 - 5, y: arrowY, width: arrowWidth, height: arrowHeight)
-//                },
-//                completion: nil)
-//            UIView.animateWithDuration(0.8,
-//                delay:0.5,
-//                usingSpringWithDamping: 0.8,
-//                initialSpringVelocity: 0.3,
-//                options: [.Repeat,.CurveEaseInOut],
-//                animations: {
-//                    cell.leftArrow2.frame = CGRect(x: 40 + 5, y: arrowY, width: arrowWidth, height: arrowHeight)
-//                },
-//                completion: nil)
-//            
-//            UIView.animateWithDuration(0.8,
-//                delay:0.5,
-//                usingSpringWithDamping: 0.8,
-//                initialSpringVelocity: 0.3,
-//                options: [.Repeat,.CurveEaseInOut],
-//                animations: {
-//                    cell.rightArrow2.frame = CGRect(x: 115 - 5, y: arrowY, width: arrowWidth, height: arrowHeight)
-//                },
-//                completion: nil)
-            
+            //帮助中心
+            cell.helpView.userInteractionEnabled = true
+            let helpTap = UITapGestureRecognizer(target: self, action: "helpCenter")
+            cell.helpView.addGestureRecognizer(helpTap)
+
             
             returnCell = cell
         }else if indexPath.section == 1{
@@ -207,9 +238,6 @@ class DreamerViewController: UITableViewController,UIImagePickerControllerDelega
             let moreTap = UITapGestureRecognizer(target: self, action: "moreAction")
             //cell.more.addGestureRecognizer(moreTap)
             cell.contentView.addGestureRecognizer(moreTap)
-            
-            
-
         
             returnCell = cell
         }else if indexPath.section == 2{
@@ -283,9 +311,10 @@ class DreamerViewController: UITableViewController,UIImagePickerControllerDelega
     func moreAction(){
         let introViewController  = self.storyboard?.instantiateViewControllerWithIdentifier("WebViewController") as! WebViewController
         introViewController.webSite = envisioninfo
+        introViewController.navigationItem.title = "关于远景"
         self.navigationController?.pushViewController(introViewController, animated: true)
-        
     }
+    
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         var rowHeight:CGFloat = 0
@@ -301,27 +330,10 @@ class DreamerViewController: UITableViewController,UIImagePickerControllerDelega
         return rowHeight
     }
     
-//    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?{
-//        let width = UIScreen.mainScreen().bounds.width
-//        let headView = UIView(frame: CGRect(x: 0, y: 0, width: width, height: 10))
-//        headView.backgroundColor = UIColor(red: 0xf7/255, green: 0xf7/255, blue: 0xf7/255, alpha: 1)
-//        return headView
-//    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

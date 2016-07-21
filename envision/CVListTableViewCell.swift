@@ -1,30 +1,27 @@
 //
-//  HeaderTableViewCell.swift
+//  CVListTableViewCell.swift
 //  envision
 //
-//  Created by  ywf on 16/5/31.
+//  Created by  ywf on 16/7/8.
 //  Copyright © 2016年 yingwf. All rights reserved.
 //
 
 import UIKit
 
-class HeaderTableViewCell: UITableViewCell {
+class CVListTableViewCell: UITableViewCell {
+    @IBOutlet weak var headImg: UIImageView!
 
-    @IBOutlet weak var headImage: UIImageView!
-    
     @IBOutlet weak var name: UILabel!
     
-    @IBOutlet weak var dreamerID: UILabel!
-        
-    @IBOutlet weak var toLogin: UILabel!
+    @IBOutlet weak var school: UILabel!
     
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        headImg.layer.cornerRadius = 22.5
+        headImg.layer.masksToBounds = true
         
-        self.headImage.layer.masksToBounds = true
-        self.headImage.layer.cornerRadius = 30
         
     }
 

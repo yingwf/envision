@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1713" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="m5u-UE-uKW">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1808" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="m5u-UE-uKW">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
@@ -51,6 +51,7 @@
                         <outlet property="logoutButton" destination="gpM-9F-wAU" id="7bc-2e-xcO"/>
                         <segue destination="2yu-LK-NAr" kind="push" id="8c4-rX-2d1"/>
                         <segue destination="3nc-LL-1lq" kind="push" id="xmt-ZJ-0Sh"/>
+                        <segue destination="7ju-xq-fhQ" kind="push" id="NWz-lZ-dGc"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W2x-2T-Xsd" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -84,17 +85,47 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <segue destination="PmR-VP-522" kind="push" id="2Vp-4G-jub"/>
+                        <segue destination="oEU-7b-mEP" kind="push" id="lug-MO-8gJ"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BcN-qv-Fyr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1946.5" y="1282.5"/>
         </scene>
+        <!--收藏职位-->
+        <scene sceneID="yy0-fv-qHm">
+            <objects>
+                <tableViewController storyboardIdentifier="CollectedJobsViewController" hidesBottomBarWhenPushed="YES" id="7ju-xq-fhQ" customClass="CollectedJobsViewController" customModule="梦想偏执狂" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="UQa-8s-lg8">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="T5W-YV-Jez">
+                                <rect key="frame" x="0.0" y="92" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="T5W-YV-Jez" id="QtW-Sd-dlH">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="7ju-xq-fhQ" id="aSY-zl-qLI"/>
+                            <outlet property="delegate" destination="7ju-xq-fhQ" id="cwH-jx-b9d"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="收藏职位" id="Tcu-22-dyi"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TDm-WF-4UA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1506.5" y="2074.5"/>
+        </scene>
         <!--我的应聘-->
         <scene sceneID="0br-d9-2JX">
             <objects>
                 <tableViewController storyboardIdentifier="MyApplyTableViewController" hidesBottomBarWhenPushed="YES" id="3nc-LL-1lq" customClass="MyApplyTableViewController" customModule="梦想偏执狂" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="t6M-y7-gBe">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="t6M-y7-gBe">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -121,7 +152,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iX7-Nd-lg2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1506.5" y="2147.5"/>
+            <point key="canvasLocation" x="1077.5" y="2074.5"/>
         </scene>
         <!--填写信息-->
         <scene sceneID="Qed-9t-qZK">
@@ -317,6 +348,37 @@
             </objects>
             <point key="canvasLocation" x="1362.5" y="429.5"/>
         </scene>
+        <!--我的消息-->
+        <scene sceneID="fqJ-99-7W0">
+            <objects>
+                <tableViewController storyboardIdentifier="MessageTableViewController" id="T5A-gg-7OL" customClass="MessageTableViewController" customModule="梦想偏执狂" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="ikg-Dt-Mhd">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="separatorColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
+                        <inset key="separatorInset" minX="16" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="SGE-k5-clc">
+                                <rect key="frame" x="0.0" y="92" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="SGE-k5-clc" id="OWl-sb-Yuk">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="T5A-gg-7OL" id="JpL-Tg-MZj"/>
+                            <outlet property="delegate" destination="T5A-gg-7OL" id="oPa-tb-hou"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="我的消息" id="Sb9-ql-XwV"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1uV-Yj-ZVm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="649.5" y="1282.5"/>
+        </scene>
         <!--偏执狂中心-->
         <scene sceneID="D6h-ZN-sUH">
             <objects>
@@ -334,6 +396,7 @@
                     <nil name="viewControllers"/>
                     <connections>
                         <segue destination="B9u-sx-AvP" kind="relationship" relationship="rootViewController" id="jt2-IA-7m4"/>
+                        <segue destination="T5A-gg-7OL" kind="push" id="hi7-Kl-EaJ"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hvU-KS-XBA" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -368,7 +431,7 @@
                                         <rect key="frame" x="55" y="7" width="312" height="30"/>
                                         <color key="textColor" red="0.37647058820000001" green="0.42352941179999998" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                     </textField>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -399,7 +462,7 @@
                                         <rect key="frame" x="55" y="7" width="312" height="30"/>
                                         <color key="textColor" red="0.37647058820000001" green="0.42352941179999998" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -417,7 +480,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iHY-Ti-Weo">
                                 <rect key="frame" x="0.0" y="173" width="375" height="44"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="再次输入密码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3g1-dT-yAw">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入验证码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3g1-dT-yAw">
                                         <rect key="frame" x="70" y="7" width="204" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="204" id="W1c-Zy-wEi"/>
@@ -565,6 +628,7 @@
                         <outlet property="receiveLabel" destination="b3t-9X-2WM" id="atD-ax-Z38"/>
                         <outlet property="typeView" destination="t2P-TJ-w1Q" id="efO-L2-C1L"/>
                         <outlet property="userNameField" destination="qs9-Iv-CMr" id="NZj-jN-rPi"/>
+                        <outlet property="userNameLabel" destination="Grp-9S-mCP" id="E4n-tZ-wgU"/>
                         <outlet property="verificationCodeField" destination="3g1-dT-yAw" id="kuE-hw-PKy"/>
                         <segue destination="Ki0-EP-huT" kind="push" id="Qhz-WG-uxp"/>
                     </connections>
@@ -576,7 +640,7 @@
         <!--我的简历-->
         <scene sceneID="YyU-Lj-Q8e">
             <objects>
-                <viewController storyboardIdentifier="MyCVViewController" id="Ki0-EP-huT" customClass="MyCVViewController" customModule="梦想偏执狂" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MyCVViewController" hidesBottomBarWhenPushed="YES" id="Ki0-EP-huT" customClass="MyCVViewController" customModule="梦想偏执狂" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="FoF-jo-Y88"/>
                         <viewControllerLayoutGuide type="bottom" id="vOm-aY-nLS"/>
@@ -599,11 +663,29 @@
                             <constraint firstItem="y7p-jC-ope" firstAttribute="leading" secondItem="pMQ-Ee-ywg" secondAttribute="leadingMargin" id="yce-K4-BRY"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="我的简历" id="bU9-3Y-KXs"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="我的简历" id="bU9-3Y-KXs">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="zlm-3b-9jW">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="gKq-NA-oay">
+                                <rect key="frame" x="276" y="7" width="83" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <state key="normal" title="详细简历">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="fullResume:" destination="Ki0-EP-huT" eventType="touchUpInside" id="N5J-Uu-Quw"/>
+                                    <action selector="saveCV:" destination="yMp-yq-HPi" eventType="touchUpInside" id="9yG-XZ-bSa"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="tableView" destination="y7p-jC-ope" id="IoX-N1-KDg"/>
                         <segue destination="yMp-yq-HPi" kind="push" id="he4-ya-2BG"/>
+                        <segue destination="Xwf-6k-473" kind="push" id="bGZ-uM-X0a"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M5c-0Q-Y3C" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -640,7 +722,7 @@
                                             <constraint firstAttribute="width" constant="12" id="QXe-bJ-1pO"/>
                                         </constraints>
                                     </imageView>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入手机号或邮箱" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1ME-hF-Ys2">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入账户名称" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1ME-hF-Ys2">
                                         <rect key="frame" x="95" y="7" width="263" height="30"/>
                                         <color key="textColor" red="0.37647058820000001" green="0.42352941179999998" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1165,7 +1247,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mo5-A3-yfP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5001.5" y="1685.5"/>
+            <point key="canvasLocation" x="4977.5" y="2035.5"/>
         </scene>
         <!--姓名-->
         <scene sceneID="Lmd-aY-OiJ">
@@ -1234,7 +1316,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kH3-wZ-qxL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5813.5" y="902.5"/>
+            <point key="canvasLocation" x="4977.5" y="1282.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="pXI-jK-iDm">
@@ -1302,7 +1384,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Jq-kX-4f0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1946.5" y="2147.5"/>
+            <point key="canvasLocation" x="1077.5" y="2888.5"/>
         </scene>
         <!--面试管理-->
         <scene sceneID="74l-rF-gWQ">
@@ -1493,19 +1575,19 @@
                                         <color key="textColor" red="0.3921568627" green="0.3921568627" blue="0.3921568627" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="40" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1fR-h0-Ar4">
-                                        <rect key="frame" x="289" y="9" width="53" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="％" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qA6-gq-oJD">
+                                        <rect key="frame" x="345" y="9" width="22" height="21"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="53" id="Gqx-C5-HFm"/>
+                                            <constraint firstAttribute="width" constant="22" id="MSe-sK-v8N"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" red="0.3921568627" green="0.3921568627" blue="0.3921568627" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="％" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qA6-gq-oJD">
-                                        <rect key="frame" x="345" y="9" width="22" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="40" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1fR-h0-Ar4">
+                                        <rect key="frame" x="289" y="9" width="53" height="21"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="22" id="MSe-sK-v8N"/>
+                                            <constraint firstAttribute="width" constant="53" id="Gqx-C5-HFm"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" red="0.3921568627" green="0.3921568627" blue="0.3921568627" alpha="1" colorSpace="calibratedRGB"/>
@@ -1588,9 +1670,12 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <size key="titleShadowOffset" width="3" height="3"/>
-                                <state key="normal" title="当前学生简历">
+                                <state key="normal" title="评价当前学生">
                                     <color key="titleColor" red="0.0" green="0.65098039220000004" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="currentApplicant:" destination="AK9-dj-NPw" eventType="touchUpInside" id="oSv-2f-ybr"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mw0-gx-fGq">
                                 <rect key="frame" x="27" y="580" width="320" height="44"/>
@@ -1618,6 +1703,9 @@
                                 <state key="normal" title="呼叫下一位">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="nextApplicant:" destination="AK9-dj-NPw" eventType="touchUpInside" id="UcS-cc-847"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1666,7 +1754,11 @@
                     <connections>
                         <outlet property="currentApplicant" destination="UH3-rB-9e6" id="BG1-xy-2UT"/>
                         <outlet property="endInterview" destination="Mw0-gx-fGq" id="Iut-Ua-G7b"/>
-                        <outlet property="nextApplicant" destination="mae-sQ-5Fy" id="8q5-HN-AMj"/>
+                        <outlet property="interviewedApplicant" destination="vwg-Mj-B9K" id="Vuo-bP-Ese"/>
+                        <outlet property="nextApplicant" destination="mae-sQ-5Fy" id="tY5-1f-o7f"/>
+                        <outlet property="passedApplicant" destination="mz6-7s-cUJ" id="djk-8c-p98"/>
+                        <outlet property="passedRate" destination="1fR-h0-Ar4" id="S7V-OJ-vGO"/>
+                        <outlet property="waitApplicant" destination="5wD-fh-p5t" id="aqQ-p5-UKc"/>
                         <segue destination="dEf-LH-LNr" kind="push" id="XrM-x6-21k"/>
                     </connections>
                 </viewController>
@@ -1708,6 +1800,9 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
                                 </state>
                             </button>
+                            <connections>
+                                <action selector="endInterview:" destination="dEf-LH-LNr" id="4jt-pm-TVu"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
@@ -1820,6 +1915,71 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fz9-qU-JFc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3469.5" y="429.5"/>
+        </scene>
+        <!--查看简历-->
+        <scene sceneID="K23-lI-FPH">
+            <objects>
+                <tableViewController storyboardIdentifier="CVListTableViewController" id="oEU-7b-mEP" customClass="CVListTableViewController" customModule="梦想偏执狂" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="E5Q-eN-TbL">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="VDP-Ns-kXh">
+                                <rect key="frame" x="0.0" y="92" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VDP-Ns-kXh" id="Qlq-fN-suG">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="oEU-7b-mEP" id="80V-9u-scD"/>
+                            <outlet property="delegate" destination="oEU-7b-mEP" id="V62-we-DSf"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="查看简历" id="4uA-t6-Ufn"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="e5x-ge-zHs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1946.5" y="2074.5"/>
+        </scene>
+        <!--详细简历-->
+        <scene sceneID="dai-ZD-NJx">
+            <objects>
+                <viewController storyboardIdentifier="FullResumeViewController" hidesBottomBarWhenPushed="YES" id="Xwf-6k-473" customClass="FullResumeViewController" customModule="梦想偏执狂" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="VI7-rE-2Ju"/>
+                        <viewControllerLayoutGuide type="bottom" id="fEI-Ms-fjF"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="0ee-bt-gsS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="详细简历" id="aMU-UZ-cDN">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="AOP-z5-pXk">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="grr-P0-ClN">
+                                <rect key="frame" x="279" y="7" width="80" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <state key="normal" title="编辑">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="fullResume:" destination="Ki0-EP-huT" eventType="touchUpInside" id="0U1-DQ-rqU"/>
+                                    <action selector="saveCV:" destination="yMp-yq-HPi" eventType="touchUpInside" id="eB1-iN-2Ba"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="873-Ae-UJJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4155.5" y="2093.5"/>
         </scene>
     </scenes>
     <resources>

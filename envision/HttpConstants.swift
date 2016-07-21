@@ -8,8 +8,10 @@
 
 import Foundation
 
-var ROOTURL = "http://118.242.16.162:5580/envision/api/"
-var HTMLURL = "http://118.242.16.162:5580/envision/"
+var HTMLURL = "http://campus.envisioncn.com:8080/envision/"
+var ROOTURL = HTMLURL + "api/"
+
+//118.242.16.162:5580 172.16.34.151 campus.envisioncn.com
 
 //登陆
 let  LOGIN = ROOTURL + "applicantLogin.htm"
@@ -56,13 +58,58 @@ let viewresume = HTMLURL + "viewresume.html"
 
 let myinterview = HTMLURL + "myinterview.html"
 
-let applyjob = HTMLURL + "applyjob.html"
+let applyjob = ROOTURL + "applyJob.htm"
 
 let envisioninfo = HTMLURL + "envisioninfo.html"
 
 let mymessage = HTMLURL + "mymessage.html"
 
-let workinggroup = HTMLURL + "school-recruit-working-group.html"
+let workingGroup = HTMLURL + "school-recruit-working-group.html"
+
+let favorJob = ROOTURL + "favorJob.htm"
+
+let unFavorJob  = ROOTURL + "unfavorJob.htm"
+
+let getFavorJobList = ROOTURL + "getFavorJobList.htm"
+
+let getInterviewInfoList = ROOTURL + "getInterviewInfoList.htm"
+
+let getLineNumberAndRound = ROOTURL + "getLineNumberAndRound.htm"
+
+let selectInterviewTime = ROOTURL + "selectInterviewTime.htm"
+
+let getApplicantListForMyInterview = ROOTURL +  "getApplicantListForMyInterview.htm"
+
+let startInterview = ROOTURL + "startInterview.htm"
+
+let getMyInterviewerInfoList = ROOTURL + "getMyInterviewerInfoList.htm"
+
+let helpUrl = HTMLURL + "helpcenter-company.html"
+
+let futureseed = HTMLURL + "futureseed.html"
+
+let walktofuture = HTMLURL + "walktofuture.html"
+
+let recomparanoia = HTMLURL + "recomparanoia.html"
+
+let getMessageList = ROOTURL + "getApplicantMessageList.htm"
+
+let employment = HTMLURL + "employment-holiday.html"
+
+let myInterview = ROOTURL + "myInterview.htm"
+
+let interviewCurrentApplicant = ROOTURL + "interviewCurrentApplicant.htm"
+
+let interviewNextApplicant = ROOTURL + "interviewNextApplicant.htm"
+
+let endOneInterview = ROOTURL + "endOneInterview.htm"
+
+
+let interviewerEndInterview = ROOTURL + "InterviewerEndInterview.htm"
+
+let fullresume = HTMLURL + "fullresume-options.html"
+
+
 
 
 

@@ -35,6 +35,18 @@ class YJImagePickerController: UIImagePickerController {
         if UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(tempFilePath!){
             UISaveVideoAtPathToSavedPhotosAlbum(tempFilePath!, self, "video:didFinishSavingWithError:contextInfo:", nil)
         }
+//        let fileManager = NSFileManager.defaultManager()
+//        let formater = NSDateFormatter()
+//        formater.dateFormat = "yyyyMMddHHmmss"
+//        let filename = "video\(formater.stringFromDate(NSDate())).MOV"
+//        let resultPath = NSHomeDirectory().stringByAppendingString("/Documents/\(filename)")
+//        do {
+//            try fileManager.copyItemAtPath(tempFilePath!, toPath: resultPath)
+//        }catch let error as NSError{
+//            print(error.localizedDescription)
+//        }
+//        print("resultPath:-----\(resultPath)")
+//        avCompressAndUpload(resultPath as String)
     }
     
     
@@ -47,7 +59,6 @@ class YJImagePickerController: UIImagePickerController {
             self.presentViewController(alertView, animated: true, completion: nil)
             
         }else{
-            
             avCompressAndUpload(video as String)
         }
     }
@@ -59,10 +70,12 @@ class YJImagePickerController: UIImagePickerController {
         formater.dateFormat = "yyyy-MM-dd-HH:mm:ss"
         let filename = sourceUrl.componentsSeparatedByString("/").last!
         self.videoCompress(sourceUrl)
+        //self.convertVideoWithMediumQuality(NSURL(string: sourceUrl)!)
         //上传视频
         let username = NSUserDefaults.standardUserDefaults().valueForKey("username") as? String
         let password = NSUserDefaults.standardUserDefaults().valueForKey("password") as? String
         let url = uploadFile + "?username=\(username!)&password=\(password!)&fileext=MOV&filetype=2"
+        
         
         Alamofire.upload(.POST, url, headers:nil, multipartFormData: {
             multipartFormData in
@@ -117,33 +130,80 @@ class YJImagePickerController: UIImagePickerController {
     func videoCompress(sourceUrl: String){
         
         let avAsset = AVURLAsset(URL: NSURL(string: sourceUrl)!)
+        let compatiblePresets = AVAssetExportSession.exportPresetsCompatibleWithAsset(avAsset)
+        if compatiblePresets.contains(AVAssetExportPreset640x480){
+            let exportSession = AVAssetExportSession(asset: avAsset, presetName: AVAssetExportPreset640x480)
+            
+            let formater = NSDateFormatter()
+            formater.dateFormat = "yyyyMMddHHmmss"
+            let filename = "video\(formater.stringFromDate(NSDate())).mp4"
+            let resultPath = NSHomeDirectory().stringByAppendingString("/Documents/\(filename)")
+            let outputURL = NSURL(string: resultPath)
+            
+            exportSession!.outputURL = outputURL
+            exportSession!.outputFileType = AVFileTypeMPEG4
+            exportSession!.shouldOptimizeForNetworkUse = true
+            exportSession!.exportAsynchronouslyWithCompletionHandler({
+                switch (exportSession!.status) {
+                case .Failed:
+                    print("视频压缩失败")
+                    print("failed \(exportSession!.error)")
+                case .Completed:
+                    print("视频压缩成功")
+                    print("cancelled \(exportSession!.error)")
+                    
+                default:
+                    print("default")
+                }
+            })
+
+        }
+    }
+    func convertVideoWithMediumQuality(inputURL : NSURL){
         
-        let exportSession = AVAssetExportSession(asset: avAsset, presetName: AVAssetExportPresetLowQuality)
-        
-        
-        
-        
+        //let VideoFilePath = NSURL(fileURLWithPath: NSTemporaryDirectory()).URLByAppendingPathComponent("mergeVideo\(arc4random()%1000)d").URLByAppendingPathExtension("mp4").absoluteString
         
         let formater = NSDateFormatter()
-        formater.dateFormat = "yyyy-MM-dd-HH:mm:ss"
-        let filename = "output-\(formater.stringFromDate(NSDate())).mp4"
-        let resultPath = NSHomeDirectory().stringByAppendingString("/Documents/\(filename)")
-        exportSession?.outputURL = NSURL(string: resultPath)
-        exportSession?.outputFileType = AVFileTypeMPEG4
-        exportSession?.shouldOptimizeForNetworkUse = true
-        exportSession?.exportAsynchronouslyWithCompletionHandler({
-            switch (exportSession!.status) {
-            case .Failed:
-                print("视频压缩失败")
-            case .Completed:
-                print("视频压缩成功")
-                
+        formater.dateFormat = "yyyyMMddHHmmss"
+        let filename = "video\(formater.stringFromDate(NSDate())).mp4"
+        let VideoFilePath = NSHomeDirectory().stringByAppendingString("/Documents/\(filename)")
+        
+        if NSFileManager.defaultManager().fileExistsAtPath(VideoFilePath) {
+            do {
+                try NSFileManager.defaultManager().removeItemAtPath(VideoFilePath)
+            } catch { }
+        }
+        
+        let savePathUrl =  NSURL(string: VideoFilePath)!
+        
+        let sourceAsset = AVURLAsset(URL: inputURL, options: nil)
+        
+        let assetExport: AVAssetExportSession = AVAssetExportSession(asset: sourceAsset, presetName: AVAssetExportPresetMediumQuality)!
+        assetExport.outputFileType = AVFileTypeQuickTimeMovie
+        assetExport.outputURL = savePathUrl
+        assetExport.exportAsynchronouslyWithCompletionHandler { () -> Void in
+            
+            switch assetExport.status {
+            case AVAssetExportSessionStatus.Completed:
+                dispatch_async(dispatch_get_main_queue(), {
+                    do {
+                        let videoData = try NSData(contentsOfURL: savePathUrl, options: NSDataReadingOptions())
+                        print("MB - \(videoData.length / (1024 * 1024))")
+                    } catch {
+                        print(error)
+                    }
+                    
+                })
+            case  AVAssetExportSessionStatus.Failed:
+                print("failed \(assetExport.error)")
+            case AVAssetExportSessionStatus.Cancelled:
+                print("cancelled \(assetExport.error)")
             default:
-                print("default")
+                print("complete")
             }
-        })
+        }
+        
     }
-
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

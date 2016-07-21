@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1713" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1808" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
-        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -21,24 +21,17 @@
                             <constraint firstAttribute="width" constant="60" id="8Fb-mx-Quc"/>
                         </constraints>
                     </imageView>
-                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="小刚" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RRV-bX-hex">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="小刚" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RRV-bX-hex">
                         <rect key="frame" x="88" y="21" width="207" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="偏执狂ID：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2uJ-LH-a8d">
-                        <rect key="frame" x="88" y="48" width="61" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="偏执狂ID：09637682" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2uJ-LH-a8d">
+                        <rect key="frame" x="88" y="48" width="279" height="21"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="61" id="QB9-YS-5pY"/>
-                            <constraint firstAttribute="height" constant="21" id="ued-5J-lVr"/>
+                            <constraint firstAttribute="height" constant="21" id="fCO-hU-OsZ"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <color key="textColor" red="0.0" green="0.65098039220000004" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="09637682" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0J2-HH-yUd">
-                        <rect key="frame" x="145" y="48" width="191" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.0" green="0.65098039220000004" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -54,26 +47,22 @@
                     <constraint firstItem="q4h-T1-nCQ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="6" id="0y0-sU-gQW"/>
                     <constraint firstItem="oHS-cj-7yx" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="25" id="5uG-DA-UWd"/>
                     <constraint firstItem="oHS-cj-7yx" firstAttribute="leading" secondItem="RRV-bX-hex" secondAttribute="leading" id="6zw-Q3-qpQ"/>
-                    <constraint firstItem="2uJ-LH-a8d" firstAttribute="baseline" secondItem="0J2-HH-yUd" secondAttribute="baseline" id="9rg-Wl-Qrx"/>
+                    <constraint firstItem="2uJ-LH-a8d" firstAttribute="leading" secondItem="oHS-cj-7yx" secondAttribute="leading" id="GNw-4S-pEL"/>
                     <constraint firstItem="RRV-bX-hex" firstAttribute="leading" secondItem="q4h-T1-nCQ" secondAttribute="trailing" constant="11" id="Hz4-Am-CHR"/>
-                    <constraint firstItem="2uJ-LH-a8d" firstAttribute="firstBaseline" secondItem="0J2-HH-yUd" secondAttribute="firstBaseline" id="N4o-Sw-gVo"/>
                     <constraint firstAttribute="bottomMargin" secondItem="q4h-T1-nCQ" secondAttribute="bottom" constant="2.5" id="OQk-vh-YA8"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="0J2-HH-yUd" secondAttribute="trailing" constant="31" id="SR2-Py-WnZ"/>
                     <constraint firstItem="oHS-cj-7yx" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="THc-zv-xIO"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="2uJ-LH-a8d" secondAttribute="bottom" constant="7.5" id="TPe-QY-NhK"/>
                     <constraint firstAttribute="trailingMargin" secondItem="RRV-bX-hex" secondAttribute="trailing" constant="72" id="TYB-W0-Kbx"/>
-                    <constraint firstItem="0J2-HH-yUd" firstAttribute="leading" secondItem="q4h-T1-nCQ" secondAttribute="trailing" constant="68" id="VCf-go-sER"/>
                     <constraint firstItem="q4h-T1-nCQ" firstAttribute="centerY" secondItem="oHS-cj-7yx" secondAttribute="centerY" id="iai-Tx-6n9"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="2uJ-LH-a8d" secondAttribute="bottom" constant="7.5" id="jJT-lo-St8"/>
                     <constraint firstItem="RRV-bX-hex" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="13" id="jLr-lQ-2bS"/>
-                    <constraint firstItem="2uJ-LH-a8d" firstAttribute="leading" secondItem="oHS-cj-7yx" secondAttribute="leading" id="tPK-0U-IcV"/>
-                    <constraint firstItem="2uJ-LH-a8d" firstAttribute="top" secondItem="RRV-bX-hex" secondAttribute="bottom" constant="6" id="xWy-wJ-XqA"/>
+                    <constraint firstItem="2uJ-LH-a8d" firstAttribute="top" secondItem="RRV-bX-hex" secondAttribute="bottom" constant="6" id="jbd-eF-NS3"/>
+                    <constraint firstItem="2uJ-LH-a8d" firstAttribute="trailing" secondItem="oHS-cj-7yx" secondAttribute="trailing" id="pcu-pb-CIR"/>
                     <constraint firstItem="q4h-T1-nCQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="9" id="zFI-o4-0us"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="dreamerID" destination="0J2-HH-yUd" id="xez-xc-2tX"/>
+                <outlet property="dreamerID" destination="2uJ-LH-a8d" id="ymG-1p-J1s"/>
                 <outlet property="headImage" destination="q4h-T1-nCQ" id="bAX-Dh-AgF"/>
-                <outlet property="idLabel" destination="2uJ-LH-a8d" id="LSA-IO-pUo"/>
                 <outlet property="name" destination="RRV-bX-hex" id="wuI-nh-qcd"/>
                 <outlet property="toLogin" destination="oHS-cj-7yx" id="8iH-gF-dKE"/>
             </connections>

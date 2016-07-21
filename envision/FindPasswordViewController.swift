@@ -48,10 +48,6 @@ class FindPasswordViewController: UIViewController {
         
     }
     
-    func handleTap(sender: UITapGestureRecognizer) {
-        self.view.endEditing(true)
-    }
-    
     func textFieldDidBeginEditing(textField: UITextField){
         print("beginediting")
     }

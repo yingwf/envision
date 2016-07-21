@@ -20,13 +20,15 @@ class EditCVViewController: UIViewController,UITableViewDelegate,UITableViewData
 
     let cvHintCell = "CVhintTableViewCell"
     let cvEditCell = "CVeditTableViewCell"
-    let sectionTitle = ["真实姓名","身份证号","电子邮箱","性别","最高学历","毕业学校","专业名称","毕业年份"]
+    let sectionTitle = ["真实姓名","身份证号","电子邮箱","手机号","性别","最高学历","毕业学校","专业名称","毕业年份"]
     let genders = ["男","女"]
     let degrees = ["大专","本科","硕士","博士"]
     var valueArray = ["","","","","","","",""]
-    //    let sectionTitle = ["真实姓名","身份证号","电子邮箱","性别","最高学历","毕业学校","专业名称","毕业年份"]
+    var isRegister = false //表示是否注册时
 
     @IBOutlet weak var tableView: UITableView!
+    
+    var isModify = false //标示是修改还是新建，修改时不允许调整姓名等，新建是均可允许
     
     var delegate: RefreshUserInfoDelegate?
     
@@ -51,16 +53,10 @@ class EditCVViewController: UIViewController,UITableViewDelegate,UITableViewData
             self.graduateYear.append(String(index + 2010))
         }
         
-        //self.navigationItem.leftBarButtonItem = getBackButton(self)
         self.setBackButton()
-        
-        self.navigationController?.interactivePopGestureRecognizer!.delegate = self
-    
+            
     }
     
-//    func backToPrevious(){
-//        self.navigationController?.popViewControllerAnimated(true)
-//    }
     
     func updateInfo(indexPath: NSIndexPath, info: String?){
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! CVeditTableViewCell
@@ -75,7 +71,7 @@ class EditCVViewController: UIViewController,UITableViewDelegate,UITableViewData
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         if section == 0{
-            return 4
+            return 5
         }
         return 5
     }
@@ -99,6 +95,8 @@ class EditCVViewController: UIViewController,UITableViewDelegate,UITableViewData
                 cell.value.text = userinfo.identity
             case 3:
                 cell.value.text = userinfo.email
+            case 4:
+                cell.value.text = userinfo.mobile
             default:
                 print("default")
             }
@@ -107,7 +105,7 @@ class EditCVViewController: UIViewController,UITableViewDelegate,UITableViewData
             returnCell = cell
         }else if(indexPath.section == 1) {
             let cell = tableView.dequeueReusableCellWithIdentifier(cvEditCell, forIndexPath: indexPath) as! CVeditTableViewCell
-            cell.title.text = self.sectionTitle[indexPath.row + 3]
+            cell.title.text = self.sectionTitle[indexPath.row + 4]
             
             //初始化
             switch indexPath.row{
@@ -154,6 +152,10 @@ class EditCVViewController: UIViewController,UITableViewDelegate,UITableViewData
             if indexPath.row == 0{
                 return
             }
+//            if isModify {
+//                //修改简历时，姓名等不可更改
+//                return
+//            }
             let inputInfoViewController = self.storyboard?.instantiateViewControllerWithIdentifier("InputInfoViewController") as! InputInfoViewController
             inputInfoViewController.navigationItem.title = self.sectionTitle[indexPath.row - 1]
             inputInfoViewController.placeHolder = "请输入" + self.sectionTitle[indexPath.row - 1]
@@ -198,7 +200,7 @@ class EditCVViewController: UIViewController,UITableViewDelegate,UITableViewData
                 let sheetView = UIAlertController(title: "\n\n\n\n\n\n\n\n\n\n", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
                 
                 let width = UIScreen.mainScreen().bounds.width
-                pickerView = UIPickerView(frame: CGRectMake(0, 0, width, 200))
+                pickerView = UIPickerView(frame: CGRectMake(0, 0, width - 20, 200))
                 pickerView!.delegate = self
                 pickerView!.dataSource = self
                 let dateFormatter = NSDateFormatter()
@@ -270,16 +272,14 @@ class EditCVViewController: UIViewController,UITableViewDelegate,UITableViewData
         self.presentViewController(sheetView, animated: true, completion: nil)
     }
 
-    
-    
+
     //保存简历
     @IBAction func saveCV(sender: AnyObject) {
 
-        
         for index in 1...3{
             let indexPath = NSIndexPath(forRow: index, inSection: 0)
             let cell = self.tableView.cellForRowAtIndexPath(indexPath) as! CVeditTableViewCell
-            if cell.value.text == "" {
+            if cell.value.text == "" { // && !isModify
                 let alertView = UIAlertController(title: "提醒", message: "请输入\(self.sectionTitle[index - 1])", preferredStyle: .Alert)
                 let okAction = UIAlertAction(title: "确定", style: .Default, handler: nil)
                 alertView.addAction(okAction)
@@ -289,6 +289,7 @@ class EditCVViewController: UIViewController,UITableViewDelegate,UITableViewData
                 valueArray[index - 1] = cell.value.text!
             }
         }
+
         for index in 0...4{
             let indexPath = NSIndexPath(forRow: index, inSection: 1)
             let cell = self.tableView.cellForRowAtIndexPath(indexPath) as! CVeditTableViewCell
@@ -306,16 +307,28 @@ class EditCVViewController: UIViewController,UITableViewDelegate,UITableViewData
         let mobile = NSUserDefaults.standardUserDefaults().valueForKey("username") as! String
         
         let url = applicantUpdate
-        let param = ["mobile":mobile, "name":valueArray[0], "CertificateNumber":valueArray[1], "email":valueArray[2], "gendar":valueArray[3], "educationLevel":valueArray[4], "lastschool":valueArray[5], "lastdisciplinekind":valueArray[6], "graduationdate":valueArray[7]] as [String : AnyObject]
+        var param = ["mobile":mobile, "name":valueArray[0], "IDcard":valueArray[1], "email":valueArray[2], "gendar":valueArray[3], "educationLevel":valueArray[4], "lastschool":valueArray[5], "lastdisciplinekind":valueArray[6], "graduationdate":valueArray[7]] as [String : AnyObject]
+//        if isModify{
+//            param = ["gendar":valueArray[3], "educationLevel":valueArray[4], "lastschool":valueArray[5], "lastdisciplinekind":valueArray[6], "graduationdate":valueArray[7]]
+//        }
+        HUD.show(.RotatingImage(loadingImage))
         doRequest(url, parameters: param, encoding: .URL, praseMethod: praseSaveResult)
+
     }
     
     func praseSaveResult(json: SwiftyJSON.JSON){
+        HUD.hide()
         if json["success"].boolValue {
             let alertView = UIAlertController(title: "提醒", message: "已保存简历", preferredStyle: .Alert)
             let okAction = UIAlertAction(title: "确定", style: .Default){ (UIAlertAction) -> Void in
-                self.delegate?.refreshUserInfo()
-                self.navigationController?.popViewControllerAnimated(true)
+
+                if self.isRegister {
+                    self.navigationController?.popToRootViewControllerAnimated(true)
+                    
+                }else{
+                    self.delegate?.refreshUserInfo()
+                    self.navigationController?.popViewControllerAnimated(true)
+                }
             }
             
             //成功后保存到全局变量userinfo
@@ -332,9 +345,15 @@ class EditCVViewController: UIViewController,UITableViewDelegate,UITableViewData
             self.presentViewController(alertView, animated: false, completion: nil)
             
         }else{
-            let alertView = UIAlertController(title: "提醒", message: json["message"].string, preferredStyle: .Alert)
+            var message = "简历保存失败，请重新保存"
+            if json["message"].string != nil{
+                message = json["message"].string!
+            }
+            let alertView = UIAlertController(title: "提醒", message: message, preferredStyle: .Alert)
             let okAction = UIAlertAction(title: "确定", style: .Default, handler: nil)
             alertView.addAction(okAction)
+            self.presentViewController(alertView, animated: false, completion: nil)
+
         }
     }
 

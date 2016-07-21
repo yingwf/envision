@@ -7,11 +7,18 @@
 //
 
 import UIKit
+import SwiftyJSON
+
 
 class TimeSelectTableViewController: UITableViewController {
 
     let timeTitleTableViewCell = "TimeTitleTableViewCell"
     let timeSelectTableViewCell = "TimeSelectTableViewCell"
+    
+    var interviewInfos = [InterviewInfo]()
+    var delegate: UpdateInterviewInfoDelegate?
+    var currentRow = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -19,7 +26,29 @@ class TimeSelectTableViewController: UITableViewController {
         self.tableView.separatorStyle = .None
         self.tableView.registerNib(UINib(nibName: "TimeSelectTableViewCell", bundle: nil), forCellReuseIdentifier: timeSelectTableViewCell)
         self.tableView.registerNib(UINib(nibName: "TimeTitleTableViewCell", bundle: nil), forCellReuseIdentifier: timeTitleTableViewCell)
+        self.setBackButton()
         
+        HUD.show(.RotatingImage(loadingImage))
+        
+        let seedUrl = getInterviewInfoList
+        var parameters = ["applicantId":userinfo.beisen_id! ] as! [String: AnyObject]
+        doRequest(seedUrl, parameters: parameters, encoding: .URL, praseMethod: praseInterviewInfoList)
+    }
+    
+    func praseInterviewInfoList(json: SwiftyJSON.JSON){
+        
+        if json["success"].boolValue {
+            let interviewList = json["list"].array!
+            if interviewList.count > 0{
+                for index in 0...interviewList.count - 1{
+                    let interview = InterviewInfo()
+                    interview.getInterviewInfo(interviewList[index])
+                    self.interviewInfos.append(interview)
+                }
+            }
+            self.tableView.reloadData()
+        }
+        HUD.hide()
     }
 
     override func didReceiveMemoryWarning() {
@@ -36,7 +65,7 @@ class TimeSelectTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 4
+        return interviewInfos.count
     }
 
     
@@ -50,8 +79,22 @@ class TimeSelectTableViewController: UITableViewController {
             returnCell = cell
         }else{
             let cell = tableView.dequeueReusableCellWithIdentifier(timeSelectTableViewCell, forIndexPath: indexPath) as! TimeSelectTableViewCell
-            cell.selectButton.addTarget(self, action: "selectTimeOK:", forControlEvents: .TouchUpInside)
+            cell.selectAddress.text = interviewInfos[indexPath.row - 1].location!
+            cell.selectPeople.text = "已有\(interviewInfos[indexPath.row - 1].number!)/\(interviewInfos[indexPath.row - 1].allNumber!)人"
+            cell.selectTime.text = interviewInfos[indexPath.row - 1].getInterViewTime()
+            if interviewInfos[indexPath.row - 1].number! == interviewInfos[indexPath.row - 1].allNumber!{
+                //已满
+                cell.selectButton.enabled = false
+                cell.selectButton.backgroundColor = UIColor(red: 0xe5/255, green: 0xe5/255, blue: 0xe5/255, alpha: 1)
+
+            }else{
+                cell.selectButton.enabled = true
+                cell.selectButton.backgroundColor = SYSTEMCOLOR
+                cell.selectButton.tag = indexPath.row
+                cell.selectButton.addTarget(self, action: "selectTimeOK:", forControlEvents: .TouchUpInside)
+            }
             
+            cell.selectPeople.sizeToFit()
             
             returnCell = cell
         }
@@ -61,13 +104,45 @@ class TimeSelectTableViewController: UITableViewController {
         return returnCell
     }
     
+    
     func selectTimeOK(sender: UIButton){
-        
+        self.currentRow = sender.tag - 1
         let alertView = UIAlertController(title: "确认选择", message: "选择该时间段作为面试时间，不可更改", preferredStyle: .Alert)
-        let okAction = UIAlertAction(title: "确认", style: .Default, handler: nil)
+        let okAction = UIAlertAction(title: "确认", style: .Default){
+            (action) in
+            HUD.show(.RotatingImage(loadingImage))
+
+            
+            let seedUrl = selectInterviewTime
+            let parameters = ["applicantId":userinfo.beisen_id!,"scheduleInterviewid":self.interviewInfos[self.currentRow].id! ]
+            doRequest(seedUrl, parameters: parameters, encoding: .URL, praseMethod: self.praseSelectInterviewTime)
+            
+
+        }
+        let cancelAction = UIAlertAction(title: "取消", style: .Cancel, handler: nil)
+
         alertView.addAction(okAction)
+        alertView.addAction(cancelAction)
         self.presentViewController(alertView, animated: false, completion: nil)
         
+    }
+    
+    func praseSelectInterviewTime(json: SwiftyJSON.JSON){
+
+        if json["success"].boolValue {
+            self.delegate?.updateInterviewTime(self.interviewInfos[self.currentRow])
+            self.navigationController?.popViewControllerAnimated(true)
+        }else{
+            var message = "提交失败，请重新提交"
+            if json["message"].string != nil{
+                message = json["message"].string!
+            }
+            let alertView = UIAlertController(title: "提醒", message:message , preferredStyle: .Alert)
+            let okAction = UIAlertAction(title: "确认", style: .Default, handler: nil)
+            alertView.addAction(okAction)
+            self.presentViewController(alertView, animated: false, completion: nil)
+        }
+        HUD.hide()
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {

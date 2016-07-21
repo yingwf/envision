@@ -28,6 +28,8 @@ class TimeSelectTableViewCell: UITableViewCell {
         sepView.backgroundColor = UIColor(red: 0xe5/255, green: 0xe5/255, blue: 0xe5/255, alpha: 1)
         self.contentView.addSubview(sepView)
         
+        self.selectButton.setTitle("已满", forState: .Disabled)
+        
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

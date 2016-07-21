@@ -54,40 +54,13 @@ class HomeViewController: UITabBarController {
             }
         }
         //启动后自动登录
-        autoLogin()
+        //autoLogin()
 
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    func autoLogin(){
-        let login = NSUserDefaults.standardUserDefaults().valueForKey("login") as? Bool
-
-        if (login != nil) && login! {
-            let username = NSUserDefaults.standardUserDefaults().valueForKey("username") as? String
-            let password = NSUserDefaults.standardUserDefaults().valueForKey("password") as? String
-            
-            if username == nil || password == nil{
-                return
-            }
-            
-            let url = LOGIN
-            let deviceid = UIDevice.currentDevice().identifierForVendor?.UUIDString
-            let param = ["mobile": username! , "password":password! , "deviceId":deviceid!, "phoneType":2 ] as [String : AnyObject]
-            doRequest(url, parameters: param, encoding:.URL, praseMethod: praseLogin)
-        }
-    }
-    
-    
-    func praseLogin(json: SwiftyJSON.JSON){
-        if json["success"].boolValue {
-            userinfo.getUserInfo(json)
-            
-            myTableViewController.updateUserInfo()
-        }
     }
 
 }

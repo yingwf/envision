@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1713" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1808" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -11,7 +12,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="115"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="115"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="114.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bNh-2D-dmk">
@@ -94,8 +95,15 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="applyStatus" translatesAutoresizingMaskIntoConstraints="NO" id="WZm-5e-RJS">
                         <rect key="frame" x="17" y="15" width="15" height="15"/>
                         <constraints>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="15" id="L5b-pn-hz0"/>
+                            <constraint firstAttribute="height" constant="15" id="TES-RY-zi7"/>
                             <constraint firstAttribute="width" constant="15" id="Wdf-l6-14N"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="L5b-pn-hz0"/>
+                            </mask>
+                        </variation>
                     </imageView>
                 </subviews>
                 <color key="backgroundColor" red="0.94117647059999998" green="0.98431372549999996" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -116,6 +124,11 @@
                     <constraint firstAttribute="bottomMargin" secondItem="bNh-2D-dmk" secondAttribute="bottom" constant="-8.5" id="uBT-qt-qW1"/>
                     <constraint firstItem="KkK-gA-1D0" firstAttribute="leading" secondItem="XNQ-BI-vKV" secondAttribute="trailing" constant="23" id="zXR-dS-3vP"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="35L-b1-d9B"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="bgView" destination="KkK-gA-1D0" id="VB9-qW-sNe"/>

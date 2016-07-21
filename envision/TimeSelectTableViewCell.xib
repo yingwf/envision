@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1713" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1808" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -11,10 +12,10 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="66"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="66"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="65.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2015-05-16 | 9：00-10:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sgd-OC-oye">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="2015-05-16 | 9：00-10:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sgd-OC-oye">
                         <rect key="frame" x="24" y="11" width="233" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.0" green="0.65098039220000004" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -28,6 +29,11 @@
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <color key="textColor" red="1" green="0.71372549019607845" blue="0.070588235294117646" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="uhK-Xv-XFz"/>
+                            </mask>
+                        </variation>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="地址：上海市 长宁区 中山西路1055 A座15层" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ozv-bh-4HD">
                         <rect key="frame" x="24" y="36" width="264" height="21"/>
@@ -63,7 +69,7 @@
                     <constraint firstItem="KFv-oc-0yN" firstAttribute="leading" secondItem="Sgd-OC-oye" secondAttribute="trailing" constant="42" id="cNJ-jT-QYf"/>
                     <constraint firstItem="ZOe-YW-l1j" firstAttribute="top" secondItem="Sgd-OC-oye" secondAttribute="top" id="gYD-eb-61K"/>
                     <constraint firstItem="cHK-KJ-dH2" firstAttribute="bottom" secondItem="Ozv-bh-4HD" secondAttribute="bottom" id="h0U-sC-H44"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="ZOe-YW-l1j" secondAttribute="trailing" constant="7" id="j6G-We-6lO"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="ZOe-YW-l1j" secondAttribute="trailing" constant="8" id="j6G-We-6lO"/>
                     <constraint firstItem="KFv-oc-0yN" firstAttribute="centerY" secondItem="ZOe-YW-l1j" secondAttribute="centerY" id="oCD-gj-OUL"/>
                     <constraint firstItem="Sgd-OC-oye" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="3" id="ps1-RU-e99"/>
                     <constraint firstItem="cHK-KJ-dH2" firstAttribute="leading" secondItem="Ozv-bh-4HD" secondAttribute="trailing" constant="9" id="pvT-xH-qql"/>
@@ -72,6 +78,11 @@
                     <constraint firstItem="Ozv-bh-4HD" firstAttribute="centerY" secondItem="cHK-KJ-dH2" secondAttribute="centerY" id="wwL-oh-bay"/>
                     <constraint firstItem="cHK-KJ-dH2" firstAttribute="top" secondItem="ZOe-YW-l1j" secondAttribute="bottom" constant="3" id="xy7-8D-3aZ"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="cNJ-jT-QYf"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="selectAddress" destination="Ozv-bh-4HD" id="8F4-FX-l4p"/>

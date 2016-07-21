@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import SwiftyJSON
+
 
 class EndInterviewTableViewController: UITableViewController {
 
     let evaluateTableViewCell = "EvaluateTableViewCell"
     let resultTableViewCell = "ResultTableViewCell"
     let titleArray = ["您今日的战绩如下","请为今日面试安排做出评价","其他改进建议"]
+    let interviewProgress = InterviewProgress()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +25,30 @@ class EndInterviewTableViewController: UITableViewController {
         self.tableView.registerNib(UINib(nibName: "EvaluateTableViewCell", bundle: nil), forCellReuseIdentifier: evaluateTableViewCell)
         self.tableView.registerNib(UINib(nibName: "ResultTableViewCell", bundle: nil), forCellReuseIdentifier: resultTableViewCell)
 
+        self.setBackButton()
         
+        let tap = UITapGestureRecognizer(target: self, action: "handleTap:")
+        tap.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tap)
+        
+        let seedUrl = endOneInterview
+        var parameters = ["interviewinfov2id":INTERVIEWID!, "employeeId":userinfo.employeeid!] as! [String: AnyObject]
+        doRequest(seedUrl, parameters: parameters, encoding: .URL, praseMethod: praseOneInterview)
+        
+    }
+    
+    func praseOneInterview(json: SwiftyJSON.JSON){
+        
+        if json["success"].boolValue {
+            interviewProgress.getInfo(json)
+        }
+        if let cell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)){
+            let resultCell = cell as! ResultTableViewCell
+            resultCell.interviewedApplicant.text = String(interviewProgress.interviewedApplicant)
+            resultCell.passedApplicant.text = String(interviewProgress.passedApplicant)
+            resultCell.passedRate.text = interviewProgress.passedRate
+        }
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -113,50 +139,50 @@ class EndInterviewTableViewController: UITableViewController {
         return sectionView
         
     }
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    
+    
+    @IBAction func endInterview(sender: AnyObject) {
+        
+        var indexPath = NSIndexPath(forRow: 0, inSection: 1)
+        var cell = self.tableView.cellForRowAtIndexPath(indexPath) as! EvaluateTableViewCell
+        let stars = cell.getResult()
+        
+        indexPath = NSIndexPath(forRow: 0, inSection: 2)
+        let adviceCell = self.tableView.cellForRowAtIndexPath(indexPath)
+        let textField = adviceCell!.subviews.last as! UITextView
+        var advice = textField.text
+        if advice == nil{
+            advice = ""
+        }
+        
+        HUD.show(.RotatingImage(loadingImage))
+        
+        let seedUrl = interviewerEndInterview
+        var parameters = ["interviewinfov2id":INTERVIEWID!, "employeeId":userinfo.employeeid!, "thought1":stars[0], "thought2":stars[1], "thought3":stars[2], "thought4":stars[3], "others": advice] as! [String: AnyObject]
+        doRequest(seedUrl, parameters: parameters, encoding: .URL, praseMethod: praseEndInterview)
+        
+        
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+    
+    func praseEndInterview(json: SwiftyJSON.JSON){
+        
+        if json["success"].boolValue {
+            let alertView = UIAlertController(title: "提醒", message: "提交评价结果成功", preferredStyle: .Alert)
+            let okAction = UIAlertAction(title: "确定", style: .Default){ (UIAlertAction) -> Void in
+                self.navigationController?.popToRootViewControllerAnimated(true)
+            }
+            alertView.addAction(okAction)
+            self.presentViewController(alertView, animated: true, completion: nil)
+            
+        }
+        else{
+            let alertView = UIAlertController(title: "提醒", message: "提交失败，请重新提交", preferredStyle: .Alert)
+            let okAction = UIAlertAction(title: "确定", style: .Default, handler: nil)
+            alertView.addAction(okAction)
+            self.presentViewController(alertView, animated: true, completion: nil)
+        }
+        HUD.hide()
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
 
 }

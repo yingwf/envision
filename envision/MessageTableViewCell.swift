@@ -1,30 +1,28 @@
 //
-//  HeaderTableViewCell.swift
+//  MessageTableViewCell.swift
 //  envision
 //
-//  Created by  ywf on 16/5/31.
+//  Created by  ywf on 16/7/12.
 //  Copyright © 2016年 yingwf. All rights reserved.
 //
 
 import UIKit
 
-class HeaderTableViewCell: UITableViewCell {
+class MessageTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var headImage: UIImageView!
+    @IBOutlet weak var title: UILabel!
     
-    @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var content: UILabel!
     
-    @IBOutlet weak var dreamerID: UILabel!
-        
-    @IBOutlet weak var toLogin: UILabel!
+    @IBOutlet weak var redDot: UIView!
     
+    @IBOutlet weak var sendTime: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        
-        self.headImage.layer.masksToBounds = true
-        self.headImage.layer.cornerRadius = 30
+        self.redDot.layer.cornerRadius = 2.5
+        self.redDot.layer.masksToBounds = true
         
     }
 

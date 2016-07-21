@@ -20,7 +20,7 @@ static const float kLineMaxY = 385;
 static const float kReaderViewWidth = 200;
 static const float kReaderViewHeight = 200;
 
-@interface SYQRCodeViewController () <AVCaptureMetadataOutputObjectsDelegate>
+@interface SYQRCodeViewController () <AVCaptureMetadataOutputObjectsDelegate,UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) AVCaptureSession *qrSession;//回话
 @property (nonatomic, strong) AVCaptureVideoPreviewLayer *qrVideoPreviewLayer;//读取
@@ -95,7 +95,27 @@ static const float kReaderViewHeight = 200;
 //    [btn setImage:[UIImage imageNamed:@"bar_back"] forState:UIControlStateNormal];
 //    [btn addTarget:self action:@selector(cancleSYQRCodeReading) forControlEvents:UIControlEventTouchUpInside];
 //    [self.view addSubview:btn];
+
+    
+    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [backButton setFrame:CGRectMake(0, 0, 60, 30)];
+    UIImage *image = [UIImage imageNamed:@"back"];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(-8, 5,14,22)];
+    [imageView setImage:image];
+    [backButton addSubview:imageView];
+    [backButton addTarget:self action:@selector(backToPrevious) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc ] initWithCustomView:backButton];
+    backItem.tintColor = [UIColor whiteColor];
+    
+    self.navigationItem.leftBarButtonItem = backItem;
+    self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    
 }
+
+- (void)backToPrevious{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 
 - (void)initUI
 {

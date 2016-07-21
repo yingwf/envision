@@ -23,22 +23,60 @@ class InputInfoViewController: UIViewController {
         
         infoText.placeholder = placeHolder
         infoText.text = self.originValue
+        infoText.becomeFirstResponder()
+        
 
-        //self.navigationItem.leftBarButtonItem = getBackButton(self)
         self.setBackButton()
-
-        self.navigationController?.interactivePopGestureRecognizer!.delegate = self
         
+        let tap = UITapGestureRecognizer(target: self, action: "handleTap:")
+        tap.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tap)
         
-        // Do any additional setup after loading the view.
     }
-    
-//    func backToPrevious(){
-//        self.navigationController?.popViewControllerAnimated(true)
-//    }
-    
 
     @IBAction func update(sender: AnyObject) {
+        
+        //验证格式
+        if  !infoText.text!.isEmpty{
+            if let title = self.navigationItem.title {
+                switch(title){
+                case "身份证号":
+                    if !regularTest(infoText.text!, type: .idCard){
+                        let alertView = UIAlertController(title: "提醒", message: "身份证号格式不正确", preferredStyle: .Alert)
+                        let okAction = UIAlertAction(title: "确定", style: .Default, handler: nil)
+                        alertView.addAction(okAction)
+                        self.presentViewController(alertView, animated: false, completion: nil)
+                        //HUD.flash(.LabeledError(title: "身份证号格式不正确", subtitle: ""), delay: 2.0)
+                        return
+                    }
+                case "电子邮箱":
+                    if !regularTest(infoText.text!, type: .email){
+                        let alertView = UIAlertController(title: "提醒", message: "电子邮箱格式不正确", preferredStyle: .Alert)
+                        let okAction = UIAlertAction(title: "确定", style: .Default, handler: nil)
+                        alertView.addAction(okAction)
+                        self.presentViewController(alertView, animated: false, completion: nil)
+                        //HUD.flash(.LabeledError(title: "电子邮箱格式不正确", subtitle: ""), delay: 2.0)
+                        return
+                    }
+                case "手机号":
+                    if !regularTest(infoText.text!, type: .telephone){
+                        let alertView = UIAlertController(title: "提醒", message: "手机号格式不正确", preferredStyle: .Alert)
+                        let okAction = UIAlertAction(title: "确定", style: .Default, handler: nil)
+                        alertView.addAction(okAction)
+                        self.presentViewController(alertView, animated: false, completion: nil)
+                        //HUD.flash(.LabeledError(title: "手机号格式不正确", subtitle: ""), delay: 2.0)
+                        return
+                    }
+                default:
+                    print("default")
+                }
+            }
+            
+        }
+
+
+        
+        
         self.delegate?.updateInfo(indexPath, info: infoText.text)
         self.navigationController?.popViewControllerAnimated(true)
     }

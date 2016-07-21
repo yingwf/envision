@@ -13,11 +13,11 @@ class MyTableViewController: UITableViewController {
     @IBOutlet weak var logoutButton: UIButton!
     
     let studentIcon = ["center1","center2","center3","center4","center5"]
-    let interviewIcon = ["center1","center2","center3","center4"]
+    let interviewIcon = ["ic_icon","ic_icon1","ic_icon2","ic_icon3","ic_icon4"]
 
     let defaultTitle = ["联系我们"]
     let studentTitle = ["我的应聘","收藏职位","我的简历","我的消息","联系我们"]
-    let interviewTitle = ["校园行程","我的面试","校招工作组","帮助中心"]
+    let interviewTitle = ["校园行程","我的面试","我的报表","校招工作组","帮助中心"]
     
     let headerCell = "HeaderTableViewCell"
     let centerCell = "CenterTableViewCell"
@@ -46,9 +46,7 @@ class MyTableViewController: UITableViewController {
     
     func updateUserInfo(){
         self.userType = userinfo.type
-        
-        //let indexPath = NSIndexPath(forRow: 0, inSection: 0)
-        self.tableView.reloadData()// ([indexPath], withRowAnimation: .None)
+        self.tableView.reloadData()
         
     }
 
@@ -60,7 +58,7 @@ class MyTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        var numberOfSection = 2
+        var numberOfSection = 6
         if userType == nil{
             return numberOfSection
         }
@@ -70,17 +68,16 @@ class MyTableViewController: UITableViewController {
         case 2: //老师
             numberOfSection = 6
         case 3: //面试官
-            numberOfSection = 5
+            numberOfSection = 6
         default:
-            numberOfSection = 2
+            numberOfSection = 6
         }
         return numberOfSection
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if userType == nil{
-            return 1
-        }else if userType == 1 || userType == 2{
+        
+        if userType == 1 || userType == 2 || userType == nil{
              //学生、老师
             if section == 5{
                 return 2
@@ -95,80 +92,97 @@ class MyTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var returnCell = UITableViewCell()
-        if indexPath.section == 0 {
-            
-            
-            //判断是否已登录
-            if self.userType != nil{
+        
+        if self.userType == nil{
+            //未登录
+            switch(indexPath.section){
+            case 0:
                 let cell = tableView.dequeueReusableCellWithIdentifier(headerCell, forIndexPath: indexPath) as! HeaderTableViewCell
+                
+                logoutButton.hidden = true
+                
+                cell.name.hidden = true
+                cell.dreamerID.hidden = true
+                cell.toLogin.hidden = false
+                
+                cell.accessoryType = .None
+                cell.selectionStyle = .Default
+                returnCell = cell
+            case 1...4:
+                let cell = tableView.dequeueReusableCellWithIdentifier(centerCell, forIndexPath: indexPath) as! CenterTableViewCell
+                cell.centerImage.image = UIImage(named: self.studentIcon[indexPath.section - 1])
+                cell.centerTitle.text = self.studentTitle[indexPath.section - 1]
+                cell.accessoryType = .DisclosureIndicator
+                returnCell = cell
+            case 5:
+                if indexPath.row == 0 {
+                    let cell = tableView.dequeueReusableCellWithIdentifier(centerCell, forIndexPath: indexPath) as! CenterTableViewCell
+                    cell.centerImage.image = UIImage(named: self.studentIcon[indexPath.section - 1])
+                    cell.centerTitle.text = self.studentTitle[indexPath.section - 1]
+                    cell.accessoryType = .None
+                    cell.selectionStyle = .None
+                    returnCell = cell
+                }else if indexPath.row == 1{
+                    let cell = tableView.dequeueReusableCellWithIdentifier(contactCell, forIndexPath: indexPath) as! ContactTableViewCell
+                    cell.selectionStyle = .None
+                    returnCell = cell
+                }
+                
+            default:
+                print("default")
+            }
 
+        }else{
+            switch(self.userType!, indexPath.section){
+            case(1...3, 0):
+                let cell = tableView.dequeueReusableCellWithIdentifier(headerCell, forIndexPath: indexPath) as! HeaderTableViewCell
+                
                 logoutButton.hidden = false
                 
                 cell.name.hidden = false
-                cell.idLabel.hidden = false
                 cell.dreamerID.hidden = false
                 cell.toLogin.hidden = true
                 
                 cell.headImage.imageFromUrl(userinfo.image)
                 cell.name.text = userinfo.name
-                cell.dreamerID.text = String(userinfo.beisen_id!)
-                returnCell = cell
-            }else{
                 
-                returnCell.accessoryType = .None
-                returnCell.selectionStyle = .None
-            }
-            
-        }else if indexPath.section >= 1 && indexPath.section <= 4 {
-            if self.userType == 1 || self.userType == 2{
+                if self.userType == 1 || self.userType == 2{
+                    cell.dreamerID.text = "偏执狂ID：\(userinfo.beisen_id!)"
+                }else{
+                    cell.dreamerID.text = "Email：\(userinfo.email!)"
+                }
+                cell.selectionStyle = .None
+                returnCell = cell
+            case(1...2, 1...4):
                 //学生、老师
                 let cell = tableView.dequeueReusableCellWithIdentifier(centerCell, forIndexPath: indexPath) as! CenterTableViewCell
                 cell.centerImage.image = UIImage(named: self.studentIcon[indexPath.section - 1])
                 cell.centerTitle.text = self.studentTitle[indexPath.section - 1]
                 cell.accessoryType = .DisclosureIndicator
                 returnCell = cell
-            }else if self.userType == 3{
+            case(3, 1...5):
                 //面试官
                 let cell = tableView.dequeueReusableCellWithIdentifier(centerCell, forIndexPath: indexPath) as! CenterTableViewCell
                 cell.centerImage.image = UIImage(named: self.interviewIcon[indexPath.section - 1])
                 cell.centerTitle.text = self.interviewTitle[indexPath.section - 1]
                 cell.accessoryType = .DisclosureIndicator
                 returnCell = cell
-            }else{
-                //未登录
-                if indexPath.section == 1 {
-                    
-                    let cell = tableView.dequeueReusableCellWithIdentifier(headerCell, forIndexPath: indexPath) as! HeaderTableViewCell
-                    
-                    logoutButton.hidden = true
-                    
-                    cell.name.hidden = true
-                    cell.idLabel.hidden = true
-                    cell.dreamerID.hidden = true
-                    cell.toLogin.hidden = false
-                    
+            case(1...2, 5):
+                if indexPath.row == 0 {
+                    let cell = tableView.dequeueReusableCellWithIdentifier(centerCell, forIndexPath: indexPath) as! CenterTableViewCell
+                    cell.centerImage.image = UIImage(named: self.studentIcon[indexPath.section - 1])
+                    cell.centerTitle.text = self.studentTitle[indexPath.section - 1]
                     cell.accessoryType = .None
                     cell.selectionStyle = .None
                     returnCell = cell
+                }else if indexPath.row == 1{
+                    let cell = tableView.dequeueReusableCellWithIdentifier(contactCell, forIndexPath: indexPath) as! ContactTableViewCell
+                    cell.selectionStyle = .None
+                    returnCell = cell
                 }
-                
-                
+            default:
+                print("default")
             }
-
-        }else if indexPath.section == 5{
-            if indexPath.row == 0 {
-                let cell = tableView.dequeueReusableCellWithIdentifier(centerCell, forIndexPath: indexPath) as! CenterTableViewCell
-                cell.centerImage.image = UIImage(named: self.studentIcon[indexPath.section - 1])
-                cell.centerTitle.text = self.studentTitle[indexPath.section - 1]
-                cell.accessoryType = .None
-                cell.selectionStyle = .None
-                returnCell = cell
-            }else if indexPath.row == 1{
-                let cell = tableView.dequeueReusableCellWithIdentifier(contactCell, forIndexPath: indexPath) as! ContactTableViewCell
-                cell.selectionStyle = .None
-                returnCell = cell
-            }
-            
         }
         
         return returnCell
@@ -177,26 +191,21 @@ class MyTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         var rowHeight:CGFloat = 0
         
-        if userType == 1 || userType == 2 || userType == 3{
-            if indexPath.section == 0 {
-                rowHeight = 85
-            }else if indexPath.section >= 1 && indexPath.section <= 4 {
+        if indexPath.section == 0 {
+            rowHeight = 85
+        }else if indexPath.section >= 1 && indexPath.section <= 4 {
+            rowHeight = 44
+        }else if indexPath.section == 5{
+            if self.userType == 3{
+                //面试官
                 rowHeight = 44
-            }else if indexPath.section == 5{
+            }else{
+                //学生，老师，或未登录
                 if indexPath.row == 0 {
                     rowHeight = 44
                 }else if indexPath.row == 1{
                     rowHeight = 60
                 }
-            }
-        }else{
-            if indexPath.section == 0 {
-                //未登录，居中
-                let height = self.view.frame.height
-                rowHeight = height/2 - 99
-            }else if indexPath.section == 1{
-                rowHeight = 85
-
             }
         }
         
@@ -208,7 +217,7 @@ class MyTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView?{
-        if (section == 5)  { //|| (userType == nil && section == 1)
+        if (userType != 3 && section == 5)  {
             let width = UIScreen.mainScreen().bounds.width
             let sectionView = UIView(frame: CGRect(x: 0, y: 0, width: width, height: 10))
             sectionView.backgroundColor = UIColor.clearColor()
@@ -225,22 +234,22 @@ class MyTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        if userType == 2{
+        if userType == 1 || userType == 2{
             switch indexPath.section {
-            case 0:
-                let loginViewController = self.storyboard?.instantiateViewControllerWithIdentifier("LoginViewController") as! LoginViewController
-                
-                self.navigationController?.pushViewController(loginViewController, animated: true)
+//            case 0:
+//                let loginViewController = self.storyboard?.instantiateViewControllerWithIdentifier("LoginViewController") as! LoginViewController
+//                
+//                self.navigationController?.pushViewController(loginViewController, animated: true)
             case 1:
                 //我的应聘
-                let myApplyTableViewController = self.storyboard?.instantiateViewControllerWithIdentifier("MyApplyTableViewController") as! MyApplyTableViewController
+                myApplyTableViewController = self.storyboard?.instantiateViewControllerWithIdentifier("MyApplyTableViewController") as? MyApplyTableViewController
                 
-                self.navigationController?.pushViewController(myApplyTableViewController, animated: true)
+                self.navigationController?.pushViewController(myApplyTableViewController!, animated: true)
             case 2:
                 //收藏职位
-                let cvViewController = self.storyboard?.instantiateViewControllerWithIdentifier("MyCVViewController") as! MyCVViewController
+                let collectedJobsViewController = self.storyboard?.instantiateViewControllerWithIdentifier("CollectedJobsViewController") as! CollectedJobsViewController
                 
-                self.navigationController?.pushViewController(cvViewController, animated: true)
+                self.navigationController?.pushViewController(collectedJobsViewController, animated: true)
                 
             case 3:
                 let cvViewController = self.storyboard?.instantiateViewControllerWithIdentifier("MyCVViewController") as! MyCVViewController
@@ -248,11 +257,13 @@ class MyTableViewController: UITableViewController {
                 self.navigationController?.pushViewController(cvViewController, animated: true)
             case 4:
                 //我的消息
-                let introViewController  = self.storyboard?.instantiateViewControllerWithIdentifier("WebViewController") as! WebViewController
-                introViewController.webSite = mymessage
-                introViewController.navigationItem.title = "我的消息"
-                self.navigationController?.pushViewController(introViewController, animated: true)
+//                let introViewController  = self.storyboard?.instantiateViewControllerWithIdentifier("WebViewController") as! WebViewController
+//                introViewController.webSite = mymessage
+//                introViewController.navigationItem.title = "我的消息"
+//                self.navigationController?.pushViewController(introViewController, animated: true)
                 
+                let messageTableViewController  = self.storyboard?.instantiateViewControllerWithIdentifier("MessageTableViewController") as! MessageTableViewController
+                self.navigationController?.pushViewController(messageTableViewController, animated: true)
             default:
                 print("default")
 
@@ -260,25 +271,47 @@ class MyTableViewController: UITableViewController {
             
             
         }else if userType == 3{
-            if indexPath.section == 0{
-                let loginViewController = self.storyboard?.instantiateViewControllerWithIdentifier("LoginViewController") as! LoginViewController
-                
-                self.navigationController?.pushViewController(loginViewController, animated: true)
-            }else if indexPath.section == 2{
+            switch indexPath.section{
+//            case 0:
+//                let loginViewController = self.storyboard?.instantiateViewControllerWithIdentifier("LoginViewController") as! LoginViewController
+//                
+//                self.navigationController?.pushViewController(loginViewController, animated: true)
+            case 2:
                 let interViewTableViewController = self.storyboard?.instantiateViewControllerWithIdentifier("InterViewTableViewController") as! InterViewTableViewController
                 
                 self.navigationController?.pushViewController(interViewTableViewController, animated: true)
+            case 4:
+                
+                let introViewController  = self.storyboard?.instantiateViewControllerWithIdentifier("WebViewController") as! WebViewController
+                introViewController.webSite = workingGroup
+                introViewController.navigationItem.title = "校招工作组"
+                self.navigationController?.pushViewController(introViewController, animated: true)
+                
+            case 5:
+                let introViewController  = self.storyboard?.instantiateViewControllerWithIdentifier("WebViewController") as! WebViewController
+                introViewController.webSite = helpUrl
+                introViewController.navigationItem.title = "帮助中心"
+                self.navigationController?.pushViewController(introViewController, animated: true)
+                
+            default:
+                print("default")
             }
-            
             
         }else {
             //未登录
-            if indexPath.section == 1{
+            switch indexPath.section{
+            case 0...4:
                 let loginViewController = self.storyboard?.instantiateViewControllerWithIdentifier("LoginViewController") as! LoginViewController
                 
                 self.navigationController?.pushViewController(loginViewController, animated: true)
+            default:
+                print("default")
+                
             }
+
         }
+        
+        self.tableView.deselectRowAtIndexPath(indexPath, animated: false)
 
     }
     
@@ -289,50 +322,4 @@ class MyTableViewController: UITableViewController {
         self.updateUserInfo()
 
     }
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

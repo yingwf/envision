@@ -19,6 +19,10 @@ class PositionListTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        let width = UIScreen.mainScreen().bounds.width
+        let sepView = UIView(frame: CGRect(x: 16, y: 72.5, width: width - 16, height: 0.5))
+        sepView.backgroundColor = SEPERATORCOLOR
+        self.contentView.addSubview(sepView)
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

@@ -22,6 +22,8 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.nameTextField.placeholder = "请输入账户名称"
+        
         let width = self.view.frame.width
         let sepeView = UIView(frame: CGRect(x: 0, y: 0, width: width, height: 0.5))
         sepeView.backgroundColor = UIColor(red: 0, green: 0xa6/255, blue: 0xdb/255, alpha: 0.22)
@@ -55,7 +57,12 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         
         nameTextField.text = NSUserDefaults.standardUserDefaults().valueForKey("username") as? String
         pwdTextField.text = NSUserDefaults.standardUserDefaults().valueForKey("password") as? String
+        
+        self.setBackButton()
     
+        let tap = UITapGestureRecognizer(target: self, action: "handleTap:")
+        tap.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tap)
     
     }
     
@@ -78,7 +85,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
     
     @IBAction func loginAction(sender: AnyObject) {
         if nameTextField.text!.isEmpty {
-            let alertView = UIAlertController(title: "提醒", message: "请输入账户", preferredStyle: .Alert)
+            let alertView = UIAlertController(title: "提醒", message: "请输入账户名称", preferredStyle: .Alert)
             let okAction = UIAlertAction(title: "确定", style: .Default, handler: nil)
             alertView.addAction(okAction)
             self.presentViewController(alertView, animated: true, completion: nil)
@@ -93,8 +100,10 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         }
         HUD.show(.RotatingImage(loadingImage))
         let url = LOGIN
-        let deviceid = UIDevice.currentDevice().identifierForVendor?.UUIDString
-        let param = ["id":nameTextField.text! ,"mobile": nameTextField.text! , "password":pwdTextField.text!, "deviceId":deviceid!, "phoneType":2 ] as [String : AnyObject]
+        var param = ["id":nameTextField.text!, "password":pwdTextField.text!, "phoneType":2 ] as [String : AnyObject]
+        if deviceId != nil {
+            param["deviceId"] = deviceId!
+        }
         doRequest(url, parameters: param, encoding:.URL, praseMethod: praseLogin)
     }
     
@@ -104,15 +113,31 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
 
         if json["success"].boolValue {
             userinfo.getUserInfo(json)
-            myTableViewController.updateUserInfo()
-
+            userinfo.jobId = json["jobId"].int
+            
             NSUserDefaults.standardUserDefaults().setObject(true, forKey: "login")//标识自动登录
             NSUserDefaults.standardUserDefaults().setObject(nameTextField.text!, forKey: "username")
             NSUserDefaults.standardUserDefaults().setObject(pwdTextField.text!, forKey: "password")
+            
+            
+            if userinfo.name == "" || userinfo.name == nil{
+                //未填写微简历时，需首先弹出微简历填写页面
+                let editCVViewController = self.storyboard?.instantiateViewControllerWithIdentifier("EditCVViewController") as! EditCVViewController
+                
+                self.navigationController?.pushViewController(editCVViewController, animated: true)
+                
+            }else{
+                myTableViewController?.updateUserInfo()
+                
+                self.navigationController?.popViewControllerAnimated(true)
+            }
 
-            self.navigationController?.popViewControllerAnimated(true)
         }else{
-            let alertView = UIAlertController(title: "提醒", message: json["message"].string, preferredStyle: .Alert)
+            var message = "登录失败，请重新登录"
+            if json["message"].string != nil{
+                message = json["message"].string!
+            }
+            let alertView = UIAlertController(title: "提醒", message: message, preferredStyle: .Alert)
             let okAction = UIAlertAction(title: "确定", style: .Default, handler: nil)
             alertView.addAction(okAction)
             self.presentViewController(alertView, animated: true, completion: nil)
