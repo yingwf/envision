@@ -16,11 +16,14 @@ let SEPERATORCOLOR  = UIColor(red: 0xe5/255, green: 0xe5/255, blue: 0xe5/255, al
 var userinfo = UserInfo()
 var myTableViewController: MyTableViewController?
 var myApplyTableViewController: MyApplyTableViewController?
+var homeViewController: HomeViewController?
 let loadingImage = UIImage(named: "loadingLogo")
 var deviceId: String? //apns token
 var isFromMyInterview = false //标示是否从“我的应聘”页面进入选择职位
-var INTERVIEWID: Int? //当前面试任务id
+var INTERVIEWID: Int64? //当前面试任务id
 var roomInfo: RoomInfo? //当前面试官房间信息
+var BADGE = 0
+var LAUNCH = false //标识未运行时，点击远程通知栏启动app，此时，app启动后直接打开我的应聘页面
 
 //种子信息
 class SeedInfo {
@@ -39,14 +42,14 @@ class SeedInfo {
 
 
 class CvInfo {
-    var applicantId: Int?
+    var applicantId: String?
     var name: String?
     var img: String?
     var lastschool: String?
     var ElinkUrl: String?
     
     func getCvInfo(json: SwiftyJSON.JSON){
-        self.applicantId = json["applicantId"].int
+        self.applicantId = json["applicantId"].string
         self.name = json["name"].string
         self.img = json["img"].string
         self.lastschool = json["lastschool"].string
@@ -77,9 +80,12 @@ class UserInfo {
     var beisen_id : Int?
     var employeeid: Int?
     var jobId: Int?
+    var count: Int?
     
     func getUserInfo(json: SwiftyJSON.JSON){
-        let applicant = json["userinfo"].dictionary!
+        guard let applicant = json["userinfo"].dictionary else {
+            return
+        }
         self.id = applicant["id"]?.int
         self.gender = applicant["gender"]?.string
         self.lastApplyDate = applicant["lastApplyDate"]?.string
@@ -115,7 +121,7 @@ class Job {
     var jobid: Int?
     var address: String?
     var MBYZ: String?
-    var MBRQ: String?
+    var MXRQ: String?
     var jobTitle: String?
     var kind: String?
     var Duty: String?
@@ -126,6 +132,7 @@ class Job {
         self.jobid = json["jobid"].int
         self.address = json["address"].string
         self.MBYZ = json["MBYZ"].string
+        self.MXRQ = json["MXRQ"].string
         self.jobTitle = json["jobTitle"].string
         self.kind = json["kind"].string
         self.Duty = json["Duty"].string
@@ -174,10 +181,15 @@ class InterviewInfo {
         self.number = json["number"].string
         self.allNumber = json["allnumber"].string
     }
-    func getInterViewTime() -> String{
+    func getInterViewTime() -> String {
         var interviewTime = ""
+        if self.startTime != nil {
+            interviewTime = self.startTime!
+        }
         if self.startTime != nil && self.endTime != nil {
-            interviewTime = getDateFromString(self.startTime!)! + " | " + getTimeFromString(self.startTime!)! + "-" + getTimeFromString(self.endTime!)!
+            if let startDate = getDateFromString(self.startTime!), startTime = getTimeFromString(self.startTime!), endTime = getTimeFromString(self.endTime!) {
+                interviewTime = startDate + " | " + startTime + "-" + endTime
+            }
         }
 
         return interviewTime
@@ -199,22 +211,27 @@ class LineInfo {
 }
 
 class MyInterView {
-    var interviewId: Int?
+    var interviewId: Int64?
     var duration: Int?
     var location: String?
     var job: String?
     var time: String?
     var date: String?
     var personAmount: Int?
+    var session: Int?
     
     func getMyInterView(json: SwiftyJSON.JSON){
-        self.interviewId = json["interviewId"].int
+//        if let  interviewId = json["interviewId"].int{
+//            self.interviewId = "\(interviewId)"
+//        }
+        self.interviewId = json["interviewId"].int64
         self.duration = json["Duration"].int
         self.location = json["interviewLocName"].string
         self.job = json["job"].string
         self.time = json["time"].string
         self.date = json["interviewDate"].string
         self.personAmount = json["PersonAmount"].int
+        self.session = json["session"].int
     }
 }
 
@@ -280,6 +297,11 @@ class InterviewProgress {
     var passedRate: String?
     var totalPassedRate: String?
     
+    var thought1: Int?
+    var thought2: Int?
+    var thought3: Int?
+    var thought4: Int?
+    var others: String?
     
     func getInfo(json: SwiftyJSON.JSON){
         self.applicantId = json["applicantId"].int
@@ -289,6 +311,13 @@ class InterviewProgress {
         self.passedApplicant = json["passedApplicant"].int
         self.passedRate = json["passedRate"].string
         self.totalPassedRate = json["totalPassedRate"].string
+        
+        self.thought1 = json["thought1"].int
+        self.thought2 = json["thought2"].int
+        self.thought3 = json["thought3"].int
+        self.thought4 = json["thoughtOverAll"].int
+        self.others = json["others"].string
+
     }
 }
 

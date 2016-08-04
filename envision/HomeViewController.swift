@@ -21,7 +21,8 @@ class HomeViewController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        homeViewController = self
         
         self.viewControllers = []
         for i in 0 ... tabDefaultController.count - 1{
@@ -40,7 +41,7 @@ class HomeViewController: UITabBarController {
                 var image:UIImage = UIImage(named: tabDefaultImageArray[i])!
                 var selectedimage:UIImage = UIImage(named: tabSelectedImageArray[i])!
                 let item = items[i]
-                item.title=titleArray[i]
+                item.title = titleArray[i]
                 item.setTitleTextAttributes([NSForegroundColorAttributeName :
                     UIColor(red: 0x90/255, green: 0x90/255, blue: 0x90/255, alpha: 0.44)], forState: UIControlState.Normal)
                 item.setTitleTextAttributes([NSForegroundColorAttributeName : UIColor(red: 0x00/255, green: 0xa6/255, blue: 0xdb/255, alpha: 1)], forState: UIControlState.Selected)
@@ -53,9 +54,7 @@ class HomeViewController: UITabBarController {
                 
             }
         }
-        //启动后自动登录
-        //autoLogin()
-
+        
     }
 
     override func didReceiveMemoryWarning() {

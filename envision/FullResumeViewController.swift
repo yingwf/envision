@@ -8,9 +8,12 @@
 
 import UIKit
 import WebKit
+import SwiftyJSON
+
 
 class FullResumeViewController: UIViewController,WKNavigationDelegate,WKUIDelegate,WKScriptMessageHandler {
 
+    @IBOutlet weak var editBtn: UIButton!
     
     var webSite: String = ""
     
@@ -45,6 +48,13 @@ class FullResumeViewController: UIViewController,WKNavigationDelegate,WKUIDelega
         
         self.setBackButton()
         
+        if userinfo.type == 3 {
+            //面试官，隐藏编辑按钮
+            self.editBtn.hidden = true
+        }else {
+            self.editBtn.hidden = false
+        }
+        
     }
     
     //实现WKScriptMessageHandler委托
@@ -64,6 +74,37 @@ class FullResumeViewController: UIViewController,WKNavigationDelegate,WKUIDelega
     
     func webView(webView: WKWebView, didFinishNavigation navigation: WKNavigation!){
         HUD.hide()
+    }
+    
+    @IBAction func updateResume(sender: AnyObject) {
+        
+        let url = inviteUpdateResume
+        var param = ["applicantId":userinfo.beisen_id!] as [String : AnyObject]
+
+        HUD.show(.RotatingImage(loadingImage))
+        afRequest(url, parameters: param, encoding: .URL, praseMethod: praseUpdateResume)
+        
+    }
+    
+    
+    func praseUpdateResume(json: SwiftyJSON.JSON){
+        HUD.hide()
+        if json["success"].boolValue {
+            let alertView = UIAlertController(title: "提醒", message: "已发送更新邮件，请前往更新", preferredStyle: .Alert)
+            let okAction = UIAlertAction(title: "确定", style: .Default,handler:nil)
+            alertView.addAction(okAction)
+            self.presentViewController(alertView, animated: false, completion: nil)
+        }else{
+            var message = "邮件发送失败"
+            if json["message"].string != nil {
+                message = json["message"].string!
+            }
+            let alertView = UIAlertController(title: "提醒", message: message, preferredStyle: .Alert)
+            let okAction = UIAlertAction(title: "确定", style: .Default,handler:nil)
+            alertView.addAction(okAction)
+            self.presentViewController(alertView, animated: false, completion: nil)
+        }
+        
     }
 
 

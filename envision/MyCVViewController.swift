@@ -139,7 +139,7 @@ class MyCVViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     @IBAction func fullResume(sender: AnyObject) {
         let introViewController  = self.storyboard?.instantiateViewControllerWithIdentifier("FullResumeViewController") as! FullResumeViewController
         //introViewController.navigationItem.title = "详细简历"
-        introViewController.webSite = fullresume
+        introViewController.webSite = fullresume + "?applicantId=\(userinfo.beisen_id!)"
         
         self.navigationController?.pushViewController(introViewController, animated: true)
     }

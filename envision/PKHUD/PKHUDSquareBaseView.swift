@@ -53,7 +53,7 @@ public class PKHUDSquareBaseView: UIView {
     public let subtitleLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .Center
-        label.font = UIFont.systemFontOfSize(14.0)
+        label.font = UIFont.systemFontOfSize(12.0)//14
         label.textColor = UIColor.blackColor().colorWithAlphaComponent(0.7)
         label.adjustsFontSizeToFitWidth = true
         label.numberOfLines = 2

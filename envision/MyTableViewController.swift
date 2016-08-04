@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class MyTableViewController: UITableViewController {
 
@@ -50,6 +51,40 @@ class MyTableViewController: UITableViewController {
         
     }
 
+    func autoLogin(){
+        let login = NSUserDefaults.standardUserDefaults().valueForKey("login") as? Bool
+        
+        if (login != nil) && login! {
+            let username = NSUserDefaults.standardUserDefaults().valueForKey("username") as? String
+            let password = NSUserDefaults.standardUserDefaults().valueForKey("password") as? String
+            
+            if username == nil || password == nil{
+                return
+            }
+            
+            let url = LOGIN
+            let param = ["id": username! , "password":password! , "deviceId":deviceId!, "phoneType":2 ] as [String : AnyObject]
+            afRequest(url, parameters: param, encoding:.URL, praseMethod: praseLogin)
+        }
+    }
+    
+    
+    func praseLogin(json: SwiftyJSON.JSON){
+        if json["success"].boolValue {
+            userinfo.getUserInfo(json)
+            myTableViewController?.updateUserInfo()
+            
+            if LAUNCH && (userinfo.type == 1 || userinfo.type == 2) {
+                //学生身份，打开我的应聘
+                LAUNCH = false
+                homeViewController?.selectedIndex = 2
+                myApplyTableViewController = self.storyboard?.instantiateViewControllerWithIdentifier("MyApplyTableViewController") as? MyApplyTableViewController
+                self.navigationController?.pushViewController(myApplyTableViewController!, animated: true)
+            }
+        }
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -104,6 +139,7 @@ class MyTableViewController: UITableViewController {
                 cell.name.hidden = true
                 cell.dreamerID.hidden = true
                 cell.toLogin.hidden = false
+                cell.headImage.image = UIImage(named: "head")
                 
                 cell.accessoryType = .None
                 cell.selectionStyle = .Default
@@ -320,6 +356,10 @@ class MyTableViewController: UITableViewController {
         NSUserDefaults.standardUserDefaults().setObject(false, forKey: "login")//标识自动登录
         userinfo = UserInfo()
         self.updateUserInfo()
+        
+        BADGE = 0
+        UIApplication.sharedApplication().applicationIconBadgeNumber = 0
+        homeViewController?.tabBar.items?.last?.badgeValue = nil
 
     }
 }

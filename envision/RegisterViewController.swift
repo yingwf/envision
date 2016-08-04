@@ -60,9 +60,7 @@ class RegisterViewController: UIViewController,UITextFieldDelegate {
         tap.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tap)
         
-        //self.navigationItem.leftBarButtonItem = getBackButton(self)
         self.setBackButton()
-        
 
     }
 
@@ -82,7 +80,7 @@ class RegisterViewController: UIViewController,UITextFieldDelegate {
         
         let url = getCode
         let param = ["mobile":userNameField.text!] as [String : AnyObject]
-        doRequest(url, parameters: param, encoding: .URL, praseMethod: praseVerificationCode)
+        afRequest(url, parameters: param, encoding: .URL, praseMethod: praseVerificationCode)
         
         self.receiveLabel.removeGestureRecognizer(receiveVerificaitonCodeTap!)
         self.receiveLabel.text = "已接收：60s"
@@ -175,12 +173,14 @@ class RegisterViewController: UIViewController,UITextFieldDelegate {
         
         let url = REGISTER
         let param = ["mobile": userNameField.text! , "password":passwordField.text!, "code":verificationCodeField.text!, "type":String(userType)] as [String : AnyObject]
-        doRequest(url, parameters: param, encoding:.URL, praseMethod: praseRegister)
+        afRequest(url, parameters: param, encoding:.URL, praseMethod: praseRegister)
         
     }
     
     func praseRegister(json: SwiftyJSON.JSON){
         if json["success"].boolValue {
+            userinfo.getUserInfo(json)
+            
             //注册成功
             let alertView = UIAlertController(title: "提醒", message:"注册成功，请填写简历", preferredStyle: .Alert)
             let okAction = UIAlertAction(title: "确定", style: .Default) {(UIAlertAction) -> Void in
@@ -189,9 +189,11 @@ class RegisterViewController: UIViewController,UITextFieldDelegate {
                 NSUserDefaults.standardUserDefaults().setObject(self.passwordField.text!, forKey: "password")
                 
                 let editCVViewController = self.storyboard?.instantiateViewControllerWithIdentifier("EditCVViewController") as! EditCVViewController
-                editCVViewController.isRegister = true
+                editCVViewController.needPopToRoot = true
                 
                 self.navigationController?.pushViewController(editCVViewController, animated: true)
+                
+                myTableViewController?.autoLogin()
                 
             }
             alertView.addAction(okAction)
@@ -200,7 +202,11 @@ class RegisterViewController: UIViewController,UITextFieldDelegate {
             
             
         }else{
-            let alertView = UIAlertController(title: "提醒", message: json["message"].string, preferredStyle: .Alert)
+            var message = "注册失败"
+            if json["message"].string != nil{
+                message = json["message"].string!
+            }
+            let alertView = UIAlertController(title: "提醒", message: message, preferredStyle: .Alert)
             let okAction = UIAlertAction(title: "确定", style: .Default, handler: nil)
             alertView.addAction(okAction)
             self.presentViewController(alertView, animated: true, completion: nil)

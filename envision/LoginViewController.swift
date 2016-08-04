@@ -104,7 +104,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         if deviceId != nil {
             param["deviceId"] = deviceId!
         }
-        doRequest(url, parameters: param, encoding:.URL, praseMethod: praseLogin)
+        afRequest(url, parameters: param, encoding:.URL, praseMethod: praseLogin)
     }
     
     
@@ -114,22 +114,30 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         if json["success"].boolValue {
             userinfo.getUserInfo(json)
             userinfo.jobId = json["jobId"].int
+            userinfo.count = json["count"].int
             
             NSUserDefaults.standardUserDefaults().setObject(true, forKey: "login")//标识自动登录
             NSUserDefaults.standardUserDefaults().setObject(nameTextField.text!, forKey: "username")
             NSUserDefaults.standardUserDefaults().setObject(pwdTextField.text!, forKey: "password")
-            
+
             
             if userinfo.name == "" || userinfo.name == nil{
                 //未填写微简历时，需首先弹出微简历填写页面
                 let editCVViewController = self.storyboard?.instantiateViewControllerWithIdentifier("EditCVViewController") as! EditCVViewController
-                
+                editCVViewController.needPopToRoot = true
                 self.navigationController?.pushViewController(editCVViewController, animated: true)
                 
             }else{
                 myTableViewController?.updateUserInfo()
                 
                 self.navigationController?.popViewControllerAnimated(true)
+            }
+            
+            //首次使用登录时需检查badge
+            if userinfo.count > 0 && BADGE == 0 {
+                BADGE = userinfo.count!
+                UIApplication.sharedApplication().applicationIconBadgeNumber = BADGE
+                homeViewController?.tabBar.items?.last?.badgeValue = String(BADGE)
             }
 
         }else{

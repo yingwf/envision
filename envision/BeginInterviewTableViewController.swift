@@ -95,6 +95,10 @@ class BeginInterviewTableViewController: UITableViewController,updateInfoDelegat
     
     func beginInterview(){
         
+        guard userinfo.email != nil else {
+            return
+        }
+        
         var indexPath = NSIndexPath()
         var cell = UITableViewCell()
         
@@ -126,8 +130,8 @@ class BeginInterviewTableViewController: UITableViewController,updateInfoDelegat
         
         HUD.show(.RotatingImage(loadingImage))
         let seedUrl = startInterview
-        let parameters = ["name":roomInfo!.interviewName!, "roomNo":roomInfo!.roomNo!, "deskNo":roomInfo!.deskNo!, "interviewinfov2id":self.myInterview.interviewId!] as! [String : AnyObject]
-        doRequest(seedUrl, parameters: parameters , encoding: .URL, praseMethod: praseStartInterView)
+        let parameters = ["email": userinfo.email!, "name":roomInfo!.interviewName!, "roomNo":roomInfo!.roomNo!, "deskNo":roomInfo!.deskNo!, "interviewinfov2id":String(self.myInterview.interviewId!)] as! [String : AnyObject]
+        afRequest(seedUrl, parameters: parameters , encoding: .URL, praseMethod: praseStartInterView)
     }
 
     func praseStartInterView(json: SwiftyJSON.JSON){
@@ -143,8 +147,11 @@ class BeginInterviewTableViewController: UITableViewController,updateInfoDelegat
             let interviewMgrViewController = self.storyboard?.instantiateViewControllerWithIdentifier("InterviewMgrViewController") as! InterviewMgrViewController
             self.navigationController?.pushViewController(interviewMgrViewController, animated: true)
         }else{
-            
-            let alertView = UIAlertController(title: "提醒", message: "连接后台服务器出错，请重新开始", preferredStyle: .Alert)
+            var message = "连接后台服务器出错"
+            if json["message"].string != nil{
+                message = json["message"].string!
+            }
+            let alertView = UIAlertController(title: "提醒", message:message , preferredStyle: .Alert)
             let okAction = UIAlertAction(title: "确定", style: .Default, handler: nil)
             alertView.addAction(okAction)
             self.presentViewController(alertView, animated: false, completion: nil)

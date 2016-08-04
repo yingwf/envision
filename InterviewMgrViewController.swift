@@ -42,15 +42,28 @@ class InterviewMgrViewController: UIViewController {
         sepView.backgroundColor = BACKGROUNDCOLOR
         self.view.addSubview(sepView)
         self.setBackButton()
+        
+        let seedUrl = getCurrentInterviewStatus
+        var parameters = ["interviewId": String(INTERVIEWID!)] as! [String: AnyObject]
+        afRequest(seedUrl, parameters: parameters, encoding: .URL, praseMethod: praseProgress)
+        
+        
+    }
+    
+    func praseProgress(json: SwiftyJSON.JSON){
+        if json["success"].boolValue {
+            self.interviewProgress.getInfo(json)
+            self.updateProgress()
+        }
     }
     
     @IBAction func currentApplicant(sender: AnyObject) {
         
         HUD.show(.RotatingImage(loadingImage))
         
-        let seedUrl = interviewCurrentApplicant
-        var parameters = ["applicantId":userinfo.beisen_id! ] as! [String: AnyObject]
-        doRequest(seedUrl, parameters: parameters, encoding: .URL, praseMethod: praseCurrentApplicant)
+        let seedUrl = getCurrentUrl //interviewCurrentApplicant
+        var parameters = ["employeeId":userinfo.employeeid! ] as! [String: AnyObject]
+        afRequest(seedUrl, parameters: parameters, encoding: .URL, praseMethod: praseCurrentApplicant)
     }
     
     func praseCurrentApplicant(json: SwiftyJSON.JSON){
@@ -62,8 +75,26 @@ class InterviewMgrViewController: UIViewController {
                 introViewController.webSite = eLinkUrl!
                 introViewController.navigationItem.title = "面试评价"
                 self.navigationController?.pushViewController(introViewController, animated: true)
+            }else{
+                var message = "没有当前学生，请呼叫下一位"
+                if json["message"].string != nil {
+                    message = json["message"].string!
+                }
+                let alertView = UIAlertController(title: "提醒", message:message , preferredStyle: .Alert)
+                let okAction = UIAlertAction(title: "确定", style: .Default, handler: nil)
+                alertView.addAction(okAction)
+                self.presentViewController(alertView, animated: false, completion: nil)
             }
             
+        }else{
+            var message = "获取当前学生失败"
+            if json["message"].string != nil {
+                message = json["message"].string!
+            }
+            let alertView = UIAlertController(title: "提醒", message:message , preferredStyle: .Alert)
+            let okAction = UIAlertAction(title: "确定", style: .Default, handler: nil)
+            alertView.addAction(okAction)
+            self.presentViewController(alertView, animated: false, completion: nil)
         }
         HUD.hide()
     }
@@ -76,8 +107,8 @@ class InterviewMgrViewController: UIViewController {
         HUD.show(.RotatingImage(loadingImage))
         
         let seedUrl = interviewNextApplicant
-        let parameters = ["interviewId": INTERVIEWID!, "employeeId":userinfo.employeeid! ] as! [String: AnyObject]
-        doRequest(seedUrl, parameters: parameters, encoding: .URL, praseMethod: praseNextApplicant)
+        let parameters = ["interviewId": String(INTERVIEWID!), "employeeId":userinfo.employeeid! ] as! [String: AnyObject]
+        afRequest(seedUrl, parameters: parameters, encoding: .URL, praseMethod: praseNextApplicant)
         
     }
     
@@ -91,10 +122,30 @@ class InterviewMgrViewController: UIViewController {
                 introViewController.webSite = eLinkUrl
                 introViewController.navigationItem.title = "面试评价"
                 self.navigationController?.pushViewController(introViewController, animated: true)
+            }else{
+                var message = "获取下一位学生简历出错"
+                if json["message"].string != nil {
+                    message = json["message"].string!
+                }
+                let alertView = UIAlertController(title: "提醒", message:message , preferredStyle: .Alert)
+                let okAction = UIAlertAction(title: "确定", style: .Default, handler: nil)
+                alertView.addAction(okAction)
+                self.presentViewController(alertView, animated: false, completion: nil)
             }
+        }else{
+                var message = "获取下一位学生简历出错"
+                if json["message"].string != nil {
+                    message = json["message"].string!
+                }
+                let alertView = UIAlertController(title: "提醒", message:message , preferredStyle: .Alert)
+                let okAction = UIAlertAction(title: "确定", style: .Default, handler: nil)
+                alertView.addAction(okAction)
+                self.presentViewController(alertView, animated: false, completion: nil)
         }
         HUD.hide()
     }
+    
+    
     
     func updateProgress(){
         if interviewProgress.waitApplicant != nil{

@@ -13,7 +13,6 @@ let kGtAppId:String = "kh6wXq5XFi91TPixoXhpQ8"
 let kGtAppKey:String = "JJVjtoWbUfAL6ENTYOJOs3"
 let kGtAppSecret:String = "IeqXsCaMiTAiqncMpyo9q8"
 
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate,WXApiDelegate,GeTuiSdkDelegate {
 
@@ -22,6 +21,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate,WXApiDelegate,GeTuiSdkDele
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        if launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey] != nil {
+            //未启动，点击remote notification通知栏时，打开我的应聘页面
+            LAUNCH = true
+        }
         
         WXApi.registerApp("wx658cf26421d80331")
         
@@ -50,11 +54,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate,WXApiDelegate,GeTuiSdkDele
         }
     }
     
-    
     // MARK: - 远程通知(推送)回调
     
     /** 远程通知注册成功委托 */
-    func application(application: UIApplication, var didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
         var token = deviceToken.description.stringByTrimmingCharactersInSet(NSCharacterSet(charactersInString: "<>"))
         token = token.stringByReplacingOccurrencesOfString(" ", withString: "")
         
@@ -63,7 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,WXApiDelegate,GeTuiSdkDele
         
         //自动登录
         deviceId = token
-        autoLogin()
+        myTableViewController?.autoLogin()
         
         NSLog("\n>>>[DeviceToken Success]:%@\n\n",token)
     }
@@ -77,14 +80,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate,WXApiDelegate,GeTuiSdkDele
     
     /** APP已经接收到“远程”通知(推送) - (App运行在后台/App运行在前台) */
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-        application.applicationIconBadgeNumber = 0;        // 标签
-        
-        myApplyTableViewController?.updateInfo()
-        print("update interview info")
-        
-        //        if userInfo["aps"] != nil && userInfo["aps"]!["alert"] != nil && userInfo["aps"]!["alert"]!!["title"] != nil && (userInfo["aps"]!["alert"]!!["title"]! as! String) == "当前面试信息" {
-        
-        NSLog("\n>>>[Receive RemoteNotification]:%@\n\n",userInfo);
+
+//        if let apsBadge = userInfo["aps"]?["badge"] {
+//            BADGE = apsBadge as! Int
+//            application.applicationIconBadgeNumber = BADGE
+//            homeViewController?.tabBar.items?.last?.badgeValue = String(BADGE)
+//        }
+//        
+//        myApplyTableViewController?.updateInfo()
+//        
+//        NSLog("\n>>>[Receive RemoteNotification]:%@\n\n",userInfo);
     }
     
     // MARK: - GeTuiSdkDelegate
@@ -121,7 +126,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate,WXApiDelegate,GeTuiSdkDele
     }
 
 
-
     func application(application: UIApplication, handleOpenURL url: NSURL) -> Bool{
         
         WXApi.handleOpenURL(url, delegate:self)
@@ -143,9 +147,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate,WXApiDelegate,GeTuiSdkDele
 //        }
     }
     
+    
     func applicationWillResignActive(application: UIApplication) {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+
     }
 
     func applicationDidEnterBackground(application: UIApplication) {
@@ -159,35 +163,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate,WXApiDelegate,GeTuiSdkDele
 
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        print("applicationDidBecomeActive")
+        let badge = application.applicationIconBadgeNumber
+        if badge != BADGE {
+            homeViewController?.tabBar.items?.last?.badgeValue = String(badge)
+            
+            myApplyTableViewController?.updateInfo()
+            BADGE = badge
+        }
     }
 
+    func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forRemoteNotification userInfo: [NSObject : AnyObject], completionHandler: () -> Void) {
+        print("handleActionWithIdentifier")
+
+    }
+    
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+
+        if let apsBadge = userInfo["aps"]?["badge"] {
+            BADGE = apsBadge as! Int
+            application.applicationIconBadgeNumber = BADGE
+            homeViewController?.tabBar.items?.last?.badgeValue = String(BADGE)
+        }
+        
+        myApplyTableViewController?.updateInfo()
+        
+        NSLog("\n>>>[Receive RemoteNotification]:%@\n\n",userInfo);
+        
+        completionHandler(.NoData)
+
+    }
+    
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    }
-
-    func autoLogin(){
-        let login = NSUserDefaults.standardUserDefaults().valueForKey("login") as? Bool
-        
-        if (login != nil) && login! {
-            let username = NSUserDefaults.standardUserDefaults().valueForKey("username") as? String
-            let password = NSUserDefaults.standardUserDefaults().valueForKey("password") as? String
-            
-            if username == nil || password == nil{
-                return
-            }
-            
-            let url = LOGIN
-            let param = ["id": username! , "password":password! , "deviceId":deviceId!, "phoneType":2 ] as [String : AnyObject]
-            doRequest(url, parameters: param, encoding:.URL, praseMethod: praseLogin)
-        }
-    }
-    
-    
-    func praseLogin(json: SwiftyJSON.JSON){
-        if json["success"].boolValue {
-            userinfo.getUserInfo(json)
-            myTableViewController?.updateUserInfo()
-        }
     }
     
 

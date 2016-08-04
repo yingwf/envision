@@ -14,6 +14,8 @@ class JotTitleTableViewCell: UITableViewCell {
     @IBOutlet weak var kind: UILabel!
     @IBOutlet weak var address: UILabel!
     @IBOutlet weak var collectImage: UIImageView!
+    @IBOutlet weak var major: UILabel!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()

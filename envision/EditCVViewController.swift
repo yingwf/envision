@@ -23,8 +23,8 @@ class EditCVViewController: UIViewController,UITableViewDelegate,UITableViewData
     let sectionTitle = ["真实姓名","身份证号","电子邮箱","手机号","性别","最高学历","毕业学校","专业名称","毕业年份"]
     let genders = ["男","女"]
     let degrees = ["大专","本科","硕士","博士"]
-    var valueArray = ["","","","","","","",""]
-    var isRegister = false //表示是否注册时
+    var valueArray = ["","","","","","","","",""]
+    var needPopToRoot = false //注册，登录后完善简历时，保存后需回退到“偏执狂中心”页面
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -81,11 +81,19 @@ class EditCVViewController: UIViewController,UITableViewDelegate,UITableViewData
         var returnCell = UITableViewCell()
         if indexPath.section == 0 && indexPath.row == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier(cvHintCell, forIndexPath: indexPath) as! CVhintTableViewCell
+            
+            if isModify {
+                cell.hint.text = "姓名，邮箱，身份证，手机号不可编辑。"
+            }else {
+                cell.hint.text = "姓名，邮箱，身份证，手机号，填写后无法修改，请确保准确。"
+            }
+            
             cell.selectionStyle = .None
             returnCell = cell
         }else if (indexPath.section == 0) && (indexPath.row > 0) {
             let cell = tableView.dequeueReusableCellWithIdentifier(cvEditCell, forIndexPath: indexPath) as! CVeditTableViewCell
             cell.title.text = self.sectionTitle[indexPath.row - 1]
+            cell.value.placeholder = "填写"
             
             //初始化
             switch indexPath.row{
@@ -101,7 +109,9 @@ class EditCVViewController: UIViewController,UITableViewDelegate,UITableViewData
                 print("default")
             }
             
-            cell.selectionStyle = .None
+            if isModify {
+                cell.selectionStyle = .None
+            }
             returnCell = cell
         }else if(indexPath.section == 1) {
             let cell = tableView.dequeueReusableCellWithIdentifier(cvEditCell, forIndexPath: indexPath) as! CVeditTableViewCell
@@ -152,10 +162,10 @@ class EditCVViewController: UIViewController,UITableViewDelegate,UITableViewData
             if indexPath.row == 0{
                 return
             }
-//            if isModify {
-//                //修改简历时，姓名等不可更改
-//                return
-//            }
+            if isModify {
+                //修改简历时，姓名等不可更改
+                return
+            }
             let inputInfoViewController = self.storyboard?.instantiateViewControllerWithIdentifier("InputInfoViewController") as! InputInfoViewController
             inputInfoViewController.navigationItem.title = self.sectionTitle[indexPath.row - 1]
             inputInfoViewController.placeHolder = "请输入" + self.sectionTitle[indexPath.row - 1]
@@ -183,7 +193,6 @@ class EditCVViewController: UIViewController,UITableViewDelegate,UITableViewData
                 searchVCViewController.indexPath = indexPath
                 searchVCViewController.delegate = self
                 self.presentViewController(searchVCViewController, animated: true, completion: nil)
-
                 
             }else if indexPath.row == 3{
                 //专业名称
@@ -276,7 +285,7 @@ class EditCVViewController: UIViewController,UITableViewDelegate,UITableViewData
     //保存简历
     @IBAction func saveCV(sender: AnyObject) {
 
-        for index in 1...3{
+        for index in 1...4{
             let indexPath = NSIndexPath(forRow: index, inSection: 0)
             let cell = self.tableView.cellForRowAtIndexPath(indexPath) as! CVeditTableViewCell
             if cell.value.text == "" { // && !isModify
@@ -294,52 +303,57 @@ class EditCVViewController: UIViewController,UITableViewDelegate,UITableViewData
             let indexPath = NSIndexPath(forRow: index, inSection: 1)
             let cell = self.tableView.cellForRowAtIndexPath(indexPath) as! CVeditTableViewCell
             if  cell.value.text == "" {
-                let alertView = UIAlertController(title: "提醒", message: "请选择\(self.sectionTitle[index + 3])", preferredStyle: .Alert)
+                let alertView = UIAlertController(title: "提醒", message: "请选择\(self.sectionTitle[index + 4])", preferredStyle: .Alert)
                 let okAction = UIAlertAction(title: "确定", style: .Default, handler: nil)
                 alertView.addAction(okAction)
                 self.presentViewController(alertView, animated: true, completion: nil)
                 return
             }else{
-                valueArray[index + 3] = cell.value.text!
+                valueArray[index + 4] = cell.value.text!
             }
         }
         
         let mobile = NSUserDefaults.standardUserDefaults().valueForKey("username") as! String
         
         let url = applicantUpdate
-        var param = ["mobile":mobile, "name":valueArray[0], "IDcard":valueArray[1], "email":valueArray[2], "gendar":valueArray[3], "educationLevel":valueArray[4], "lastschool":valueArray[5], "lastdisciplinekind":valueArray[6], "graduationdate":valueArray[7]] as [String : AnyObject]
+        var param = ["mobile":mobile, "name":valueArray[0], "IDcard":valueArray[1], "email":valueArray[2], "gendar":valueArray[4], "educationLevel":valueArray[5], "lastschool":valueArray[6], "lastdisciplinekind":valueArray[7], "graduationdate":valueArray[8]] as [String : AnyObject]
 //        if isModify{
 //            param = ["gendar":valueArray[3], "educationLevel":valueArray[4], "lastschool":valueArray[5], "lastdisciplinekind":valueArray[6], "graduationdate":valueArray[7]]
 //        }
         HUD.show(.RotatingImage(loadingImage))
-        doRequest(url, parameters: param, encoding: .URL, praseMethod: praseSaveResult)
+        afRequest(url, parameters: param, encoding: .URL, praseMethod: praseSaveResult)
 
     }
     
     func praseSaveResult(json: SwiftyJSON.JSON){
         HUD.hide()
         if json["success"].boolValue {
+            userinfo.getUserInfo(json)
+            
             let alertView = UIAlertController(title: "提醒", message: "已保存简历", preferredStyle: .Alert)
             let okAction = UIAlertAction(title: "确定", style: .Default){ (UIAlertAction) -> Void in
 
-                if self.isRegister {
+                if self.needPopToRoot {
                     self.navigationController?.popToRootViewControllerAnimated(true)
                     
                 }else{
                     self.delegate?.refreshUserInfo()
                     self.navigationController?.popViewControllerAnimated(true)
                 }
+                
+                myTableViewController?.updateUserInfo()//更新用户信息
             }
             
-            //成功后保存到全局变量userinfo
-            userinfo.name = valueArray[0]
-            userinfo.identity = valueArray[1]
-            userinfo.email = valueArray[2]
-            userinfo.gender = valueArray[3]
-            userinfo.educationLevel = valueArray[4]
-            userinfo.lastschool = valueArray[5]
-            userinfo.lastDisciplineKind = valueArray[6]
-            userinfo.graduationDate = valueArray[7]
+//            //成功后保存到全局变量userinfo
+//            userinfo.name = valueArray[0]
+//            userinfo.identity = valueArray[1]
+//            userinfo.email = valueArray[2]
+//            userinfo.mobile = valueArray[3]
+//            userinfo.gender = valueArray[4]
+//            userinfo.educationLevel = valueArray[5]
+//            userinfo.lastschool = valueArray[6]
+//            userinfo.lastDisciplineKind = valueArray[7]
+//            userinfo.graduationDate = valueArray[8]
             alertView.addAction(okAction)
             
             self.presentViewController(alertView, animated: false, completion: nil)

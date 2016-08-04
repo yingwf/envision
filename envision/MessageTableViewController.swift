@@ -15,12 +15,17 @@ class MessageTableViewController: UITableViewController {
     var messages = [Message]()
     let messageCell = "MessageTableViewCell"
     
+    var refreshController = UIRefreshControl()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
         self.setBackButton()
+        self.refreshController.attributedTitle = NSAttributedString(string: "下拉刷新")
+        self.refreshController.addTarget(self, action: "refreshList", forControlEvents: .ValueChanged)
         
+        self.tableView.addSubview(refreshController)
         
         self.tableView.tableFooterView = UIView() //取消多余的分割线
         self.tableView.backgroundColor = BACKGROUNDCOLOR
@@ -32,25 +37,41 @@ class MessageTableViewController: UITableViewController {
         HUD.show(.RotatingImage(loadingImage))
         let seedUrl = getMessageList
         let parameters = ["applicantId":userinfo.beisen_id!]
-        doRequest(seedUrl, parameters: parameters, encoding: .URL, praseMethod: praseMessageList)
+        afRequest(seedUrl, parameters: parameters, encoding: .URL, praseMethod: praseMessageList)
     }
     
     func praseMessageList(json: SwiftyJSON.JSON){
         if json["success"].boolValue {
             if let data = json["news"].array{
                 if data.count > 0{
+                    var tempList = [Message]()
                     for index in 0...data.count - 1{
                         let message = Message()
                         message.getMessageInfo(data[index])
-                        self.messages.append(message)
+                        tempList.append(message)
                     }
+                    self.messages = tempList
                 }
                 self.tableView.reloadData()
+                
+                UIApplication.sharedApplication().applicationIconBadgeNumber = 0 //badge归零
+                homeViewController?.tabBar.items?.last?.badgeValue = nil
+                BADGE = 0
             }
         }
         HUD.hide()
+        self.refreshController.endRefreshing()
     }
 
+    func refreshList() {
+        
+        let seedUrl = getMessageList
+        let parameters = ["applicantId":userinfo.beisen_id!]
+        afRequest(seedUrl, parameters: parameters, encoding: .URL, praseMethod: praseMessageList)
+        
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

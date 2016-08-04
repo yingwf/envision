@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1808" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="m5u-UE-uKW">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1909" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="m5u-UE-uKW">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
@@ -66,6 +66,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="sectionIndexBackgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="VzE-HT-jsI">
                                 <rect key="frame" x="0.0" y="92" width="375" height="44"/>
@@ -351,7 +352,7 @@
         <!--我的消息-->
         <scene sceneID="fqJ-99-7W0">
             <objects>
-                <tableViewController storyboardIdentifier="MessageTableViewController" id="T5A-gg-7OL" customClass="MessageTableViewController" customModule="梦想偏执狂" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="MessageTableViewController" hidesBottomBarWhenPushed="YES" id="T5A-gg-7OL" customClass="MessageTableViewController" customModule="梦想偏执狂" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="ikg-Dt-Mhd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1135,29 +1136,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NNP-n2-6Y4">
-                                <rect key="frame" x="0.0" y="64" width="375" height="34"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="登录电脑端完善更多简历 &gt;" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gA1-bF-x8X">
-                                        <rect key="frame" x="106" y="6" width="163" height="21"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="163" id="oNw-PC-HeE"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                        <color key="textColor" red="0.80000000000000004" green="0.59999999999999998" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" red="1" green="0.71372549019607845" blue="0.070588235294117646" alpha="0.41999999999999998" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstItem="gA1-bF-x8X" firstAttribute="centerY" secondItem="NNP-n2-6Y4" secondAttribute="centerY" id="2ZF-6a-ZDN"/>
-                                    <constraint firstItem="gA1-bF-x8X" firstAttribute="centerX" secondItem="NNP-n2-6Y4" secondAttribute="centerX" id="Zbl-tJ-Dpd"/>
-                                    <constraint firstAttribute="height" constant="34" id="ahZ-Oz-maG"/>
-                                    <constraint firstItem="gA1-bF-x8X" firstAttribute="top" secondItem="NNP-n2-6Y4" secondAttribute="top" constant="6" id="hNF-wC-hFt"/>
-                                </constraints>
-                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hdu-4C-rSd">
-                                <rect key="frame" x="16" y="108" width="343" height="559"/>
+                                <rect key="frame" x="16" y="8" width="343" height="659"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="559" id="S8e-dS-Rsc"/>
@@ -1172,13 +1152,10 @@
                         </subviews>
                         <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="NNP-n2-6Y4" firstAttribute="centerX" secondItem="hdu-4C-rSd" secondAttribute="centerX" id="0au-DV-5PL"/>
-                            <constraint firstItem="NNP-n2-6Y4" firstAttribute="top" secondItem="ZjR-hS-xEk" secondAttribute="bottom" id="1N2-Gg-QJI"/>
-                            <constraint firstItem="NNP-n2-6Y4" firstAttribute="leading" secondItem="67c-1D-W30" secondAttribute="leading" id="9iS-oV-0ui"/>
-                            <constraint firstAttribute="bottom" secondItem="hdu-4C-rSd" secondAttribute="bottom" id="qIP-LB-FtO"/>
-                            <constraint firstItem="hdu-4C-rSd" firstAttribute="leading" secondItem="67c-1D-W30" secondAttribute="leadingMargin" id="qow-2q-Bex"/>
-                            <constraint firstAttribute="trailing" secondItem="NNP-n2-6Y4" secondAttribute="trailing" id="wHI-F9-HQt"/>
-                            <constraint firstItem="hdu-4C-rSd" firstAttribute="top" secondItem="NNP-n2-6Y4" secondAttribute="bottom" constant="10" id="zhD-VJ-C6X"/>
+                            <constraint firstItem="hdu-4C-rSd" firstAttribute="top" secondItem="ZjR-hS-xEk" secondAttribute="bottom" constant="-56" id="QUc-9u-rhm"/>
+                            <constraint firstAttribute="bottom" secondItem="hdu-4C-rSd" secondAttribute="bottom" id="ieV-Bd-24G"/>
+                            <constraint firstItem="hdu-4C-rSd" firstAttribute="trailing" secondItem="67c-1D-W30" secondAttribute="trailingMargin" id="zZW-cW-Y5J"/>
+                            <constraint firstItem="hdu-4C-rSd" firstAttribute="leading" secondItem="67c-1D-W30" secondAttribute="leadingMargin" id="zhW-iK-R9R"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="编辑简历" id="gGZ-GQ-iKq">
@@ -1381,10 +1358,33 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <segue destination="B9X-Qi-v31" kind="push" id="ONX-v6-Qzj"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Jq-kX-4f0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1077.5" y="2888.5"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="oL3-bt-aPM">
+            <objects>
+                <viewController id="B9X-Qi-v31" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="SKI-Nf-FTx"/>
+                        <viewControllerLayoutGuide type="bottom" id="8bM-IG-YtR"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="sjH-ps-bC6">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="T3w-ln-Dwd"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6Bq-pL-DPR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1506.5" y="2888.5"/>
         </scene>
         <!--面试管理-->
         <scene sceneID="74l-rF-gWQ">
@@ -1799,10 +1799,10 @@
                                 <state key="normal" title="提交">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="endInterview:" destination="dEf-LH-LNr" eventType="touchUpInside" id="Z67-Ig-HTI"/>
+                                </connections>
                             </button>
-                            <connections>
-                                <action selector="endInterview:" destination="dEf-LH-LNr" id="4jt-pm-TVu"/>
-                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
@@ -1972,10 +1972,14 @@
                                 <connections>
                                     <action selector="fullResume:" destination="Ki0-EP-huT" eventType="touchUpInside" id="0U1-DQ-rqU"/>
                                     <action selector="saveCV:" destination="yMp-yq-HPi" eventType="touchUpInside" id="eB1-iN-2Ba"/>
+                                    <action selector="updateResume:" destination="Xwf-6k-473" eventType="touchUpInside" id="hL7-0B-7vj"/>
                                 </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="editBtn" destination="grr-P0-ClN" id="To4-SB-6XM"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="873-Ae-UJJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

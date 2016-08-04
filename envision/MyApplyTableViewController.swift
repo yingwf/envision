@@ -9,6 +9,7 @@
 import UIKit
 import AVFoundation
 import SwiftyJSON
+import AudioToolbox
 
 protocol UpdateInterviewInfoDelegate {
     func updateInterviewTime(interviewInfo: InterviewInfo)
@@ -25,9 +26,15 @@ class MyApplyTableViewController: UITableViewController,UpdateInterviewInfoDeleg
     let applyOfferTableViewCell = "ApplyOfferTableViewCell"
     
     var interview = ApplicantInterview()
+    var refreshController = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.refreshController.attributedTitle = NSAttributedString(string: "下拉刷新")
+        self.refreshController.addTarget(self, action: "refreshData", forControlEvents: .ValueChanged)
+        
+        self.tableView.addSubview(refreshController)
         
         self.tableView.tableFooterView = UIView() //取消多余的分割线
         self.tableView.backgroundColor = UIColor(red: 0xf0/255, green: 0xfb/255, blue: 0xff/255, alpha: 1)
@@ -45,8 +52,7 @@ class MyApplyTableViewController: UITableViewController,UpdateInterviewInfoDeleg
         HUD.show(.RotatingImage(loadingImage))
         let url = myInterview
         let parameters = ["applicantId":userinfo.beisen_id!]
-        doRequest(url, parameters: parameters, encoding: .URL, praseMethod: praseInterview)
-
+        afRequest(url, parameters: parameters, encoding: .URL, praseMethod: praseInterview)
 
     }
     
@@ -54,30 +60,55 @@ class MyApplyTableViewController: UITableViewController,UpdateInterviewInfoDeleg
         if json["success"].boolValue {
             self.interview.getInfo(json)
             self.tableView.reloadData()
+            
+            if interview.interviewPhase == 3 && (interview.interviewStatus == 2 || (interview.interviewStatus == 1 && interview.lineInfo?.count <= 2)) {
+                //已开始面试，或签到后，排队人数小于等于2位时，震动提醒
+                systemAlert()
+            }
         }
         HUD.hide()
+        self.refreshController.endRefreshing()
     }
+    
+    func refreshData() {
+        
+        let url = myInterview
+        let parameters = ["applicantId":userinfo.beisen_id!]
+        afRequest(url, parameters: parameters, encoding: .URL, praseMethod: praseInterview)
+        
+    }
+    
     
     func praseLineNumber(json: SwiftyJSON.JSON){
         if json["success"].boolValue {
             let lineData = json["info"]
-            self.interview.lineInfo = LineInfo()
-            self.interview.lineInfo!.getLineInfo(lineData)
-            let alertView = UIAlertController(title: "二维码扫描结果", message: "已签到，你的排队号是\(self.interview.lineInfo!.lineNumber!)，前面还有\(self.interview.lineInfo!.count!)个", preferredStyle: .Alert)
+            interview.lineInfo = LineInfo()
+            interview.lineInfo!.getLineInfo(lineData)
+            guard let lineNumber = self.interview.lineInfo?.lineNumber, count = self.interview.lineInfo?.count else {
+                let alertView = UIAlertController(title: "提醒", message: "排队信息获取有误，请重新签到", preferredStyle: .Alert)
+                let okAction = UIAlertAction(title: "确定", style: .Default, handler: nil )
+                alertView.addAction(okAction)
+                self.presentViewController(alertView, animated: false, completion: nil)
+                return
+            }
+            
+            let alertView = UIAlertController(title: "二维码扫描结果", message: "已签到，你的排队号是\(lineNumber)，前面还有\(count)个", preferredStyle: .Alert)
             let okAction = UIAlertAction(title: "确定", style: .Default){(action) in
-                //self.navigationController?.popViewControllerAnimated(true)
             }
             alertView.addAction(okAction)
             self.presentViewController(alertView, animated: false, completion: nil)
 
             self.interview.interviewStatus = 1//已签到，开始排队
-            let indexPath = NSIndexPath(forRow: 4, inSection: 0)
-            self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+            let indexPath1 = NSIndexPath(forRow: 3, inSection: 0)
+            let indexPath2 = NSIndexPath(forRow: 4, inSection: 0)
+            self.tableView.reloadRowsAtIndexPaths([indexPath1, indexPath2], withRowAnimation: .Automatic)
         }else{
-            let alertView = UIAlertController(title: "二维码扫描结果", message: json["message"].string!, preferredStyle: .Alert)
-            let okAction = UIAlertAction(title: "确定", style: .Default){(action) in
-                //self.navigationController?.popViewControllerAnimated(true)
+            var message = "排队信息获取有误，请重新签到"
+            if json["message"].string != nil {
+                message = json["message"].string!
             }
+            let alertView = UIAlertController(title: "二维码扫描结果", message: message, preferredStyle: .Alert)
+            let okAction = UIAlertAction(title: "确定", style: .Default, handler:nil)
             alertView.addAction(okAction)
             self.presentViewController(alertView, animated: false, completion: nil)
         }
@@ -85,6 +116,14 @@ class MyApplyTableViewController: UITableViewController,UpdateInterviewInfoDeleg
         HUD.hide()
     }
     
+    func systemAlert() {
+        
+        var soundID:SystemSoundID = 1005 //alarm
+        AudioServicesPlayAlertSound(soundID)
+        
+        soundID = SystemSoundID(kSystemSoundID_Vibrate) //振动
+        AudioServicesPlaySystemSound(soundID)
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -102,7 +141,7 @@ class MyApplyTableViewController: UITableViewController,UpdateInterviewInfoDeleg
         HUD.show(.RotatingImage(loadingImage))
         let url = myInterview
         let parameters = ["applicantId":userinfo.beisen_id!]
-        doRequest(url, parameters: parameters, encoding: .URL, praseMethod: praseInterview)
+        afRequest(url, parameters: parameters, encoding: .URL, praseMethod: praseInterview)
     }
 
     func capture(){
@@ -110,16 +149,10 @@ class MyApplyTableViewController: UITableViewController,UpdateInterviewInfoDeleg
         let qrcodevc = SYQRCodeViewController()
         qrcodevc.SYQRCodeSuncessBlock = {(aqrvc:SYQRCodeViewController!, qrString:String!) -> Void in
             if qrString.hasPrefix(ROOTURL){
-                let alertView = UIAlertController(title: "二维码扫描结果", message: qrString, preferredStyle: .Alert)
-                let okAction = UIAlertAction(title: "确定", style: .Default){(action) in
-                    self.navigationController?.popViewControllerAnimated(true)
-                    HUD.show(.RotatingImage(loadingImage))
-                    let seedUrl = qrString + "&applicantId=\(userinfo.beisen_id!)"  //getLineNumberAndRound
-                    //let parameters = ["applicantId":userinfo.beisen_id!]
-                    doRequest(seedUrl, parameters: nil, encoding: .URL, praseMethod: self.praseLineNumber)
-                }
-                alertView.addAction(okAction)
-                self.presentViewController(alertView, animated: false, completion: nil)
+                self.navigationController?.popViewControllerAnimated(true)
+                HUD.show(.RotatingImage(loadingImage))
+                let seedUrl = qrString + "&applicantId=\(userinfo.beisen_id!)"
+                afRequest(seedUrl, parameters: nil, encoding: .URL, praseMethod: self.praseLineNumber)
             }else{
                 
                 let alertView = UIAlertController(title: "二维码扫描结果", message: "不是签到二维码，请重新签到", preferredStyle: .Alert)
@@ -129,18 +162,21 @@ class MyApplyTableViewController: UITableViewController,UpdateInterviewInfoDeleg
                 alertView.addAction(okAction)
                 self.presentViewController(alertView, animated: false, completion: nil)
             }
-            
 
         }
         qrcodevc.SYQRCodeFailBlock = {(aqrvc:SYQRCodeViewController!) -> Void in
             let alertView = UIAlertController(title: "二维码扫描结果", message: "扫描失败", preferredStyle: .Alert)
-            let okAction = UIAlertAction(title: "确定", style: .Default, handler: nil)
+            let okAction = UIAlertAction(title: "确定", style: .Default){(action) in
+                self.navigationController?.popViewControllerAnimated(true)
+            }
             alertView.addAction(okAction)
             self.presentViewController(alertView, animated: false, completion: nil)
         }
         qrcodevc.SYQRCodeCancleBlock = {(aqrvc:SYQRCodeViewController!) -> Void in
             let alertView = UIAlertController(title: "二维码扫描结果", message: "扫描取消", preferredStyle: .Alert)
-            let okAction = UIAlertAction(title: "确定", style: .Default, handler: nil)
+            let okAction = UIAlertAction(title: "确定", style: .Default){(action) in
+                self.navigationController?.popViewControllerAnimated(true)
+            }
             alertView.addAction(okAction)
             self.presentViewController(alertView, animated: false, completion: nil)
         }
@@ -167,6 +203,7 @@ class MyApplyTableViewController: UITableViewController,UpdateInterviewInfoDeleg
             
             isFromMyInterview = true //标示从这个页面选择职位
             let applyViewController = self.storyboard?.instantiateViewControllerWithIdentifier("ApplyTableViewController") as! ApplyTableViewController
+            applyViewController.setButton = true
             self.navigationController?.pushViewController(applyViewController, animated: true)
         }
         
@@ -244,7 +281,7 @@ class MyApplyTableViewController: UITableViewController,UpdateInterviewInfoDeleg
                     cell.selectButton.addTarget(self, action: "selectTime:", forControlEvents: .TouchUpInside)
                 case 3:
                     //3简历筛选通过，且面试时间已安排，面试时间已选择
-                    if self.interview.interviewInfo != nil{
+                    if self.interview.interviewInfo != nil {
                         cell.setTimeSelected(self.interview.interviewInfo!)
                     }
                 case 4:
@@ -258,8 +295,11 @@ class MyApplyTableViewController: UITableViewController,UpdateInterviewInfoDeleg
                 }
             }else if self.interview.interviewPhase == 3 && self.interview.interviewStatus == 0 && self.interview.lineInfo?.interviewNumber == 1 {
                 //初试，未开始，未签到时，需显示时间地点信息
-                if self.interview.interviewInfo != nil{
+                if self.interview.interviewInfo != nil {
                     cell.setTimeSelected(self.interview.interviewInfo!)
+                }
+                if cell.subviews.last?.tag == 100 {
+                    cell.subviews.last?.removeFromSuperview()
                 }
             }else{
                 cell.setHide()
@@ -311,6 +351,11 @@ class MyApplyTableViewController: UITableViewController,UpdateInterviewInfoDeleg
                     let cell = tableView.dequeueReusableCellWithIdentifier(applyInterviewTableViewCell, forIndexPath: indexPath) as! ApplyInterviewTableViewCell
                     cell.interviewInfo = self.interview
                     cell.setPassAndNotEnd()
+                    
+                    cell.capture.userInteractionEnabled = true
+                    let captureTap = UITapGestureRecognizer(target: self, action: "capture")
+                    cell.capture.addGestureRecognizer(captureTap)
+                    
                     cell.contentView.addSubview(indicatorImage)
                     cell.selectionStyle = .None
                     returnCell = cell

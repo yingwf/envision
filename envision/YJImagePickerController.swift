@@ -14,7 +14,7 @@ import AVFoundation
 
 
 class YJImagePickerController: UIImagePickerController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         if UIImagePickerController.isSourceTypeAvailable(.Camera){
@@ -25,6 +25,7 @@ class YJImagePickerController: UIImagePickerController {
             self.videoMaximumDuration = 15 //15s
         }else{
             print("摄像头不可使用")
+            return
         }
     }
 
@@ -69,17 +70,27 @@ class YJImagePickerController: UIImagePickerController {
         let formater = NSDateFormatter()
         formater.dateFormat = "yyyy-MM-dd-HH:mm:ss"
         let filename = sourceUrl.componentsSeparatedByString("/").last!
-        self.videoCompress(sourceUrl)
+        
+        //压缩视频
+        //self.videoCompress(sourceUrl)
         //self.convertVideoWithMediumQuality(NSURL(string: sourceUrl)!)
+        
+        //self.convertVideoWithMediumQuality(NSURL(fileURLWithPath: sourceUrl, isDirectory: false))
+
+        
         //上传视频
-        let username = NSUserDefaults.standardUserDefaults().valueForKey("username") as? String
-        let password = NSUserDefaults.standardUserDefaults().valueForKey("password") as? String
-        let url = uploadFile + "?username=\(username!)&password=\(password!)&fileext=MOV&filetype=2"
-        
-        
-        Alamofire.upload(.POST, url, headers:nil, multipartFormData: {
+        let url = uploadFile
+        Alamofire.upload(.POST, url, multipartFormData: {
             multipartFormData in
-            multipartFormData.appendBodyPart(data: NSData(contentsOfFile: sourceUrl)!, name: filename, mimeType: "video/quicktime")
+            let data = NSData(contentsOfFile: sourceUrl)!
+            multipartFormData.appendBodyPart(data: data, name: "file", fileName:filename, mimeType: "video/quicktime")
+            
+            let param = ["name" : userinfo.name!, "email" : userinfo.email!, "mobile": userinfo.mobile!, "fileext": "MOV", "filetype": "2" ]
+            print(param)
+            for (key, value) in param {
+                multipartFormData.appendBodyPart(data: value.dataUsingEncoding(NSUTF8StringEncoding)!, name: key)
+            }
+            
             },
             encodingCompletion: { encodingResult in
                 switch encodingResult {
@@ -88,8 +99,8 @@ class YJImagePickerController: UIImagePickerController {
                         HUD.hide()
                         
                         print(response)
-                        if(response.data != nil && response.result.isSuccess){
-                            let json=SwiftyJSON.JSON(response.result.value!)
+                        if(response.result.value != nil && response.result.isSuccess){
+                            let json = SwiftyJSON.JSON(response.result.value!)
                             print(json)
                             if json["success"].boolValue {
                                 let alertView = UIAlertController(title: "提醒", message:"视频上传成功", preferredStyle: .Alert)
@@ -115,7 +126,6 @@ class YJImagePickerController: UIImagePickerController {
                     }
                 case .Failure(let encodingError):
                     print(encodingError)
-                    print("视频encoding失败")
                     let alertView = UIAlertController(title: "提醒", message:"视频录制失败，请重新录制", preferredStyle: .Alert)
                     let okAction = UIAlertAction(title: "确定", style: .Default, handler: nil)
                     alertView.addAction(okAction)
@@ -126,6 +136,7 @@ class YJImagePickerController: UIImagePickerController {
         )
         
     }
+    
     
     func videoCompress(sourceUrl: String){
         
@@ -159,6 +170,7 @@ class YJImagePickerController: UIImagePickerController {
 
         }
     }
+    
     func convertVideoWithMediumQuality(inputURL : NSURL){
         
         //let VideoFilePath = NSURL(fileURLWithPath: NSTemporaryDirectory()).URLByAppendingPathComponent("mergeVideo\(arc4random()%1000)d").URLByAppendingPathExtension("mp4").absoluteString
@@ -179,7 +191,7 @@ class YJImagePickerController: UIImagePickerController {
         let sourceAsset = AVURLAsset(URL: inputURL, options: nil)
         
         let assetExport: AVAssetExportSession = AVAssetExportSession(asset: sourceAsset, presetName: AVAssetExportPresetMediumQuality)!
-        assetExport.outputFileType = AVFileTypeQuickTimeMovie
+        assetExport.outputFileType = AVFileTypeMPEG4 //AVFileTypeQuickTimeMovie
         assetExport.outputURL = savePathUrl
         assetExport.exportAsynchronouslyWithCompletionHandler { () -> Void in
             

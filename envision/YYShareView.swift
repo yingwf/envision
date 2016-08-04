@@ -110,7 +110,7 @@ class YYShareView: UIView {
 
         
         let webpageObject = WXWebpageObject()
-        webpageObject.webpageUrl = "www.envisioncn.com" //self.webpageUrl
+        webpageObject.webpageUrl = self.webpageUrl
         message.mediaObject = webpageObject
         
         let req = SendMessageToWXReq()
@@ -141,7 +141,7 @@ class YYShareView: UIView {
         
         //创建多媒体对象
         let webpageObject = WXWebpageObject()
-        webpageObject.webpageUrl =  "www.envisioncn.com" //self.webpageUrl
+        webpageObject.webpageUrl =  self.webpageUrl
         message.mediaObject = webpageObject
         
         //完成发送对象实例

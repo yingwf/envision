@@ -11,7 +11,7 @@ import Foundation
 var HTMLURL = "http://campus.envisioncn.com:8080/envision/"
 var ROOTURL = HTMLURL + "api/"
 
-//118.242.16.162:5580 172.16.34.151 campus.envisioncn.com
+//118.242.16.162:5580 172.16.34.151 campus.envisioncn.com:8080
 
 //登陆
 let  LOGIN = ROOTURL + "applicantLogin.htm"
@@ -40,14 +40,14 @@ let searchSpecialty = ROOTURL + "searchSpecialty.htm"
 
 let applicantUpdate = ROOTURL + "applicantUpdate.htm"
 
-let getjobInfoUrl = ROOTURL + "getjobInfoUrl.htm"
+let getjobInfoUrl = HTMLURL + "jobinfoajax.html"
 
 let getjobInfoJson = ROOTURL + "getjobInfoJson.htm"
 
 let getJobList = ROOTURL + "getJobList.htm"
 
 //上传文件
-let uploadFile = ROOTURL + "uploadFileMultipart.htm"
+let uploadFile = ROOTURL + "uploadVideo.htm"
 
 let modifyUser = ROOTURL + "modifyUser.htm"
 
@@ -84,6 +84,8 @@ let startInterview = ROOTURL + "startInterview.htm"
 
 let getMyInterviewerInfoList = ROOTURL + "getMyInterviewerInfoList.htm"
 
+let getElinkUrl = ROOTURL + "getElinkUrl.htm"
+
 let helpUrl = HTMLURL + "helpcenter-company.html"
 
 let futureseed = HTMLURL + "futureseed.html"
@@ -100,16 +102,21 @@ let myInterview = ROOTURL + "myInterview.htm"
 
 let interviewCurrentApplicant = ROOTURL + "interviewCurrentApplicant.htm"
 
+let getCurrentUrl = ROOTURL + "getCurrentUrl.htm"
+
 let interviewNextApplicant = ROOTURL + "interviewNextApplicant.htm"
 
 let endOneInterview = ROOTURL + "endOneInterview.htm"
 
-
 let interviewerEndInterview = ROOTURL + "InterviewerEndInterview.htm"
 
-let fullresume = HTMLURL + "fullresume-options.html"
+let fullresume = HTMLURL + "fullresume-resumeajax.html"
 
+let inviteUpdateResume = ROOTURL + "inviteUpdateResume.htm"
 
+let getCurrentInterviewStatus  = ROOTURL + "getCurrentInterviewStatus.htm"
+
+let giveupJob = ROOTURL + "giveupJob.htm"
 
 
 

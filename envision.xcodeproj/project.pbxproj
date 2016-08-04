@@ -45,6 +45,7 @@
 		145CEBF01CFDA55300BDA5DD /* HeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 145CEBEE1CFDA55300BDA5DD /* HeaderTableViewCell.xib */; };
 		145CEBF31CFDA70C00BDA5DD /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145CEBF11CFDA70C00BDA5DD /* ContactTableViewCell.swift */; };
 		145CEBF41CFDA70C00BDA5DD /* ContactTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 145CEBF21CFDA70C00BDA5DD /* ContactTableViewCell.xib */; };
+		147EF49C1D5326210010E6D5 /* RNCalScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147EF49B1D5326210010E6D5 /* RNCalScrollView.swift */; };
 		14836C291D3DF41100653122 /* FullResumeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14836C281D3DF41100653122 /* FullResumeViewController.swift */; };
 		1484AC741D0138A00074346C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1484AC731D0138A00074346C /* LoginViewController.swift */; };
 		1484AC7E1D0152BC0074346C /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1484AC7D1D0152BC0074346C /* RegisterViewController.swift */; };
@@ -310,6 +311,7 @@
 		145CEBEE1CFDA55300BDA5DD /* HeaderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderTableViewCell.xib; sourceTree = "<group>"; };
 		145CEBF11CFDA70C00BDA5DD /* ContactTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactTableViewCell.swift; sourceTree = "<group>"; };
 		145CEBF21CFDA70C00BDA5DD /* ContactTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactTableViewCell.xib; sourceTree = "<group>"; };
+		147EF49B1D5326210010E6D5 /* RNCalScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RNCalScrollView.swift; sourceTree = "<group>"; };
 		14836C281D3DF41100653122 /* FullResumeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullResumeViewController.swift; sourceTree = "<group>"; };
 		1484AC731D0138A00074346C /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1484AC7D1D0152BC0074346C /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -741,6 +743,7 @@
 				14AD34131CF746E4007AA411 /* YYScrollView.swift */,
 				14053B0E1CFFDCC300BBF0A3 /* YYShareView.swift */,
 				14BF84771D0702D700AD212E /* YYPickerView.swift */,
+				147EF49B1D5326210010E6D5 /* RNCalScrollView.swift */,
 			);
 			name = framework;
 			sourceTree = "<group>";
@@ -1090,6 +1093,7 @@
 				1487DFB91D1BE58700215546 /* InterViewTableViewController.swift in Sources */,
 				14B95D8B1D12B4AA00F21FB3 /* CVTableViewCell.swift in Sources */,
 				14B34C711D227C3A00476B8B /* InterviewMgrViewController.swift in Sources */,
+				147EF49C1D5326210010E6D5 /* RNCalScrollView.swift in Sources */,
 				14CC8C671D26106D007CB259 /* SendTitleTableViewCell.swift in Sources */,
 				14AD34141CF746E4007AA411 /* YYScrollView.swift in Sources */,
 				145CEBEB1CFDA23400BDA5DD /* CenterTableViewCell.swift in Sources */,

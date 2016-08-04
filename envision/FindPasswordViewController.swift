@@ -46,6 +46,8 @@ class FindPasswordViewController: UIViewController {
         tap.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tap)
         
+        self.setBackButton()
+        
     }
     
     func textFieldDidBeginEditing(textField: UITextField){
@@ -63,7 +65,7 @@ class FindPasswordViewController: UIViewController {
         
         let url = getCode
         let param = ["mobile":userNameField.text!] as [String : AnyObject]
-        doRequest(url, parameters: param, encoding: .URL, praseMethod: praseVerificationCode)
+        afRequest(url, parameters: param, encoding: .URL, praseMethod: praseVerificationCode)
         
         self.receiveLabel.removeGestureRecognizer(receiveVerificaitonCodeTap!)
         self.receiveLabel.text = "已接收：60s"
@@ -121,7 +123,7 @@ class FindPasswordViewController: UIViewController {
         
         let url = findPassword
         let param = ["mobile": userNameField.text! , "password":passwordField.text!, "code":verificationCodeField.text!] as [String : AnyObject]
-        doRequest(url, parameters: param, encoding:.URL, praseMethod: praseFindPassword)
+        afRequest(url, parameters: param, encoding:.URL, praseMethod: praseFindPassword)
         
     }
     

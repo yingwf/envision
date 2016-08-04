@@ -16,6 +16,8 @@ class ApplyTableViewController: UITableViewController {
     let introduction = ["在校园我们欠缺经验，无实际工作体验，那这里就是你的梦想练级场。","2018届毕业生专属职位，帮助你的实习获得宝贵的工作经验。","积累工作经验要从基础做起，为您推荐更多职位。"]
     
     let positionTypeCell = "PositionTypeTableViewCell"
+    
+    var setButton = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,9 +26,10 @@ class ApplyTableViewController: UITableViewController {
         self.tableView.backgroundColor = BACKGROUNDCOLOR
         self.tableView.separatorStyle = .None
         self.tableView.registerNib(UINib(nibName: "PositionTypeTableViewCell", bundle: nil), forCellReuseIdentifier: positionTypeCell)
-
         
-
+        if setButton {
+            self.setBackButton()
+        }
     }
 
     override func didReceiveMemoryWarning() {

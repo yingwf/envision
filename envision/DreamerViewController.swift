@@ -32,11 +32,11 @@ class DreamerViewController: UITableViewController,UIImagePickerControllerDelega
         
         //获取滚动图片
         let url = GET_MARQUESS
-        doRequest(url, parameters: nil, encoding: .JSON, praseMethod: praseMarquess)
+        afRequest(url, parameters: nil, encoding: .JSON, praseMethod: praseMarquess)
         self.tableView.tableHeaderView = headView
         
         let seedUrl = getSeedList
-        doRequest(seedUrl, parameters: nil, encoding: .JSON, praseMethod: praseSeedList)
+        afRequest(seedUrl, parameters: nil, encoding: .JSON, praseMethod: praseSeedList)
         
         
         let width = UIScreen.mainScreen().bounds.width
@@ -50,7 +50,7 @@ class DreamerViewController: UITableViewController,UIImagePickerControllerDelega
 
         headView.frame = CGRect(x: 0, y: 0, width: width, height: width*0.427) //160
         
-
+        
     }
 
     //获取滚动图片
@@ -74,8 +74,12 @@ class DreamerViewController: UITableViewController,UIImagePickerControllerDelega
     func praseSeedList(json: SwiftyJSON.JSON){
         let status = json["success"].boolValue
         if status {
-            let count = json["seedList"].array!.count
-            
+            guard let count = json["seedList"].array?.count else {
+                return
+            }
+            guard count > 0 else {
+                return
+            }
             for index in 0 ... count - 1 {
                 let seed = SeedInfo()
                 seed.id = json["seedList"].array![index]["id"].int
@@ -119,16 +123,41 @@ class DreamerViewController: UITableViewController,UIImagePickerControllerDelega
             self.navigationController?.pushViewController(loginViewController, animated: true)
             return
         }
+        if userinfo.type == 3 {
+            let alertView = UIAlertController(title: "提醒", message: "面试官用户不能录制视频", preferredStyle: .Alert)
+            let okAction = UIAlertAction(title: "确定", style: .Default, handler:nil)
+            alertView.addAction(okAction)
+            self.presentViewController(alertView, animated: false, completion: nil)
+            return
+        }
         if !userinfo.haveCV(){
             //未填写微简历
-            let editCVViewController  = self.storyboard?.instantiateViewControllerWithIdentifier("EditCVViewController") as! EditCVViewController
-            editCVViewController.isModify = true
-            self.navigationController?.pushViewController(editCVViewController, animated: true)
+            let alertView = UIAlertController(title: "提醒", message: "请先完善简历信息", preferredStyle: .Alert)
+            let okAction = UIAlertAction(title: "确定", style: .Default){
+                (action) in
+                let editCVViewController  = self.storyboard?.instantiateViewControllerWithIdentifier("EditCVViewController") as! EditCVViewController
+                editCVViewController.isModify = true
+                self.navigationController?.pushViewController(editCVViewController, animated: true)
+            }
+            let cancelAction = UIAlertAction(title: "取消", style: .Cancel, handler: nil)
+            alertView.addAction(okAction)
+            alertView.addAction(cancelAction)
+            self.presentViewController(alertView, animated: false, completion: nil)
             return
         }
         
         //录制视频
         imagePickerController = YJImagePickerController()
+        if !UIImagePickerController.isSourceTypeAvailable(.Camera){
+            
+            let alertView = UIAlertController(title: "提醒", message: "摄像头不可用，请在设置中打开摄像头权限", preferredStyle: .Alert)
+            let okAction = UIAlertAction(title: "确定", style: .Default) {(UIAlertAction) -> Void in
+                self.dismissViewControllerAnimated(true, completion: nil)
+            }
+            alertView.addAction(okAction)
+            self.presentViewController(alertView, animated: true, completion: nil)
+            return
+        }
         imagePickerController!.delegate = self
         self.presentViewController(imagePickerController!, animated: true, completion: nil)
     }
@@ -144,11 +173,13 @@ class DreamerViewController: UITableViewController,UIImagePickerControllerDelega
     func applyPosition(){
         //self.navigationController?.tabBarController?.selectedIndex = 1
         let applyViewController = self.storyboard?.instantiateViewControllerWithIdentifier("ApplyTableViewController") as! ApplyTableViewController
+        applyViewController.setButton = true
         self.navigationController?.pushViewController(applyViewController, animated: true)
         
     }
     
     func helpCenter(){
+        
         let introViewController  = self.storyboard?.instantiateViewControllerWithIdentifier("WebViewController") as! WebViewController
         introViewController.webSite = helpUrl
         introViewController.navigationItem.title = "帮助中心"

@@ -75,7 +75,7 @@ class SearchVCViewController: UIViewController, UITableViewDataSource,UITableVie
         self.dismissViewControllerAnimated(true, completion: nil)
         
     }
-//    
+
     // 返回表格行数（也就是返回控件数）
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.dataArray.count
@@ -105,7 +105,7 @@ class SearchVCViewController: UIViewController, UITableViewDataSource,UITableVie
 //        }
 //        let url =  searchAcademy
 //        let param = ["keyword":searchText ,"count":self.searchCount] as [String : AnyObject]
-//        doRequest(url, parameters: param, encoding: .URL, praseMethod: praseSearchResult)
+//        afRequest(url, parameters: param, encoding: .URL, praseMethod: praseSearchResult)
 //        
 //    }
     
@@ -129,10 +129,8 @@ class SearchVCViewController: UIViewController, UITableViewDataSource,UITableVie
         
     }
     
-    // 搜索代理UISearchBarDelegate方法，每次改变搜索内容时都会调用
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        if (searchText as NSString).length < (self.searchText as NSString).length{
-            //回退时不搜索
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        guard let searchText = searchBar.text else {
             return
         }
         self.searchText = searchText
@@ -141,12 +139,30 @@ class SearchVCViewController: UIViewController, UITableViewDataSource,UITableVie
         if isSearchSchool {
             url =  searchAcademy
         }
-        if searchText.isEmpty {return}
         let param = ["keyword":searchText ,"count":self.searchCount] as [String : AnyObject]
-        doRequest(url, parameters: param, encoding: .URL, praseMethod: praseSearchResult)
-        
-
+        afRequest(url, parameters: param, encoding: .URL, praseMethod: praseSearchResult)
     }
+    
+    
+    
+    // 搜索代理UISearchBarDelegate方法，每次改变搜索内容时都会调用
+//    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+//        if (searchText as NSString).length < (self.searchText as NSString).length{
+//            //回退时不搜索
+//            return
+//        }
+//        self.searchText = searchText
+//        self.searchBar.resignFirstResponder()
+//        var url = searchSpecialty
+//        if isSearchSchool {
+//            url =  searchAcademy
+//        }
+//        if searchText.isEmpty {return}
+//        let param = ["keyword":searchText ,"count":self.searchCount] as [String : AnyObject]
+//        afRequest(url, parameters: param, encoding: .URL, praseMethod: praseSearchResult)
+//        
+//
+//    }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let info = tableView.cellForRowAtIndexPath(indexPath)?.textLabel?.text

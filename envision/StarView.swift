@@ -17,7 +17,6 @@ class StarView: UIView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.setStar()
-
     }
     
     override init(frame: CGRect) {
@@ -26,6 +25,22 @@ class StarView: UIView {
         self.setStar()
     }
     
+    func setResult(star: Int) {
+        if star < 0 {
+            self.star = 0
+        }else if star > 5 {
+            self.star = 5
+        }else {
+            self.star = star
+        }
+        for index in 0...4 {
+            if index <= self.star - 1 {
+                (starArray[index].subviews.first as! UIImageView).image = UIImage(named:"starY")
+            }else{
+                (starArray[index].subviews.first as! UIImageView).image = UIImage(named:"starG")
+            }
+        }
+    }
     
     func setStar(){
         

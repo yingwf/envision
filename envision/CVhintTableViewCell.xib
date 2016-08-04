@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1808" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1909" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -14,18 +15,47 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="cv_prompt" translatesAutoresizingMaskIntoConstraints="NO" id="fh2-xC-kEY">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cv_prompt" translatesAutoresizingMaskIntoConstraints="NO" id="fh2-xC-kEY">
                         <rect key="frame" x="16" y="17" width="10" height="10"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="10" id="DNA-Ow-xS9"/>
+                            <constraint firstAttribute="height" constant="10" id="Rhv-rC-V9U"/>
+                        </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="姓名，邮箱，身份证号，手机号，填写后无法修改，请确保准确。" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v05-Xs-EKK">
-                        <rect key="frame" x="34" y="11" width="333" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="姓名，邮箱，身份证，手机号，填写后无法修改，请确保准确。" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v05-Xs-EKK">
+                        <rect key="frame" x="34" y="0.0" width="333" height="44"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="333" id="SYd-qJ-NPg"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <color key="textColor" red="0.56470588235294117" green="0.56470588235294117" blue="0.56470588235294117" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="SYd-qJ-NPg"/>
+                            </mask>
+                        </variation>
                     </label>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="v05-Xs-EKK" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="06C-v2-uVR"/>
+                    <constraint firstItem="v05-Xs-EKK" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="EUo-cK-fed"/>
+                    <constraint firstItem="v05-Xs-EKK" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="H0m-Yn-84z"/>
+                    <constraint firstItem="v05-Xs-EKK" firstAttribute="leading" secondItem="fh2-xC-kEY" secondAttribute="trailing" constant="8" symbolic="YES" id="HKO-OD-v5e"/>
+                    <constraint firstItem="v05-Xs-EKK" firstAttribute="centerY" secondItem="fh2-xC-kEY" secondAttribute="centerY" id="LGC-7l-Ec8"/>
+                    <constraint firstItem="v05-Xs-EKK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="26" id="bML-BF-ItM"/>
+                    <constraint firstItem="v05-Xs-EKK" firstAttribute="leading" secondItem="fh2-xC-kEY" secondAttribute="trailing" constant="8" symbolic="YES" id="ppT-3y-Z5g"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="ppT-3y-Z5g"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="179.5" y="307"/>
+            <connections>
+                <outlet property="hint" destination="v05-Xs-EKK" id="W6J-Zc-ltB"/>
+            </connections>
+            <point key="canvasLocation" x="236.5" y="212"/>
         </tableViewCell>
     </objects>
     <resources>

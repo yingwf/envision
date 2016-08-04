@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1808" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1909" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -14,14 +15,14 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="58.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Cm-FH-nBk">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Cm-FH-nBk">
                         <rect key="frame" x="0.0" y="10" width="375" height="44"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WLd-Eu-aMZ">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WLd-Eu-aMZ">
                                 <rect key="frame" x="0.0" y="16" width="3" height="12"/>
                                 <color key="backgroundColor" red="0.0" green="0.65098039220000004" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="应聘进度" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Sh-rP-pBz">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="应聘进度" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Sh-rP-pBz">
                                 <rect key="frame" x="16" y="11" width="342" height="21"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                 <color key="textColor" red="0.0" green="0.65098039220000004" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -29,9 +30,25 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="WLd-Eu-aMZ" firstAttribute="centerY" secondItem="3Sh-rP-pBz" secondAttribute="centerY" id="8Zz-NO-G4D"/>
+                            <constraint firstItem="3Sh-rP-pBz" firstAttribute="leading" secondItem="WLd-Eu-aMZ" secondAttribute="trailing" constant="13" id="Cmk-QD-LbN"/>
+                            <constraint firstItem="3Sh-rP-pBz" firstAttribute="top" secondItem="3Cm-FH-nBk" secondAttribute="top" constant="11" id="EvI-KL-Nah"/>
+                            <constraint firstItem="3Sh-rP-pBz" firstAttribute="centerX" secondItem="3Cm-FH-nBk" secondAttribute="centerX" id="HJD-qh-dHm"/>
+                            <constraint firstItem="WLd-Eu-aMZ" firstAttribute="leading" secondItem="3Cm-FH-nBk" secondAttribute="leading" id="T3P-Un-4uz"/>
+                            <constraint firstItem="3Sh-rP-pBz" firstAttribute="centerY" secondItem="3Cm-FH-nBk" secondAttribute="centerY" id="ZMo-yi-jfm"/>
+                            <constraint firstItem="WLd-Eu-aMZ" firstAttribute="top" secondItem="3Cm-FH-nBk" secondAttribute="top" constant="16" id="Zn4-80-rbF"/>
+                            <constraint firstAttribute="trailing" secondItem="3Sh-rP-pBz" secondAttribute="trailing" constant="17" id="fDg-yM-C9o"/>
+                        </constraints>
                     </view>
                 </subviews>
                 <color key="backgroundColor" red="0.94117647058823528" green="0.98431372549019602" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                <constraints>
+                    <constraint firstItem="3Cm-FH-nBk" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="jE5-wk-Ff7"/>
+                    <constraint firstAttribute="trailing" secondItem="3Cm-FH-nBk" secondAttribute="trailing" id="lQJ-Sl-zVe"/>
+                    <constraint firstItem="3Cm-FH-nBk" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="qwN-JN-Zxt"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="3Cm-FH-nBk" secondAttribute="bottom" constant="-3.5" id="yRK-4Y-Tar"/>
+                </constraints>
             </tableViewCellContentView>
             <point key="canvasLocation" x="139.5" y="281.5"/>
         </tableViewCell>

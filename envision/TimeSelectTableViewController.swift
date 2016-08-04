@@ -32,7 +32,7 @@ class TimeSelectTableViewController: UITableViewController {
         
         let seedUrl = getInterviewInfoList
         var parameters = ["applicantId":userinfo.beisen_id! ] as! [String: AnyObject]
-        doRequest(seedUrl, parameters: parameters, encoding: .URL, praseMethod: praseInterviewInfoList)
+        afRequest(seedUrl, parameters: parameters, encoding: .URL, praseMethod: praseInterviewInfoList)
     }
     
     func praseInterviewInfoList(json: SwiftyJSON.JSON){
@@ -40,11 +40,13 @@ class TimeSelectTableViewController: UITableViewController {
         if json["success"].boolValue {
             let interviewList = json["list"].array!
             if interviewList.count > 0{
+                var tempList = [InterviewInfo]()
                 for index in 0...interviewList.count - 1{
                     let interview = InterviewInfo()
                     interview.getInterviewInfo(interviewList[index])
-                    self.interviewInfos.append(interview)
+                    tempList.append(interview)
                 }
+                interviewInfos = tempList
             }
             self.tableView.reloadData()
         }
@@ -65,7 +67,7 @@ class TimeSelectTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return interviewInfos.count
+        return interviewInfos.count + 1
     }
 
     
@@ -115,7 +117,7 @@ class TimeSelectTableViewController: UITableViewController {
             
             let seedUrl = selectInterviewTime
             let parameters = ["applicantId":userinfo.beisen_id!,"scheduleInterviewid":self.interviewInfos[self.currentRow].id! ]
-            doRequest(seedUrl, parameters: parameters, encoding: .URL, praseMethod: self.praseSelectInterviewTime)
+            afRequest(seedUrl, parameters: parameters, encoding: .URL, praseMethod: self.praseSelectInterviewTime)
             
 
         }
@@ -128,21 +130,38 @@ class TimeSelectTableViewController: UITableViewController {
     }
     
     func praseSelectInterviewTime(json: SwiftyJSON.JSON){
-
+        
+        HUD.hide()
         if json["success"].boolValue {
             self.delegate?.updateInterviewTime(self.interviewInfos[self.currentRow])
             self.navigationController?.popViewControllerAnimated(true)
         }else{
+            if json["statusCode"] == 612 {
+                //"该面试场次人数已满，请重新选择"
+                let alertView = UIAlertController(title: "提醒", message:"该面试场次人数已满，请重新选择" , preferredStyle: .Alert)
+                let okAction = UIAlertAction(title: "确认", style: .Default) { action in
+                    //确认后，刷新场次信息
+                    HUD.show(.RotatingImage(loadingImage))
+                    let seedUrl = getInterviewInfoList
+                    let parameters = ["applicantId":userinfo.beisen_id! ]
+                    afRequest(seedUrl, parameters: parameters, encoding: .URL, praseMethod: self.praseInterviewInfoList)
+                }
+                alertView.addAction(okAction)
+                self.presentViewController(alertView, animated: false, completion: nil)
+                return
+            }
+
             var message = "提交失败，请重新提交"
             if json["message"].string != nil{
                 message = json["message"].string!
             }
+            
             let alertView = UIAlertController(title: "提醒", message:message , preferredStyle: .Alert)
             let okAction = UIAlertAction(title: "确认", style: .Default, handler: nil)
             alertView.addAction(okAction)
             self.presentViewController(alertView, animated: false, completion: nil)
         }
-        HUD.hide()
+        
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -159,55 +178,48 @@ class TimeSelectTableViewController: UITableViewController {
     
     @IBAction func giveup(sender: AnyObject) {
         
-        let endInterviewTableViewController = self.storyboard?.instantiateViewControllerWithIdentifier("EndInterviewTableViewController") as! EndInterviewTableViewController
+        let alertView = UIAlertController(title: "确认放弃", message: "是否确认放弃面试", preferredStyle: .Alert)
+        let okAction = UIAlertAction(title: "确认", style: .Default){
+            (action) in
+            
+            HUD.show(.RotatingImage(loadingImage))
+            
+            let seedUrl = giveupJob
+            let parameters = ["applicantId":userinfo.beisen_id! ]
+            afRequest(seedUrl, parameters: parameters, encoding: .URL, praseMethod: self.praseGiveup)
+            
+            
+        }
+        let cancelAction = UIAlertAction(title: "取消", style: .Cancel, handler: nil)
         
-        self.navigationController?.pushViewController(endInterviewTableViewController, animated: true)
+        alertView.addAction(okAction)
+        alertView.addAction(cancelAction)
+        self.presentViewController(alertView, animated: false, completion: nil)
         
-        
     }
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    
+    
+    func praseGiveup(json: SwiftyJSON.JSON){
+
+        if json["success"].boolValue {
+            let alertView = UIAlertController(title: "提醒", message:"已放弃面试" , preferredStyle: .Alert)
+            let okAction = UIAlertAction(title: "确认", style: .Default) {
+                action in
+                self.navigationController?.popViewControllerAnimated(true)
+            }
+            alertView.addAction(okAction)
+            self.presentViewController(alertView, animated: false, completion: nil)
+            
+        }else{
+            var message = "提交失败，请重新提交"
+            if json["message"].string != nil{
+                message = json["message"].string!
+            }
+            let alertView = UIAlertController(title: "提醒", message:message , preferredStyle: .Alert)
+            let okAction = UIAlertAction(title: "确认", style: .Default, handler: nil)
+            alertView.addAction(okAction)
+            self.presentViewController(alertView, animated: false, completion: nil)
+        }
+        HUD.hide()
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

@@ -69,13 +69,21 @@ class SendViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         }
         
         
+        let alertView = UIAlertController(title: "提醒", message: "只能申请一个职位，且申请后不可更改，是否继续申请？", preferredStyle: .Alert)
+        let okAction = UIAlertAction(title: "申请", style: .Default){
+            action in
+            let url = applyjob
+            var parameters = ["applicantId":userinfo.beisen_id!, "jobId":self.job.jobid!] as! [String: AnyObject]
+            
+            HUD.show(.RotatingImage(loadingImage))
+            
+            afRequest(url, parameters: parameters, encoding: .URL, praseMethod: self.praseApplyJob)
+        }
         
-        let url = applyjob
-        var parameters = ["applicantId":userinfo.beisen_id!, "jobId":self.job.jobid!] as! [String: AnyObject]
-
-        HUD.show(.RotatingImage(loadingImage))
-
-        doRequest(url, parameters: parameters, encoding: .URL, praseMethod: praseApplyJob)
+        alertView.addAction(okAction)
+        let cancelAction = UIAlertAction(title: "取消", style: .Cancel, handler:nil)
+        alertView.addAction(cancelAction)
+        self.presentViewController(alertView, animated: false, completion: nil)
         
     }
     
@@ -94,7 +102,8 @@ class SendViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
                     myApplyTableViewController!.updateInfo() //更新信息
                     
                 }else{
-                    self.navigationController?.popViewControllerAnimated(true)
+                    //self.navigationController?.popViewControllerAnimated(true)
+                    self.navigationController?.popToRootViewControllerAnimated(true)
                 }
                 
             }

@@ -10,6 +10,8 @@ import UIKit
 
 class CVhintTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var hint: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

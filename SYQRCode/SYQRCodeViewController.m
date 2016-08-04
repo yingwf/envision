@@ -130,6 +130,13 @@ static const float kReaderViewHeight = 200;
     {
         NSLog(@"没有摄像头-%@", error.localizedDescription);
         
+        UIAlertController *alertView = [UIAlertController alertControllerWithTitle:@"提醒" message:@"请在设置中打开摄像头权限" preferredStyle:UIAlertControllerStyleAlert];
+        [alertView addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+            [self.navigationController popViewControllerAnimated:true];
+            
+        }]];
+        [self presentViewController:alertView animated:NO completion:nil];
+        
         return;
     }
     

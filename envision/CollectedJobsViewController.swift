@@ -31,7 +31,7 @@ class CollectedJobsViewController: UITableViewController,updateRowInfoDelegate {
         HUD.show(.RotatingImage(loadingImage))
         let seedUrl = getFavorJobList
         var parameters = ["applicantId":userinfo.beisen_id!] as! [String: AnyObject]
-        doRequest(seedUrl, parameters: parameters, encoding: .URL, praseMethod: praseJobList)
+        afRequest(seedUrl, parameters: parameters, encoding: .URL, praseMethod: praseJobList)
     
     }
     

@@ -24,7 +24,13 @@ func getTimeFromString(datetime: String?)->String?{
         return nil
     }
     let datetimeArray = datetime!.componentsSeparatedByCharactersInSet(NSCharacterSet (charactersInString: " "))
+    guard datetimeArray.count >= 1 else{
+        return nil
+    }
     let timeArray = datetimeArray[1].componentsSeparatedByCharactersInSet(NSCharacterSet (charactersInString: ":"))
+    guard timeArray.count >= 1 else{
+        return nil
+    }
     return timeArray[0] + ":" + timeArray[1]
 }
 
@@ -41,9 +47,10 @@ func getMonthAndDayFromString(datetime: String?)->String?{
     return returnDatetime
 }
 
-func doRequest(url: String, parameters: [String: AnyObject]?, encoding:ParameterEncoding, praseMethod: (SwiftyJSON.JSON)-> Void){
+func afRequest(url: String, parameters: [String: AnyObject]?, encoding:ParameterEncoding, praseMethod: (SwiftyJSON.JSON)-> Void){
     
     //let headersInput =  ["Content-Type":"application/json","Accept":"application/json"]
+    print(parameters)
     
     Alamofire.request(.POST, url, parameters: parameters, encoding: encoding).responseJSON { response in
         if(response.data != nil && response.result.isSuccess){
@@ -68,28 +75,88 @@ extension UIImageView {
         if urlString == nil || urlString == ""{
             return
         }
+        
+        //本地查询文件
+        if let imageData = getFile(urlString) {
+            self.image = UIImage(data: imageData)
+            return
+        }
+        
         if let url = NSURL(string: urlString!) {
             let request = NSURLRequest(URL: url)
             NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {
                 (response: NSURLResponse?, data: NSData?, error: NSError?) -> Void in
                 if data != nil{
                     self.image = UIImage(data: data!)
+                    //本地保存文件
+                    saveFile(data!, urlString: urlString)
                 }
             }
         }
     }
 }
 
-func doRequestGetImage(imageURL: String){
-    var image: UIImage?
-    Alamofire.request(.GET, imageURL).response { (request, response,  data, error) in
-        image = UIImage(data: data! as NSData,scale: 1)
-        NSLog("\(imageURL), json = \(data)")
-        if error != nil{
-            NSLog("\(imageURL)失败,\(error)")
-        }
+func getFile(filePath: String?) -> NSData? {
+    //根据文件名，获取data
+    guard filePath != nil else {
+        return nil
+    }
+    let filename = filePath!.componentsSeparatedByCharactersInSet(NSCharacterSet (charactersInString: "/")).last
+    guard filename != nil else {
+        return nil
+    }
+    
+    let fileManager = NSFileManager.defaultManager()
+    
+    let imageDir = NSHomeDirectory() + "/Documents/images"
+    
+    if fileManager.fileExistsAtPath(imageDir + "/\(filename!)") {
+        return NSData(contentsOfFile: imageDir + "/\(filename!)")
+    }else{
+        return nil
     }
 }
+
+func saveFile(data: NSData, urlString: String?){
+    //本地保存文件
+    guard let filePath = urlString else {
+        return
+    }
+    let filePath1 = filePath.componentsSeparatedByCharactersInSet(NSCharacterSet (charactersInString: "?")).first
+    guard filePath1 != nil else {
+        return
+    }
+    
+    let filename = filePath1!.componentsSeparatedByCharactersInSet(NSCharacterSet (charactersInString: "/")).last
+    guard filename != nil else {
+        return
+    }
+    
+    let fileManager = NSFileManager.defaultManager()
+    
+    let imageDir = NSHomeDirectory() + "/Documents/images"
+
+    let imageUrl = NSURL(fileURLWithPath: imageDir, isDirectory: true)
+    
+    do {
+        try fileManager.createDirectoryAtURL(imageUrl, withIntermediateDirectories: true, attributes: nil)
+    } catch {
+        return
+    }
+    data.writeToFile(imageDir + "/\(filename!)", atomically: true)
+}
+
+
+//func afRequestGetImage(imageURL: String){
+//    var image: UIImage?
+//    Alamofire.request(.GET, imageURL).response { (request, response,  data, error) in
+//        image = UIImage(data: data! as NSData,scale: 1)
+//        NSLog("\(imageURL), json = \(data)")
+//        if error != nil{
+//            NSLog("\(imageURL)失败,\(error)")
+//        }
+//    }
+//}
 
 func getBackButton(vc: UIViewController) -> UIBarButtonItem{
     

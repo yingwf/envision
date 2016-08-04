@@ -31,24 +31,58 @@ class EndInterviewTableViewController: UITableViewController {
         tap.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tap)
         
+        HUD.show(.RotatingImage(loadingImage))
         let seedUrl = endOneInterview
-        var parameters = ["interviewinfov2id":INTERVIEWID!, "employeeId":userinfo.employeeid!] as! [String: AnyObject]
-        doRequest(seedUrl, parameters: parameters, encoding: .URL, praseMethod: praseOneInterview)
+        var parameters = ["interviewinfov2id":String(INTERVIEWID!), "employeeId":userinfo.employeeid!] as! [String: AnyObject]
+        afRequest(seedUrl, parameters: parameters, encoding: .URL, praseMethod: praseOneInterview)
         
     }
     
     func praseOneInterview(json: SwiftyJSON.JSON){
         
+        HUD.hide()
         if json["success"].boolValue {
             interviewProgress.getInfo(json)
+        }else{
+            return
         }
         if let cell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)){
             let resultCell = cell as! ResultTableViewCell
-            resultCell.interviewedApplicant.text = String(interviewProgress.interviewedApplicant)
-            resultCell.passedApplicant.text = String(interviewProgress.passedApplicant)
-            resultCell.passedRate.text = interviewProgress.passedRate
+            if let interviewedApplicant = interviewProgress.interviewedApplicant {
+                resultCell.interviewedApplicant.text = String(interviewedApplicant)
+            }
+            if let passedApplicant = interviewProgress.passedApplicant {
+                resultCell.passedApplicant.text = String(passedApplicant)
+            }
+            if let passedRate = interviewProgress.passedRate {
+                resultCell.passedRate.text = passedRate
+            }
         }
-
+        
+        //更新评价
+        if let cell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1)){
+            let evaluateCell = cell as! EvaluateTableViewCell
+            if let thought1 = interviewProgress.thought1 {
+                evaluateCell.star1.setResult(thought1)
+            }
+            if let thought2 = interviewProgress.thought2 {
+                evaluateCell.star2.setResult(thought2)
+            }
+            if let thought3 = interviewProgress.thought3 {
+                evaluateCell.star3.setResult(thought3)
+            }
+            if let thought4 = interviewProgress.thought4 {
+                evaluateCell.star4.setResult(thought4)
+            }
+        }
+        
+        //更新建议
+        if let cell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 2)){
+            let textView = cell.subviews.last as! UITextView
+            if let other = interviewProgress.others {
+                textView.text = other
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -158,8 +192,8 @@ class EndInterviewTableViewController: UITableViewController {
         HUD.show(.RotatingImage(loadingImage))
         
         let seedUrl = interviewerEndInterview
-        var parameters = ["interviewinfov2id":INTERVIEWID!, "employeeId":userinfo.employeeid!, "thought1":stars[0], "thought2":stars[1], "thought3":stars[2], "thought4":stars[3], "others": advice] as! [String: AnyObject]
-        doRequest(seedUrl, parameters: parameters, encoding: .URL, praseMethod: praseEndInterview)
+        var parameters = ["interviewId":String(INTERVIEWID!), "employeeId":userinfo.employeeid!, "thought1":stars[0], "thought2":stars[1], "thought3":stars[2], "thoughtOverAll":stars[3], "others": advice] as! [String: AnyObject]
+        afRequest(seedUrl, parameters: parameters, encoding: .URL, praseMethod: praseEndInterview)
         
         
     }

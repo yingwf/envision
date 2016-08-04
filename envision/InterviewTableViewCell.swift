@@ -16,10 +16,6 @@ class InterviewTableViewCell: UITableViewCell {
     
     @IBOutlet weak var jobName: UILabel!
     
-    @IBOutlet weak var personAmount: UILabel!
-    
-    @IBOutlet weak var duration: UILabel!
-    
     @IBOutlet weak var readcv: UIView!
     
     @IBOutlet weak var interview: UIView!
@@ -29,6 +25,10 @@ class InterviewTableViewCell: UITableViewCell {
     @IBOutlet weak var time: UILabel!
     
     @IBOutlet weak var address: UILabel!
+    
+    @IBOutlet weak var readBgView: UIView!
+    
+    @IBOutlet weak var session: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -40,18 +40,26 @@ class InterviewTableViewCell: UITableViewCell {
         bgView.layer.cornerRadius = 5
         bgView.layer.masksToBounds = true
         
-        readcv.layer.borderWidth = 0.5
-        readcv.layer.borderColor = UIColor(red: 0, green: 0xa6/255, blue: 0xdb/255, alpha: 0.24).CGColor
-        readcv.layer.cornerRadius = 5
-        readcv.layer.masksToBounds = true
+//        readcv.layer.borderWidth = 0.5
+//        readcv.layer.borderColor = UIColor(red: 0, green: 0xa6/255, blue: 0xdb/255, alpha: 0.24).CGColor
+//        readcv.layer.cornerRadius = 5
+//        readcv.layer.masksToBounds = true
+//        
+//        interview.layer.cornerRadius = 5
+//        interview.layer.masksToBounds = true
         
-        interview.layer.cornerRadius = 5
-        interview.layer.masksToBounds = true
+//        let bgWidth = UIScreen.mainScreen().bounds.width
+//        let sepView = UIView(frame: CGRect(x: 10, y: 101, width: bgWidth - 20, height: 0.5))
+//        sepView.backgroundColor = UIColor(red: 0, green: 0xa6/255, blue: 0xdb/255, alpha: 0.24)
+//        bgView.addSubview(sepView)
         
-        let bgWidth = UIScreen.mainScreen().bounds.width
-        let sepView = UIView(frame: CGRect(x: 10, y: 101, width: bgWidth - 20, height: 0.5))
-        sepView.backgroundColor = UIColor(red: 0, green: 0xa6/255, blue: 0xdb/255, alpha: 0.24)
-        bgView.addSubview(sepView)
+        let readWidth = readBgView.frame.width
+        let sepView = UIView(frame: CGRect(x: readWidth - 0.5, y: 7.5, width: 0.5, height: 19))
+        sepView.backgroundColor = UIColor(red: 0xe5/255, green: 0xe5/255, blue: 0xe5/255, alpha: 1)
+        readBgView.addSubview(sepView)
+        
+        
+        
         
         
     }

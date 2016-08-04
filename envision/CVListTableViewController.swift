@@ -12,15 +12,19 @@ import SwiftyJSON
 
 class CVListTableViewController: UITableViewController {
 
-    
     let cvListCell = "CVListTableViewCell"
     var cvInfos = [CvInfo]()
-    
-    
+    var refreshController = UIRefreshControl()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.setBackButton()
+        
+        self.refreshController.attributedTitle = NSAttributedString(string: "下拉刷新")
+        self.refreshController.addTarget(self, action: "refreshList", forControlEvents: .ValueChanged)
+        
+        self.tableView.addSubview(refreshController)
         
         self.tableView.tableFooterView = UIView() //取消多余的分割线
         self.tableView.backgroundColor = BACKGROUNDCOLOR
@@ -28,8 +32,8 @@ class CVListTableViewController: UITableViewController {
         
         HUD.show(.RotatingImage(loadingImage))
         let seedUrl = getApplicantListForMyInterview
-        let parameters = ["interviewId":30251854]
-        doRequest(seedUrl, parameters: parameters, encoding: .URL, praseMethod: praseCvList)
+        let parameters = ["interviewId":String(INTERVIEWID!),"Email":userinfo.email!] as! [String:AnyObject]
+        afRequest(seedUrl, parameters: parameters, encoding: .URL, praseMethod: praseCvList)
         
     }
     
@@ -37,17 +41,27 @@ class CVListTableViewController: UITableViewController {
         if json["success"].boolValue {
             let cvData = json["data"].array!
             if cvData.count > 0{
+                var tempList = [CvInfo]()
                 for index in 0...cvData.count - 1{
                     let cvInfo = CvInfo()
                     cvInfo.getCvInfo(cvData[index])
-                    self.cvInfos.append(cvInfo)
+                    tempList.append(cvInfo)
                 }
+                self.cvInfos = tempList
             }
             self.tableView.reloadData()
         }
         HUD.hide()
+        self.refreshController.endRefreshing()
     }
     
+    func refreshList() {
+        
+        let seedUrl = getApplicantListForMyInterview
+        let parameters = ["interviewId":String(INTERVIEWID!),"Email":userinfo.email!] as! [String:AnyObject]
+        afRequest(seedUrl, parameters: parameters, encoding: .URL, praseMethod: praseCvList)
+        
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -81,16 +95,19 @@ class CVListTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.tableView.deselectRowAtIndexPath(indexPath, animated: false)
         
-//        let positionDetailViewController = self.storyboard?.instantiateViewControllerWithIdentifier("PositionDetailViewController") as! PositionDetailViewController
-//        
-//        positionDetailViewController.jobid = self.jobs[indexPath.row].jobid!
-//        positionDetailViewController.delegate = self
-//        
-//        self.currentIndexPath = indexPath
-//        self.currentJob = self.jobs[indexPath.row]
-//        
-//        self.navigationController?.pushViewController(positionDetailViewController, animated: true)
+        guard let ElinkUrl = self.cvInfos[indexPath.row].ElinkUrl else{
+            return
+        }
+        
+        let introViewController  = self.storyboard?.instantiateViewControllerWithIdentifier("FullResumeViewController") as! FullResumeViewController
+        
+        introViewController.webSite =  ElinkUrl //  fullresume + "?applicantId=\(applicantId)"
+        
+        self.navigationController?.pushViewController(introViewController, animated: true)
+        
+        
     }
     
     

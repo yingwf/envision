@@ -15,11 +15,7 @@ class PositionDetailViewController: UIViewController,UITableViewDelegate,UITable
     var webSite: String = ""
     var job = Job()
     var jobid = 0
-    
-//    let seeds = [["id": 12, "image": "http:/118.242.16.162:5580/envision/img/seed/head.png"],
-//        ["id" : 7,"image" : "http://118.242.16.162:5580/envision/img/seed/head1.jpg"],
-//        ["id" : 3,"image" : "http://118.242.16.162:5580/envision/img/seed/head2.jpg"]
-//        ]
+
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var buttomView: UIView!
@@ -57,7 +53,7 @@ class PositionDetailViewController: UIViewController,UITableViewDelegate,UITable
         if userinfo.beisen_id != nil{
             parameters["applicantId"] = userinfo.beisen_id!
         }
-        doRequest(seedUrl, parameters: parameters, encoding: .URL, praseMethod: praseJob)
+        afRequest(seedUrl, parameters: parameters, encoding: .URL, praseMethod: praseJob)
         
         self.tableView.separatorStyle = .None
 
@@ -82,9 +78,12 @@ class PositionDetailViewController: UIViewController,UITableViewDelegate,UITable
     }
     
     func shareAction(){
+        guard let jobid = self.job.jobid else{
+            return
+        }
         shareView.vc = self
         shareView.job = self.job
-        shareView.webpageUrl = self.webSite
+        shareView.webpageUrl = getjobInfoUrl + "?jobId=\(jobid)"
         shareView.show()
         
     }
@@ -148,13 +147,13 @@ class PositionDetailViewController: UIViewController,UITableViewDelegate,UITable
 
             let seedUrl = favorJob
             let parameters = ["applicantId":userinfo.beisen_id!, "jobId":self.jobid ] as! [String: AnyObject]
-            doRequest(seedUrl, parameters: parameters, encoding: .URL, praseMethod: praseFavor)
+            afRequest(seedUrl, parameters: parameters, encoding: .URL, praseMethod: praseFavor)
             
         }else{
             cell.collectImage.image = UIImage(named: "uncollected")
             let seedUrl = unFavorJob
             let parameters = ["applicantId":userinfo.beisen_id!, "jobId":self.jobid ] as! [String: AnyObject]
-            doRequest(seedUrl, parameters: parameters, encoding: .URL, praseMethod: praseUnFavor)
+            afRequest(seedUrl, parameters: parameters, encoding: .URL, praseMethod: praseUnFavor)
         }
     }
     
@@ -163,6 +162,9 @@ class PositionDetailViewController: UIViewController,UITableViewDelegate,UITable
             self.job.isCollect = true
             self.delegate?.updateRowInfo(self.job)
         }else{
+            if json["message"].string == "您已收藏该职位"{
+                return
+            }
             let indexPath = NSIndexPath(forRow: 0, inSection: 0)
             let cell = self.tableView.cellForRowAtIndexPath(indexPath) as! JotTitleTableViewCell
             cell.collectImage.image = UIImage(named: "uncollected")
@@ -201,16 +203,23 @@ class PositionDetailViewController: UIViewController,UITableViewDelegate,UITable
             cell.address.text = self.job.address
             cell.address.sizeToFit()
             cell.kind.text = self.job.kind
+            cell.major.text = self.job.MXRQ
             
-            if self.job.isCollect != nil && self.job.isCollect! {
-                cell.collectImage.image = UIImage(named: "collected")
-            }else{
-                cell.collectImage.image = UIImage(named: "uncollected")
+            if userinfo.type != 3 {
+                cell.collectImage.hidden = false
+                
+                if self.job.isCollect != nil && self.job.isCollect! {
+                    cell.collectImage.image = UIImage(named: "collected")
+                }else{
+                    cell.collectImage.image = UIImage(named: "uncollected")
+                }
+                cell.collectImage.userInteractionEnabled = true
+                let collectTap = UITapGestureRecognizer(target: self, action: "collectTap:")
+                cell.collectImage.addGestureRecognizer(collectTap)
+            }else {
+                cell.collectImage.hidden = true
             }
-            cell.collectImage.userInteractionEnabled = true
-            let collectTap = UITapGestureRecognizer(target: self, action: "collectTap:")
-            cell.collectImage.addGestureRecognizer(collectTap)
-            
+
             
             //添加种子图片
             let width = cell.contentView.frame.width - 32
