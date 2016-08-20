@@ -10,6 +10,7 @@ import UIKit
 
 class CenterTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var messageHint: UIView!
     
     @IBOutlet weak var centerImage: UIImageView!
     
@@ -18,6 +19,10 @@ class CenterTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        messageHint.layer.masksToBounds = true
+        messageHint.layer.cornerRadius = 3
+        messageHint.hidden = true
+        
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

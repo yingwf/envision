@@ -15,6 +15,9 @@ import AVFoundation
 
 class YJImagePickerController: UIImagePickerController {
     
+    var url: String?
+    var delegate2: UpdateVideoUrlDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         if UIImagePickerController.isSourceTypeAvailable(.Camera){
@@ -85,7 +88,7 @@ class YJImagePickerController: UIImagePickerController {
             let data = NSData(contentsOfFile: sourceUrl)!
             multipartFormData.appendBodyPart(data: data, name: "file", fileName:filename, mimeType: "video/quicktime")
             
-            let param = ["name" : userinfo.name!, "email" : userinfo.email!, "mobile": userinfo.mobile!, "fileext": "MOV", "filetype": "2" ]
+            let param = ["name" : userinfo.name!, "email" : userinfo.email!, "mobile": userinfo.mobile!, "fileext": "MOV", "filetype": "2", "applicantId": String(userinfo.beisen_id!) ]
             print(param)
             for (key, value) in param {
                 multipartFormData.appendBodyPart(data: value.dataUsingEncoding(NSUTF8StringEncoding)!, name: key)
@@ -101,7 +104,11 @@ class YJImagePickerController: UIImagePickerController {
                         print(response)
                         if(response.result.value != nil && response.result.isSuccess){
                             let json = SwiftyJSON.JSON(response.result.value!)
-                            print(json)
+                            debugPrint(json)
+                            if let url = json["url"].string {
+                                self.delegate2?.updateVideoUrl(url)
+                            }
+                            
                             if json["success"].boolValue {
                                 let alertView = UIAlertController(title: "提醒", message:"视频上传成功", preferredStyle: .Alert)
                                 let okAction = UIAlertAction(title: "确定", style: .Default) {(UIAlertAction) -> Void in

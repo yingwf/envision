@@ -22,6 +22,8 @@
 		14245C0D1D34A4A900458D46 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14245C0B1D34A4A900458D46 /* MessageTableViewCell.swift */; };
 		14245C0E1D34A4A900458D46 /* MessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14245C0C1D34A4A900458D46 /* MessageTableViewCell.xib */; };
 		14245C181D34A8E700458D46 /* MessageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14245C171D34A8E700458D46 /* MessageTableViewController.swift */; };
+		14283B741D6457B70070F998 /* VideoRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14283B731D6457B70070F998 /* VideoRecordViewController.swift */; };
+		14283B7E1D6457D50070F998 /* VideoPlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14283B7D1D6457D50070F998 /* VideoPlayViewController.swift */; };
 		1430192A1CFC37C500437C67 /* PositionTypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143019281CFC37C500437C67 /* PositionTypeTableViewCell.swift */; };
 		1430192B1CFC37C500437C67 /* PositionTypeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 143019291CFC37C500437C67 /* PositionTypeTableViewCell.xib */; };
 		1458CD0C1D24C94900215C61 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1458CD0B1D24C94900215C61 /* LaunchViewController.swift */; };
@@ -45,7 +47,6 @@
 		145CEBF01CFDA55300BDA5DD /* HeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 145CEBEE1CFDA55300BDA5DD /* HeaderTableViewCell.xib */; };
 		145CEBF31CFDA70C00BDA5DD /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145CEBF11CFDA70C00BDA5DD /* ContactTableViewCell.swift */; };
 		145CEBF41CFDA70C00BDA5DD /* ContactTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 145CEBF21CFDA70C00BDA5DD /* ContactTableViewCell.xib */; };
-		147EF49C1D5326210010E6D5 /* RNCalScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147EF49B1D5326210010E6D5 /* RNCalScrollView.swift */; };
 		14836C291D3DF41100653122 /* FullResumeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14836C281D3DF41100653122 /* FullResumeViewController.swift */; };
 		1484AC741D0138A00074346C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1484AC731D0138A00074346C /* LoginViewController.swift */; };
 		1484AC7E1D0152BC0074346C /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1484AC7D1D0152BC0074346C /* RegisterViewController.swift */; };
@@ -292,6 +293,8 @@
 		14245C0B1D34A4A900458D46 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		14245C0C1D34A4A900458D46 /* MessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageTableViewCell.xib; sourceTree = "<group>"; };
 		14245C171D34A8E700458D46 /* MessageTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableViewController.swift; sourceTree = "<group>"; };
+		14283B731D6457B70070F998 /* VideoRecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoRecordViewController.swift; sourceTree = "<group>"; };
+		14283B7D1D6457D50070F998 /* VideoPlayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlayViewController.swift; sourceTree = "<group>"; };
 		143019281CFC37C500437C67 /* PositionTypeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PositionTypeTableViewCell.swift; sourceTree = "<group>"; };
 		143019291CFC37C500437C67 /* PositionTypeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionTypeTableViewCell.xib; sourceTree = "<group>"; };
 		1458CD0B1D24C94900215C61 /* LaunchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
@@ -311,7 +314,6 @@
 		145CEBEE1CFDA55300BDA5DD /* HeaderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderTableViewCell.xib; sourceTree = "<group>"; };
 		145CEBF11CFDA70C00BDA5DD /* ContactTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactTableViewCell.swift; sourceTree = "<group>"; };
 		145CEBF21CFDA70C00BDA5DD /* ContactTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactTableViewCell.xib; sourceTree = "<group>"; };
-		147EF49B1D5326210010E6D5 /* RNCalScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RNCalScrollView.swift; sourceTree = "<group>"; };
 		14836C281D3DF41100653122 /* FullResumeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullResumeViewController.swift; sourceTree = "<group>"; };
 		1484AC731D0138A00074346C /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1484AC7D1D0152BC0074346C /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -655,6 +657,8 @@
 				14AD33D51CF6FBE1007AA411 /* AppDelegate.swift */,
 				14AD33D71CF6FBE1007AA411 /* ViewController.swift */,
 				14AD33D91CF6FBE1007AA411 /* Main.storyboard */,
+				14283B731D6457B70070F998 /* VideoRecordViewController.swift */,
+				14283B7D1D6457D50070F998 /* VideoPlayViewController.swift */,
 				14836C281D3DF41100653122 /* FullResumeViewController.swift */,
 				14245C171D34A8E700458D46 /* MessageTableViewController.swift */,
 				14245BC51D2F76AA00458D46 /* CVListTableViewController.swift */,
@@ -743,7 +747,6 @@
 				14AD34131CF746E4007AA411 /* YYScrollView.swift */,
 				14053B0E1CFFDCC300BBF0A3 /* YYShareView.swift */,
 				14BF84771D0702D700AD212E /* YYPickerView.swift */,
-				147EF49B1D5326210010E6D5 /* RNCalScrollView.swift */,
 			);
 			name = framework;
 			sourceTree = "<group>";
@@ -1023,6 +1026,7 @@
 				14CC8C571D24F913007CB259 /* JotTitleTableViewCell.swift in Sources */,
 				14AB661B1D14D19800A210A1 /* Window.swift in Sources */,
 				1487DFCF1D1CFEB400215546 /* BeginInterviewTableViewController.swift in Sources */,
+				14283B741D6457B70070F998 /* VideoRecordViewController.swift in Sources */,
 				14AB66141D14D19800A210A1 /* PKHUDProgressView.swift in Sources */,
 				14053B0F1CFFDCC300BBF0A3 /* YYShareView.swift in Sources */,
 				14AD353D1CF747DF007AA411 /* functions.swift in Sources */,
@@ -1074,6 +1078,7 @@
 				14B34C5A1D22269300476B8B /* TimeSelectTableViewCell.swift in Sources */,
 				14BF84EA1D116ACC00AD212E /* FindPasswordViewController.swift in Sources */,
 				14AD340C1CF70428007AA411 /* DreamerViewController.swift in Sources */,
+				14283B7E1D6457D50070F998 /* VideoPlayViewController.swift in Sources */,
 				1484AC741D0138A00074346C /* LoginViewController.swift in Sources */,
 				14AD33D61CF6FBE1007AA411 /* AppDelegate.swift in Sources */,
 				14B34C561D22254500476B8B /* TimeTitleTableViewCell.swift in Sources */,
@@ -1093,7 +1098,6 @@
 				1487DFB91D1BE58700215546 /* InterViewTableViewController.swift in Sources */,
 				14B95D8B1D12B4AA00F21FB3 /* CVTableViewCell.swift in Sources */,
 				14B34C711D227C3A00476B8B /* InterviewMgrViewController.swift in Sources */,
-				147EF49C1D5326210010E6D5 /* RNCalScrollView.swift in Sources */,
 				14CC8C671D26106D007CB259 /* SendTitleTableViewCell.swift in Sources */,
 				14AD34141CF746E4007AA411 /* YYScrollView.swift in Sources */,
 				145CEBEB1CFDA23400BDA5DD /* CenterTableViewCell.swift in Sources */,

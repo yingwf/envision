@@ -11,7 +11,7 @@ import Alamofire
 import SwiftyJSON
 import MediaPlayer
 
-class DreamerViewController: UITableViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+class DreamerViewController: UITableViewController {
     
     let homeCell = "HomeTableViewCell"
     let iconCell = "IconTableViewCell"
@@ -20,7 +20,6 @@ class DreamerViewController: UITableViewController,UIImagePickerControllerDelega
     var seedArray = [SeedInfo]()
     var seedImageArray = [UIImageView]()
     var seedRowHeight:CGFloat = 0
-    var imagePickerController: YJImagePickerController?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,15 +56,16 @@ class DreamerViewController: UITableViewController,UIImagePickerControllerDelega
     func praseMarquess(json: SwiftyJSON.JSON){
         let status = json["success"].boolValue
         if status {
-            let count = json["marqueeList"].array!.count
-            var imageArray = [String]()
-            
-            for index in 0 ... count - 1 {
-                let url = json["marqueeList"].array![index].string!
-                imageArray.append(url)
+            if let marqueeList = json["marqueeList"].array {
+                var imageArray = [String]()
+                for index in 0 ..< marqueeList.count {
+                    if let url = marqueeList[index]["marqueel"].string {
+                        imageArray.append(url)
+                    }
+                }
+                self.headView.delegate = self
+                self.headView.initWithImgs(imageArray)
             }
-            self.headView.delegate = self
-            self.headView.initWithImgs(imageArray)
             
         }
     }
@@ -146,28 +146,28 @@ class DreamerViewController: UITableViewController,UIImagePickerControllerDelega
             return
         }
         
-        //录制视频
-        imagePickerController = YJImagePickerController()
-        if !UIImagePickerController.isSourceTypeAvailable(.Camera){
-            
-            let alertView = UIAlertController(title: "提醒", message: "摄像头不可用，请在设置中打开摄像头权限", preferredStyle: .Alert)
-            let okAction = UIAlertAction(title: "确定", style: .Default) {(UIAlertAction) -> Void in
-                self.dismissViewControllerAnimated(true, completion: nil)
+        //判断是否已录制视频
+        let seedUrl = getVideo
+        let param = ["applicantId": userinfo.beisen_id!]
+        afRequest(seedUrl, parameters: param, encoding: .URL, praseMethod: praseVideo)
+        
+
+    }
+    
+    func praseVideo(json: SwiftyJSON.JSON) {
+        let status = json["success"].boolValue
+        if status {
+            if let url = json["Url"].string {
+                //已录制
+                let videoPlayViewController = self.storyboard?.instantiateViewControllerWithIdentifier("VideoPlayViewController") as! VideoPlayViewController
+                videoPlayViewController.url = url
+                self.navigationController?.pushViewController(videoPlayViewController, animated: true)
+            } else {
+                //未录制
+                let videoRecordViewController = self.storyboard?.instantiateViewControllerWithIdentifier("VideoRecordViewController") as! VideoRecordViewController
+                self.navigationController?.pushViewController(videoRecordViewController, animated: true)
             }
-            alertView.addAction(okAction)
-            self.presentViewController(alertView, animated: true, completion: nil)
-            return
         }
-        imagePickerController!.delegate = self
-        self.presentViewController(imagePickerController!, animated: true, completion: nil)
-    }
-    
-    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-        self.imagePickerController?.saveVideo(info)
     }
     
     func applyPosition(){

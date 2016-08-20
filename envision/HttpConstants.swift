@@ -118,5 +118,7 @@ let getCurrentInterviewStatus  = ROOTURL + "getCurrentInterviewStatus.htm"
 
 let giveupJob = ROOTURL + "giveupJob.htm"
 
+let getVideo = ROOTURL + "getVideo.htm"
+
 
 

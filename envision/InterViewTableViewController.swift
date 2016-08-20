@@ -146,6 +146,7 @@ class InterViewTableViewController: UITableViewController {
         let tag = tap.view?.tag
         let cvListTableViewController = self.storyboard?.instantiateViewControllerWithIdentifier("CVListTableViewController") as! CVListTableViewController
         INTERVIEWID = self.myInterviews[tag!].interviewId
+        cvListTableViewController.cvListType = .MyInterview
         self.navigationController?.pushViewController(cvListTableViewController, animated: true)
     }
     

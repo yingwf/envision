@@ -62,19 +62,31 @@ class InterviewMgrViewController: UIViewController {
         HUD.show(.RotatingImage(loadingImage))
         
         let seedUrl = getCurrentUrl //interviewCurrentApplicant
-        var parameters = ["employeeId":userinfo.employeeid! ] as! [String: AnyObject]
+        var parameters = ["interviewId": String(INTERVIEWID!), "employeeId":userinfo.employeeid! ] as! [String: AnyObject]
         afRequest(seedUrl, parameters: parameters, encoding: .URL, praseMethod: praseCurrentApplicant)
     }
     
     func praseCurrentApplicant(json: SwiftyJSON.JSON){
         
         if json["success"].boolValue {
-            let eLinkUrl = json["ElinkUrl"].string
-            if  eLinkUrl != nil && eLinkUrl != "" {
-                let introViewController  = self.storyboard?.instantiateViewControllerWithIdentifier("WebViewController") as! WebViewController
-                introViewController.webSite = eLinkUrl!
-                introViewController.navigationItem.title = "面试评价"
-                self.navigationController?.pushViewController(introViewController, animated: true)
+            let cvData = json["data"].array
+            if cvData != nil &&  cvData!.count > 0{
+                var cvInfos = [CvInfo]()
+                for index in 0...cvData!.count - 1{
+                    let cvInfo = CvInfo()
+                    cvInfo.getCvInfo(cvData![index])
+                    cvInfos.append(cvInfo)
+                }
+                let cvListTableViewController  = self.storyboard?.instantiateViewControllerWithIdentifier("CVListTableViewController") as! CVListTableViewController
+                cvListTableViewController.cvInfos = cvInfos
+                cvListTableViewController.cvListType = .CurrentList
+                self.navigationController?.pushViewController(cvListTableViewController, animated: true)
+//            let eLinkUrl = json["ElinkUrl"].string
+//            if  eLinkUrl != nil && eLinkUrl != "" {
+//                let introViewController  = self.storyboard?.instantiateViewControllerWithIdentifier("WebViewController") as! WebViewController
+//                introViewController.webSite = eLinkUrl!
+//                introViewController.navigationItem.title = "面试评价"
+//                self.navigationController?.pushViewController(introViewController, animated: true)
             }else{
                 var message = "没有当前学生，请呼叫下一位"
                 if json["message"].string != nil {
@@ -100,15 +112,40 @@ class InterviewMgrViewController: UIViewController {
     }
     
     @IBAction func nextApplicant(sender: AnyObject) {
+        
         guard INTERVIEWID != nil && userinfo.employeeid != nil else{
             return
         }
         
-        HUD.show(.RotatingImage(loadingImage))
         
-        let seedUrl = interviewNextApplicant
-        let parameters = ["interviewId": String(INTERVIEWID!), "employeeId":userinfo.employeeid! ] as! [String: AnyObject]
-        afRequest(seedUrl, parameters: parameters, encoding: .URL, praseMethod: praseNextApplicant)
+        let alertView = UIAlertController(title: "当前面试人数", message:nil , preferredStyle: .Alert)
+
+        alertView.addTextFieldWithConfigurationHandler{
+            (textField: UITextField!) -> Void in
+            textField.placeholder = "输入面试人数"
+            textField.text = "1"
+            textField.keyboardType = .NumberPad
+        }
+        let okAction = UIAlertAction(title: "确定", style: .Default, handler: {action in
+            guard let personNum = alertView.textFields?.first?.text else {
+                return
+            }
+            if Int(personNum) <= 0 {
+                return
+            }
+            HUD.show(.RotatingImage(loadingImage))
+            
+            let seedUrl = interviewNextApplicant
+            let parameters = ["interviewId": String(INTERVIEWID!), "employeeId":userinfo.employeeid!, "personNum": personNum ] as! [String: AnyObject]
+            afRequest(seedUrl, parameters: parameters, encoding: .URL, praseMethod: self.praseNextApplicant)
+            
+        })
+        let cancelAction = UIAlertAction(title: "取消", style: .Cancel, handler: nil)
+        
+        alertView.addAction(okAction)
+        alertView.addAction(cancelAction)
+
+        self.presentViewController(alertView, animated: false, completion: nil)
         
     }
     
@@ -117,11 +154,16 @@ class InterviewMgrViewController: UIViewController {
         if json["success"].boolValue {
             self.interviewProgress.getInfo(json)
             self.updateProgress()
-            if let eLinkUrl = self.interviewProgress.ElinkUrl {
-                let introViewController  = self.storyboard?.instantiateViewControllerWithIdentifier("WebViewController") as! WebViewController
-                introViewController.webSite = eLinkUrl
-                introViewController.navigationItem.title = "面试评价"
-                self.navigationController?.pushViewController(introViewController, animated: true)
+            if self.interviewProgress.cvInfos.count > 0 {
+                let cvListTableViewController  = self.storyboard?.instantiateViewControllerWithIdentifier("CVListTableViewController") as! CVListTableViewController
+                cvListTableViewController.cvInfos = self.interviewProgress.cvInfos
+                cvListTableViewController.cvListType = .NextList
+                self.navigationController?.pushViewController(cvListTableViewController, animated: true)
+//            if let eLinkUrl = self.interviewProgress.ElinkUrl {
+//                let introViewController  = self.storyboard?.instantiateViewControllerWithIdentifier("WebViewController") as! WebViewController
+//                introViewController.webSite = eLinkUrl
+//                introViewController.navigationItem.title = "面试评价"
+//                self.navigationController?.pushViewController(introViewController, animated: true)
             }else{
                 var message = "获取下一位学生简历出错"
                 if json["message"].string != nil {

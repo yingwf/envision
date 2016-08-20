@@ -9,20 +9,24 @@
 import UIKit
 import SwiftyJSON
 
+enum CVListType: Int {
+    case MyInterview = 0, CurrentList, NextList
+}
 
 class CVListTableViewController: UITableViewController {
 
     let cvListCell = "CVListTableViewCell"
     var cvInfos = [CvInfo]()
     var refreshController = UIRefreshControl()
+    var cvListType:CVListType = .MyInterview
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.setBackButton()
         
-        self.refreshController.attributedTitle = NSAttributedString(string: "下拉刷新")
-        self.refreshController.addTarget(self, action: "refreshList", forControlEvents: .ValueChanged)
+//        self.refreshController.attributedTitle = NSAttributedString(string: "下拉刷新")
+//        self.refreshController.addTarget(self, action: "refreshList", forControlEvents: .ValueChanged)
         
         self.tableView.addSubview(refreshController)
         
@@ -30,10 +34,15 @@ class CVListTableViewController: UITableViewController {
         self.tableView.backgroundColor = BACKGROUNDCOLOR
         self.tableView.registerNib(UINib(nibName: "CVListTableViewCell", bundle: nil), forCellReuseIdentifier: cvListCell)
         
-        HUD.show(.RotatingImage(loadingImage))
-        let seedUrl = getApplicantListForMyInterview
-        let parameters = ["interviewId":String(INTERVIEWID!),"Email":userinfo.email!] as! [String:AnyObject]
-        afRequest(seedUrl, parameters: parameters, encoding: .URL, praseMethod: praseCvList)
+        switch cvListType {
+        case .MyInterview:
+            HUD.show(.RotatingImage(loadingImage))
+            let seedUrl = getApplicantListForMyInterview
+            let parameters = ["interviewId":String(INTERVIEWID!),"Email":userinfo.email!] as! [String:AnyObject]
+            afRequest(seedUrl, parameters: parameters, encoding: .URL, praseMethod: praseCvList)
+        default:
+            self.tableView.reloadData()
+        }
         
     }
     
@@ -52,16 +61,16 @@ class CVListTableViewController: UITableViewController {
             self.tableView.reloadData()
         }
         HUD.hide()
-        self.refreshController.endRefreshing()
+        //self.refreshController.endRefreshing()
     }
     
-    func refreshList() {
-        
-        let seedUrl = getApplicantListForMyInterview
-        let parameters = ["interviewId":String(INTERVIEWID!),"Email":userinfo.email!] as! [String:AnyObject]
-        afRequest(seedUrl, parameters: parameters, encoding: .URL, praseMethod: praseCvList)
-        
-    }
+//    func refreshList() {
+//        
+//        let seedUrl = getApplicantListForMyInterview
+//        let parameters = ["interviewId":String(INTERVIEWID!),"Email":userinfo.email!] as! [String:AnyObject]
+//        afRequest(seedUrl, parameters: parameters, encoding: .URL, praseMethod: praseCvList)
+//        
+//    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

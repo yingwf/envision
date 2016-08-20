@@ -138,6 +138,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
                 BADGE = userinfo.count!
                 UIApplication.sharedApplication().applicationIconBadgeNumber = BADGE
                 homeViewController?.tabBar.items?.last?.badgeValue = String(BADGE)
+                myTableViewController?.setMessageHint(true)
             }
 
         }else{

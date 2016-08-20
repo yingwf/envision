@@ -195,6 +195,9 @@ class MyTableViewController: UITableViewController {
                 cell.centerImage.image = UIImage(named: self.studentIcon[indexPath.section - 1])
                 cell.centerTitle.text = self.studentTitle[indexPath.section - 1]
                 cell.accessoryType = .DisclosureIndicator
+                if BADGE > 0 && indexPath.section == 4 {
+                    cell.messageHint.hidden = false
+                }                
                 returnCell = cell
             case(3, 1...5):
                 //面试官
@@ -284,7 +287,7 @@ class MyTableViewController: UITableViewController {
             case 2:
                 //收藏职位
                 let collectedJobsViewController = self.storyboard?.instantiateViewControllerWithIdentifier("CollectedJobsViewController") as! CollectedJobsViewController
-                
+
                 self.navigationController?.pushViewController(collectedJobsViewController, animated: true)
                 
             case 3:
@@ -293,11 +296,6 @@ class MyTableViewController: UITableViewController {
                 self.navigationController?.pushViewController(cvViewController, animated: true)
             case 4:
                 //我的消息
-//                let introViewController  = self.storyboard?.instantiateViewControllerWithIdentifier("WebViewController") as! WebViewController
-//                introViewController.webSite = mymessage
-//                introViewController.navigationItem.title = "我的消息"
-//                self.navigationController?.pushViewController(introViewController, animated: true)
-                
                 let messageTableViewController  = self.storyboard?.instantiateViewControllerWithIdentifier("MessageTableViewController") as! MessageTableViewController
                 self.navigationController?.pushViewController(messageTableViewController, animated: true)
             default:
@@ -348,7 +346,15 @@ class MyTableViewController: UITableViewController {
         }
         
         self.tableView.deselectRowAtIndexPath(indexPath, animated: false)
-
+    }
+    
+    func setMessageHint(haveMessage: Bool) {
+        guard userType == 1 || userType == 2 else {
+            return
+        }
+        let cell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 4)) as! CenterTableViewCell
+        cell.messageHint.hidden = !haveMessage
+        
     }
     
     @IBAction func logout(sender: AnyObject) {

@@ -97,19 +97,20 @@ class PositionDetailViewController: UIViewController,UITableViewDelegate,UITable
             self.navigationController?.pushViewController(loginViewController, animated: true)
             return
         }
-        if !userinfo.haveCV(){
-            //未填写微简历
-            let editCVViewController  = self.storyboard?.instantiateViewControllerWithIdentifier("EditCVViewController") as! EditCVViewController
-            editCVViewController.isModify = true
-            self.navigationController?.pushViewController(editCVViewController, animated: true)
-            return
-        }
         
         if userinfo.type != 1 && userinfo.type != 2{
             let alertView = UIAlertController(title: "提醒", message: "只有学生可以申请职位", preferredStyle: .Alert)
             let okAction = UIAlertAction(title: "确定", style: .Default, handler: nil)
             alertView.addAction(okAction)
             self.presentViewController(alertView, animated: false, completion: nil)
+            return
+        }
+        
+        if !userinfo.haveCV(){
+            //未填写微简历
+            let editCVViewController  = self.storyboard?.instantiateViewControllerWithIdentifier("EditCVViewController") as! EditCVViewController
+            editCVViewController.isModify = true
+            self.navigationController?.pushViewController(editCVViewController, animated: true)
             return
         }
         

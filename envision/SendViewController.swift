@@ -135,25 +135,51 @@ class SendViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         self.navigationController?.pushViewController(editCVViewController, animated: true)
     }
     
+    
     func recordVideo(){
         if !userinfo.haveCV(){
             //未填写微简历
-            let editCVViewController  = self.storyboard?.instantiateViewControllerWithIdentifier("EditCVViewController") as! EditCVViewController
-            editCVViewController.isModify = true
-            editCVViewController.delegate = self
-            self.navigationController?.pushViewController(editCVViewController, animated: true)
+            let alertView = UIAlertController(title: "提醒", message: "请先完善简历信息", preferredStyle: .Alert)
+            let okAction = UIAlertAction(title: "确定", style: .Default){
+                (action) in
+                let editCVViewController  = self.storyboard?.instantiateViewControllerWithIdentifier("EditCVViewController") as! EditCVViewController
+                editCVViewController.isModify = true
+                editCVViewController.delegate = self
+                self.navigationController?.pushViewController(editCVViewController, animated: true)
+            }
+            let cancelAction = UIAlertAction(title: "取消", style: .Cancel, handler: nil)
+            alertView.addAction(okAction)
+            alertView.addAction(cancelAction)
+            self.presentViewController(alertView, animated: false, completion: nil)
             return
         }
         
-        //录制视频
-        imagePickerController = YJImagePickerController()
-        imagePickerController!.delegate = self
-        self.presentViewController(imagePickerController!, animated: true, completion: nil)
+        //判断是否已录制视频
+        let seedUrl = getVideo
+        let param = ["applicantId": userinfo.beisen_id!]
+        afRequest(seedUrl, parameters: param, encoding: .URL, praseMethod: praseVideo)
     }
+    
+    func praseVideo(json: SwiftyJSON.JSON) {
+        let status = json["success"].boolValue
+        if status {
+            if let url = json["Url"].string {
+                //已录制
+                let videoPlayViewController = self.storyboard?.instantiateViewControllerWithIdentifier("VideoPlayViewController") as! VideoPlayViewController
+                videoPlayViewController.url = url
+                self.navigationController?.pushViewController(videoPlayViewController, animated: true)
+            } else {
+                //未录制
+                let videoRecordViewController = self.storyboard?.instantiateViewControllerWithIdentifier("VideoRecordViewController") as! VideoRecordViewController
+                self.navigationController?.pushViewController(videoRecordViewController, animated: true)
+            }
+        }
+    }
+
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 3
+        return 2
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -171,19 +197,15 @@ class SendViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             cell.setInfo()
 
             cell.editView.userInteractionEnabled = true
-            let collectTap = UITapGestureRecognizer(target: self, action: "editCV:")
+            let collectTap = UITapGestureRecognizer(target: self, action: #selector(editCV(_:)))
             cell.editView.addGestureRecognizer(collectTap)
             
             returnCell = cell
         }else if indexPath.section == 1{
-            let cell = tableView.dequeueReusableCellWithIdentifier(sendContentTableViewCell, forIndexPath: indexPath) as! SendContentTableViewCell
-
-            returnCell = cell
-        }else if indexPath.section == 2{
             let cell = tableView.dequeueReusableCellWithIdentifier(sendVideoTableViewCell, forIndexPath: indexPath) as! SendVideoTableViewCell
             
             cell.record.userInteractionEnabled = true
-            let recordTap = UITapGestureRecognizer(target: self, action: "recordVideo")
+            let recordTap = UITapGestureRecognizer(target: self, action: #selector(recordVideo))
             cell.record.addGestureRecognizer(recordTap)
             returnCell = cell
         }

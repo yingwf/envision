@@ -289,13 +289,14 @@ class ApplicantInterview {
 }
 
 class InterviewProgress {
-    var applicantId: Int?
-    var ElinkUrl: String?
+//    var applicantId: Int?
+//    var ElinkUrl: String?
     var waitApplicant: Int?
     var interviewedApplicant: Int?
     var passedApplicant: Int?
     var passedRate: String?
     var totalPassedRate: String?
+    var cvInfos: [CvInfo] = []
     
     var thought1: Int?
     var thought2: Int?
@@ -304,8 +305,13 @@ class InterviewProgress {
     var others: String?
     
     func getInfo(json: SwiftyJSON.JSON){
-        self.applicantId = json["applicantId"].int
-        self.ElinkUrl = json["ElinkUrl"].string
+        
+        if let data = json["data"].array {
+            self.cvInfos = data.flatMap {let cvInfo = CvInfo(); cvInfo.getCvInfo($0); return cvInfo}
+        }
+        
+//        self.applicantId = json["applicantId"].int
+//        self.ElinkUrl = json["ElinkUrl"].string
         self.waitApplicant = json["waitApplicant"].int
         self.interviewedApplicant = json["interviewedApplicant"].int
         self.passedApplicant = json["passedApplicant"].int

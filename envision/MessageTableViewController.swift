@@ -56,6 +56,7 @@ class MessageTableViewController: UITableViewController {
                 
                 UIApplication.sharedApplication().applicationIconBadgeNumber = 0 //badge归零
                 homeViewController?.tabBar.items?.last?.badgeValue = nil
+                myTableViewController?.setMessageHint(false)
                 BADGE = 0
             }
         }

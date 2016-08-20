@@ -30,7 +30,7 @@ class FindPasswordViewController: UIViewController {
         super.viewDidLoad()
         
         receiveLabel.userInteractionEnabled = true
-        receiveVerificaitonCodeTap = UITapGestureRecognizer(target: self, action: "receiveVerificationCode")
+        receiveVerificaitonCodeTap = UITapGestureRecognizer(target: self, action: #selector(receiveVerificationCode))
         receiveLabel.addGestureRecognizer(receiveVerificaitonCodeTap!)
         
         let width = self.view.frame.width
@@ -42,7 +42,7 @@ class FindPasswordViewController: UIViewController {
             self.view.addSubview(sepeView)
         }
         
-        let tap = UITapGestureRecognizer(target: self, action: "handleTap:")
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         tap.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tap)
         
@@ -56,7 +56,7 @@ class FindPasswordViewController: UIViewController {
     
     func receiveVerificationCode() {
         if userNameField.text!.isEmpty {
-            let alertView = UIAlertController(title: "提醒", message: "请输入登录账户。", preferredStyle: .Alert)
+            let alertView = UIAlertController(title: "提醒", message: "请输入登录账户", preferredStyle: .Alert)
             let okAction = UIAlertAction(title: "确定", style: .Default, handler: nil)
             alertView.addAction(okAction)
             self.presentViewController(alertView, animated: true, completion: nil)
@@ -100,21 +100,21 @@ class FindPasswordViewController: UIViewController {
     
     @IBAction func resetAction(sender: AnyObject) {
         if userNameField.text!.isEmpty {
-            let alertView = UIAlertController(title: "提醒", message: "请输入手机号码。", preferredStyle: .Alert)
+            let alertView = UIAlertController(title: "提醒", message: "请输入手机号码", preferredStyle: .Alert)
             let okAction = UIAlertAction(title: "确定", style: .Default, handler: nil)
             alertView.addAction(okAction)
             self.presentViewController(alertView, animated: true, completion: nil)
             return
         }
         if passwordField.text!.isEmpty {
-            let alertView = UIAlertController(title: "提醒", message: "请输入密码。", preferredStyle: .Alert)
+            let alertView = UIAlertController(title: "提醒", message: "请输入密码", preferredStyle: .Alert)
             let okAction = UIAlertAction(title: "确定", style: .Default, handler: nil)
             alertView.addAction(okAction)
             self.presentViewController(alertView, animated: true, completion: nil)
             return
         }
         if verificationCodeField.text!.isEmpty {
-            let alertView = UIAlertController(title: "提醒", message: "请输入验证码。", preferredStyle: .Alert)
+            let alertView = UIAlertController(title: "提醒", message: "请输入验证码", preferredStyle: .Alert)
             let okAction = UIAlertAction(title: "确定", style: .Default, handler: nil)
             alertView.addAction(okAction)
             self.presentViewController(alertView, animated: true, completion: nil)

@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,WXApiDelegate,GeTuiSdkDele
             LAUNCH = true
         }
         
-        WXApi.registerApp("wx658cf26421d80331")
+        WXApi.registerApp("wx2fb63ff3f23f94e7")
         
         // 通过 appId、 appKey 、appSecret 启动SDK，注：该方法需要在主线程中调用
         GeTuiSdk.startSdkWithAppId(kGtAppId, appKey: kGtAppKey, appSecret: kGtAppSecret, delegate: self)
@@ -167,6 +167,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,WXApiDelegate,GeTuiSdkDele
         let badge = application.applicationIconBadgeNumber
         if badge != BADGE {
             homeViewController?.tabBar.items?.last?.badgeValue = String(badge)
+            myTableViewController?.setMessageHint(true)
             
             myApplyTableViewController?.updateInfo()
             BADGE = badge
